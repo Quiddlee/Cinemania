@@ -11,7 +11,7 @@ export default {
       },
     },
     fontFamily: {
-      sans: 'Roboto Mono, monospace',
+      sans: 'Poppins, monospace, sans-serif',
     },
   },
   plugins: [],
