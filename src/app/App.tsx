@@ -1,8 +1,10 @@
 import { Component } from 'react';
 
+import MainLayout from '../pages/MainLayout.tsx';
+
 class App extends Component {
   render() {
-    return <div className="bg-red-500 text-white">Hello React!</div>;
+    return <MainLayout />;
   }
 }
 
