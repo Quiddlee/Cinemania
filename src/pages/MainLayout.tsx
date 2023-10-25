@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+import Search from '../features/Search/Search.tsx';
 import Header from '../widgets/Header/Header.tsx';
 import Main from '../widgets/Main/Main.tsx';
 
@@ -11,7 +12,9 @@ class MainLayout extends Component {
 
         <div className="relative m-auto h-screen overflow-hidden">
           <div className="container relative z-20 m-auto">
-            <Header />
+            <Header>
+              <Search />
+            </Header>
             <Main />
           </div>
           <div className="absolute right-72 top-0 h-1/2 w-1/3 rounded-full bg-pink-400" />
