@@ -1,16 +1,12 @@
 import { Component } from 'react';
 
-import { IChildren } from '../../shared/types/interfaces.ts';
+import Search from '../../features/Search/Search.tsx';
 
-interface IHeaderProps extends IChildren {}
-
-class Header extends Component<IHeaderProps> {
+class Header extends Component {
   render() {
-    const { children } = this.props;
-
     return (
       <header className="flex w-full items-center justify-center p-6">
-        {children}
+        <Search />
       </header>
     );
   }

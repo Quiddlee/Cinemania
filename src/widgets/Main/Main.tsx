@@ -1,8 +1,12 @@
 import { Component } from 'react';
 
-class Main extends Component {
+import { IChildren } from '../../shared/types/interfaces.ts';
+
+class Main extends Component<IChildren> {
   render() {
-    return <main>Main</main>;
+    const { children } = this.props;
+
+    return <main>{children}</main>;
   }
 }
 
