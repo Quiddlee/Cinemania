@@ -24,6 +24,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react/destructuring-assignment': 0,
+    'react/require-default-props': 0,
     'react/state-in-constructor': ['error', 'never'],
     'react/prefer-stateless-function': 0,
     'no-void': 0,
