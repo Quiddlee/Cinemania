@@ -24,6 +24,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react/state-in-constructor': ['error', 'never'],
     'react/prefer-stateless-function': 0,
     'no-void': 0,
     'react/react-in-jsx-scope': 0,
