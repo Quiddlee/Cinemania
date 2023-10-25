@@ -9,7 +9,7 @@ class Header extends Component<IHeaderProps> {
     const { children } = this.props;
 
     return (
-      <header className="flex w-full items-center justify-center p-5">
+      <header className="flex w-full items-center justify-center p-6">
         {children}
       </header>
     );

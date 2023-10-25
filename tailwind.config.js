@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       transitionTimingFunction: {
-        bounce: 'cubic-bezier(.25,1.55,.65,.97)',
+        bounce: 'cubic-bezier(.25,1.55,.65,1.4)',
       },
       height: {
         screen: '100dvh',
