@@ -25,6 +25,7 @@ class Search extends Component<object, ISearchState> {
   handleSearch = async () => {
     const res = await getMovieList(this.state.searchQuery);
     this.context.updateMovies(res.Search);
+    this.context.updateTotalResults(Number(res.totalResults));
   };
 
   render() {

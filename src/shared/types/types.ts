@@ -15,7 +15,7 @@ export type ApiMovieListResponse = Readonly<{
 }>;
 
 export type ApiErrorResponse = Readonly<{
-  Error: 'Incorrect IMDb ID.';
+  Error: string;
   Response: 'False';
 }>;
 

@@ -23,7 +23,7 @@ class Movie extends Component<IProductCardProps, IProductCardState> {
   async componentDidMount() {
     const movieData = await getMovie(this.props.data.imdbID);
     const genre = movieData.Genre.split(', ').slice(0, 2).join('/');
-    const description = `${movieData.Plot.slice(0, 60)}...`;
+    const description = `${movieData.Plot.slice(0, 55)}...`;
 
     this.setState({
       description,
@@ -41,7 +41,7 @@ class Movie extends Component<IProductCardProps, IProductCardState> {
     return (
       <li className="w-80 cursor-pointer space-y-4 rounded-[40px] bg-neutral-950 p-2 text-gray-100 transition-all hover:bg-neutral-900">
         <img
-          className="h-[470px] rounded-[32px] object-cover"
+          className="h-[470px] w-full rounded-[32px] object-cover"
           src={poster}
           alt={`The poster of ${Title} film`}
         />

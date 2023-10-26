@@ -11,7 +11,7 @@ class MainLayout extends Component {
       <div className="relative m-auto">
         <GradientBackground />
 
-        <div className="container relative z-20 m-auto grid gap-12 p-8">
+        <div className="relative z-20 m-auto grid gap-12 pb-8">
           <Header />
           <Main>
             <MovieList />

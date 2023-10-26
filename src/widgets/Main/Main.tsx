@@ -6,7 +6,7 @@ class Main extends Component<IChildren> {
   render() {
     const { children } = this.props;
 
-    return <main>{children}</main>;
+    return <main className="relative">{children}</main>;
   }
 }
 
