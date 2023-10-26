@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import GradientBackground from './ui/GradientBackground.tsx';
-import ProductList from '../features/ProductList/ProductList.tsx';
+import MovieList from '../features/ProductList/MovieList.tsx';
 import Header from '../widgets/Header/Header.tsx';
 import Main from '../widgets/Main/Main.tsx';
 
@@ -14,7 +14,7 @@ class MainLayout extends Component {
         <div className="container relative z-20 m-auto grid gap-12 p-8">
           <Header />
           <Main>
-            <ProductList />
+            <MovieList />
           </Main>
         </div>
       </div>
