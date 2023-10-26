@@ -30,7 +30,7 @@ class Search extends Component<object, ISearchState> {
 
   render() {
     return (
-      <article className="relative flex w-1/2 min-w-fit xl:w-1/3">
+      <article className="relative flex w-fit xl:w-1/3">
         <Input
           value={this.state.searchQuery}
           onChange={(newVal) => this.setState({ searchQuery: newVal })}
