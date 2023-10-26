@@ -5,7 +5,7 @@ import Search from '../../features/Search/Search.tsx';
 class Header extends Component {
   render() {
     return (
-      <header className="flex w-full items-center justify-center p-6">
+      <header className="flex w-full items-center justify-center">
         <Search />
       </header>
     );

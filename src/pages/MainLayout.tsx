@@ -8,10 +8,10 @@ import Main from '../widgets/Main/Main.tsx';
 class MainLayout extends Component {
   render() {
     return (
-      <div className="relative m-auto h-screen overflow-hidden">
+      <div className="relative m-auto">
         <GradientBackground />
 
-        <div className="container relative z-20 m-auto">
+        <div className="container relative z-20 m-auto grid gap-12 p-8">
           <Header />
           <Main>
             <ProductList />
