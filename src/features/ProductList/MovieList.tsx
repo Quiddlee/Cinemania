@@ -21,6 +21,8 @@ class MovieList extends Component<object, IProductListState> {
 
     if (!movies) return null;
 
+    // TODO: add loading spinner
+
     return (
       <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-10">
         {movies.map((movie) => (

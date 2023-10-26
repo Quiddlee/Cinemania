@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { ISearchContext, SearchContext } from './context/SearchProvider.tsx';
 import Button from './ui/Button.tsx';
 import Input from './ui/Input.tsx';
-import getMovieList from '../../entities/movie/api/apiMovie.ts';
+import { getMovieList } from '../../entities/movie/api/apiMovie.ts';
 
 interface ISearchState {
   searchQuery: string;
