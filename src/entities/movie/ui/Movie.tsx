@@ -23,7 +23,7 @@ class Movie extends Component<IProductCardProps, IProductCardState> {
   async componentDidMount() {
     const movieData = await getMovie(this.props.data.imdbID);
     const genre = movieData.Genre.split(', ').slice(0, 2).join('/');
-    const description = `${movieData.Plot.slice(0, 70)}...`;
+    const description = `${movieData.Plot.slice(0, 60)}...`;
 
     this.setState({
       description,
@@ -39,18 +39,20 @@ class Movie extends Component<IProductCardProps, IProductCardState> {
     const poster = isPosterExist ? Poster : ReactLogo;
 
     return (
-      <li className="grid w-80 cursor-pointer gap-4 rounded-[2.5rem] bg-neutral-950 p-4 text-gray-100 transition-all hover:bg-neutral-900">
+      <li className="w-80 cursor-pointer space-y-4 rounded-[40px] bg-neutral-950 p-2 text-gray-100 transition-all hover:bg-neutral-900">
         <img
-          className="h-[430px] rounded-[2rem] object-cover"
+          className="h-[470px] rounded-[32px] object-cover"
           src={poster}
           alt={`The poster of ${Title} film`}
         />
-        <article className="p-2">
-          <h2 className="truncate text-xl">{Title}</h2>
-          <p className="mt-1 text-gray-400">{description}</p>
-          <div className="mt-4 flex justify-between">
-            <span className="text-gray-400">{genre}</span>
-            <span className="text-gray-400">{Year}</span>
+        <article className="h-full p-4">
+          <h2 className="truncate text-xl text-gray-100">{Title}</h2>
+          <div className="mt-1 text-gray-400">
+            <p>{description}</p>
+            <div className="mt-4 flex justify-between">
+              <span>{genre}</span>
+              <span>{Year}</span>
+            </div>
           </div>
         </article>
       </li>
