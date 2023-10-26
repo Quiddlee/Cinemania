@@ -24,6 +24,9 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    // TODO: remove 👇 after 1 module
+    'react/jsx-no-constructed-context-values': 0,
+    'react/static-property-placement': 0,
     'react/destructuring-assignment': 0,
     'react/require-default-props': 0,
     'react/state-in-constructor': ['error', 'never'],
