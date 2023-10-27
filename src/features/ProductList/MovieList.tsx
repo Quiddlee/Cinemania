@@ -3,7 +3,6 @@ import { Component } from 'react';
 import NotFound from './ui/NotFound.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import { MovieList as MovieListData } from '../../shared/types/types.ts';
-import Spinner from '../../shared/ui/Spinner.tsx';
 import {
   ISearchContext,
   SearchContext,
@@ -19,11 +18,9 @@ class MovieList extends Component<object, IMovieListState> {
   declare context: ISearchContext;
 
   render() {
-    const { movies, isLoading } = this.context;
+    const { movies } = this.context;
     const isNoMovies = !movies?.length;
-    const firstRender = movies === null;
 
-    if (isLoading || firstRender) return <Spinner />;
     if (isNoMovies) return <NotFound />;
 
     return (
