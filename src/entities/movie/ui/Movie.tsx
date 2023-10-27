@@ -5,16 +5,16 @@ import { NOT_EXIST } from '../../../shared/const/const.ts';
 import { Movie as MovieData } from '../../../shared/types/types.ts';
 import { getMovie } from '../api/apiMovie.ts';
 
-interface IProductCardProps {
+interface IMovieProps {
   data: MovieData;
 }
 
-interface IProductCardState {
+interface IMovieState {
   description: string;
   genre: string;
 }
 
-class Movie extends Component<IProductCardProps, IProductCardState> {
+class Movie extends Component<IMovieProps, IMovieState> {
   state = {
     description: '',
     genre: '',

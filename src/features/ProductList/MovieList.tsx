@@ -7,11 +7,11 @@ import {
   SearchContext,
 } from '../Search/context/SearchProvider.tsx';
 
-interface IProductListState {
+interface IMovieListState {
   movies: MovieListData | null;
 }
 
-class MovieList extends Component<object, IProductListState> {
+class MovieList extends Component<object, IMovieListState> {
   static contextType = SearchContext;
 
   declare context: ISearchContext;
