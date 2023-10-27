@@ -6,7 +6,7 @@ class Main extends Component<IChildren> {
   render() {
     const { children } = this.props;
 
-    return <main className="relative">{children}</main>;
+    return <main className="relative px-6">{children}</main>;
   }
 }
 

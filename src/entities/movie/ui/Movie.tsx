@@ -39,9 +39,9 @@ class Movie extends Component<IProductCardProps, IProductCardState> {
     const poster = isPosterExist ? Poster : ReactLogo;
 
     return (
-      <li className="w-80 cursor-pointer space-y-4 rounded-[40px] bg-neutral-950 p-2 text-gray-100 transition-all duration-200 hover:bg-neutral-900">
+      <li className="w-[270px] cursor-pointer space-y-4 rounded-[40px] bg-neutral-950 p-2 text-gray-100 transition-all duration-200 hover:bg-neutral-900 sm:w-80">
         <img
-          className="h-[470px] w-full rounded-[32px] object-cover"
+          className="h-80 w-full rounded-[32px] object-cover sm:h-[470px]"
           src={poster}
           alt={`The poster of ${Title} film`}
         />

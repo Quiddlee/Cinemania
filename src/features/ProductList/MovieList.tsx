@@ -24,7 +24,7 @@ class MovieList extends Component<object, IProductListState> {
     // TODO: add loading spinner
 
     return (
-      <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-10 last:m-auto">
+      <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
         {movies.map((movie) => (
           <Movie key={movie.imdbID} data={movie} />
         ))}
