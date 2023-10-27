@@ -14,7 +14,7 @@ class TotalResults extends Component {
     return (
       <p className="hidden min-w-[206px] text-lime-400 sm:block lg:text-lg">
         Found <span className="font-semibold">{this.context.totalResults}</span>{' '}
-        total results
+        movies
       </p>
     );
   }

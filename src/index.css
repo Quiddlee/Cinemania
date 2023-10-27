@@ -4,7 +4,7 @@
 
 @layer base {
   ::selection {
-    color: theme(colors.lime.400);
+    color: theme(colors.neutral.950);
     background-color: theme(colors.lime.50);
   }
 

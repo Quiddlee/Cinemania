@@ -20,7 +20,7 @@ export default {
         },
       },
       animation: {
-        'fade-in': 'fade-in .5s cubic-bezier(0.86, 0, 0.07, 1)',
+        'fade-in': 'fade-in .8s cubic-bezier(0.86, 0, 0.07, 1)',
       },
     },
     fontFamily: {

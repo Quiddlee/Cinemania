@@ -27,7 +27,7 @@ class Movie extends Component<IMovieProps, IMovieState> {
   async componentDidMount() {
     const movieData = await getMovie(this.props.data.imdbID);
     const genre = movieData.Genre.split(', ').slice(0, 2).join('/');
-    const description = `${movieData.Plot.slice(0, 42)}...`;
+    const description = `${movieData.Plot.slice(0, 38)}...`;
 
     this.setState({
       description,
@@ -59,7 +59,7 @@ class Movie extends Component<IMovieProps, IMovieState> {
     const poster = isPosterExist ? Poster : ReactLogo;
 
     return (
-      <li className="w-64 cursor-pointer overflow-hidden rounded-[40px] bg-neutral-950 text-gray-100 transition-all duration-200">
+      <li className="w-64 animate-fade-in cursor-pointer overflow-hidden rounded-[40px] bg-neutral-950 text-gray-100 transition-all duration-200">
         <div
           ref={this.movieRef}
           onMouseMove={this.handleMouseMove}
@@ -73,8 +73,8 @@ class Movie extends Component<IMovieProps, IMovieState> {
           />
           <article className="h-full p-4">
             <h2 className="truncate text-xl text-gray-100">{Title}</h2>
-            <div className="mt-1 grid text-gray-400">
-              <p className="mb-1">{description}</p>
+            <div className="mt-2 grid text-gray-400">
+              <p className="mb-2">{description}</p>
               <span>{genre}</span>
               <span>{Year}</span>
             </div>
