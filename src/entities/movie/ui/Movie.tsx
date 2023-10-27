@@ -9,6 +9,7 @@ import { getMovie } from '../api/apiMovie.ts';
 
 interface IMovieProps {
   data: MovieData;
+  delay: number;
 }
 
 interface IMovieState {
@@ -24,7 +25,15 @@ class Movie extends Component<IMovieProps, IMovieState> {
 
   movieRef = createRef<HTMLDivElement>();
 
+  containerRef = createRef<HTMLLIElement>();
+
   async componentDidMount() {
+    if (this.containerRef.current) {
+      this.containerRef.current.style.animationDelay = `0.${String(
+        this.props.delay,
+      )}s`;
+    }
+
     const movieData = await getMovie(this.props.data.imdbID);
     const genre = movieData.Genre.split(', ').slice(0, 2).join('/');
     const description = `${movieData.Plot.slice(0, 38)}...`;
@@ -59,7 +68,9 @@ class Movie extends Component<IMovieProps, IMovieState> {
     const poster = isPosterExist ? Poster : ReactLogo;
 
     return (
-      <li className="w-64 animate-fade-in cursor-pointer overflow-hidden rounded-[40px] bg-neutral-950 text-gray-100 transition-all duration-200">
+      <li
+        ref={this.containerRef}
+        className="w-64 animate-springish cursor-pointer overflow-hidden rounded-[40px] bg-neutral-950 text-gray-100 transition-all duration-200">
         <div
           ref={this.movieRef}
           onMouseMove={this.handleMouseMove}

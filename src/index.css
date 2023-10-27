@@ -97,4 +97,36 @@
         200px 0 rgba(255, 255, 255, 0);
     }
   }
+
+  @keyframes springish {
+    0.00% {
+      transform: translate3d(30px, 0, 0) scale(0.7);
+      opacity: 0;
+    }
+    11.51% {
+      transform: translate3d(-13.02px, 0, 0) scale(1.1301999999999999);
+    }
+    24.15% {
+      transform: translate3d(5.43px, 0, 0) scale(0.9457);
+      opacity: 1;
+    }
+    36.79% {
+      transform: translate3d(-2.26px, 0, 0) scale(1.0226);
+    }
+    49.43% {
+      transform: translate3d(0.94px, 0, 0) scale(0.9906);
+    }
+    62.07% {
+      transform: translate3d(-0.39px, 0, 0) scale(1.0039);
+    }
+    74.72% {
+      transform: translate3d(0.16px, 0, 0) scale(0.9984);
+    }
+    87.36% {
+      transform: translate3d(-0.07px, 0, 0) scale(1.0007);
+    }
+    100.00% {
+      transform: translate3d(0.03px, 0, 0) scale(0.9997);
+    }
+  }
 }

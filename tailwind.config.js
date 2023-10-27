@@ -18,9 +18,19 @@ export default {
             opacity: 1,
           },
         },
+        'movie-fade-in': {
+          '0%': {
+            translate: '0 90px',
+          },
+          '100%': {
+            translate: '0 0',
+          },
+        },
       },
       animation: {
         'fade-in': 'fade-in .8s cubic-bezier(0.86, 0, 0.07, 1)',
+        springish:
+          'springish 1.58s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
       },
     },
     fontFamily: {

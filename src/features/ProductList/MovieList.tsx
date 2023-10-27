@@ -28,8 +28,8 @@ class MovieList extends Component<object, IMovieListState> {
 
     return (
       <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
-        {movies.map((movie) => (
-          <Movie key={movie.imdbID} data={movie} />
+        {movies.map((movie, i) => (
+          <Movie key={movie.imdbID} data={movie} delay={i} />
         ))}
       </ul>
     );
