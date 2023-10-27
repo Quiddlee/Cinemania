@@ -52,7 +52,7 @@ class Movie extends Component<IMovieProps, IMovieState> {
       const pointerY = e.clientY - rect.top;
 
       if (this.movieRef.current)
-        this.movieRef.current.style.background = `radial-gradient(circle at ${pointerX}px ${pointerY}px, ${colors.pink['950']} 0%, ${colors.neutral['950']} 160px)`;
+        this.movieRef.current.style.background = `radial-gradient(circle at ${pointerX}px ${pointerY}px, rgb(112, 26, 117, 0.4) 0%, ${colors.neutral['950']} 190px)`;
     }
   };
 
