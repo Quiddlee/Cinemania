@@ -1,5 +1,6 @@
 import { Component, createContext } from 'react';
 
+import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
 import { IChildren } from '../../../shared/types/interfaces.ts';
 import { MovieList } from '../../../shared/types/types.ts';
 
@@ -12,10 +13,13 @@ interface ISearchProviderState {
 
 export interface ISearchContext extends ISearchProviderState {
   updateQuery: (newQuery: string) => void;
-  updateMovies: (newMovies: MovieList) => void;
-  updateTotalResults: (newTotal: number) => void;
+  updateMovies: (newMovies: MovieList, totalResults: number) => void;
   updateIsLoading: (isLoading: boolean) => void;
+  fetchMovies: (searchQuery: string) => void;
 }
+
+const NO_RESULTS = 0;
+const NO_MOVIES: MovieList = [];
 
 export const SearchContext = createContext<ISearchContext>({
   query: '',
@@ -33,22 +37,29 @@ class SearchProvider extends Component<IChildren, ISearchProviderState> {
     this.setState({ query: newQuery });
   };
 
-  updateMovies = (newMovies: MovieList) => {
-    this.setState({ movies: newMovies });
-  };
-
-  updateTotalResults = (newTotal: number) => {
-    this.setState({ totalResults: newTotal });
+  updateMovies = (newMovies: MovieList, totalResults: number) => {
+    this.setState({ movies: newMovies, totalResults });
   };
 
   updateIsLoading = (isLoading: boolean) => {
     this.setState({ isLoading });
   };
 
+  fetchMovies = async (searchQuery: string) => {
+    try {
+      this.updateIsLoading(true);
+      const res = await getMovieList(searchQuery);
+      this.updateMovies(res.Search, Number(res.totalResults));
+    } catch (e) {
+      this.updateMovies(NO_MOVIES, NO_RESULTS);
+    } finally {
+      this.updateIsLoading(false);
+    }
+  };
+
   render() {
     const { query, movies, totalResults, isLoading } = this.state;
-    const { updateQuery, updateMovies, updateTotalResults, updateIsLoading } =
-      this;
+    const { updateQuery, updateMovies, updateIsLoading, fetchMovies } = this;
 
     return (
       <SearchContext.Provider
@@ -59,8 +70,8 @@ class SearchProvider extends Component<IChildren, ISearchProviderState> {
           isLoading,
           updateQuery,
           updateMovies,
-          updateTotalResults,
           updateIsLoading,
+          fetchMovies,
         }}>
         {this.props.children}
       </SearchContext.Provider>

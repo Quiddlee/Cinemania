@@ -3,7 +3,6 @@ import { Component } from 'react';
 import { ISearchContext, SearchContext } from './context/SearchProvider.tsx';
 import Button from './ui/Button.tsx';
 import Input from './ui/Input.tsx';
-import { getMovieList } from '../../entities/movie/api/apiMovie.ts';
 
 interface ISearchState {
   searchQuery: string;
@@ -23,17 +22,7 @@ class Search extends Component<object, ISearchState> {
   }
 
   handleSearch = async () => {
-    try {
-      this.context.updateIsLoading(true);
-      const res = await getMovieList(this.state.searchQuery);
-      this.context.updateMovies(res.Search);
-      this.context.updateTotalResults(Number(res.totalResults));
-    } catch (e) {
-      this.context.updateMovies([]);
-      this.context.updateTotalResults(0);
-    } finally {
-      this.context.updateIsLoading(false);
-    }
+    this.context.fetchMovies(this.state.searchQuery);
   };
 
   render() {

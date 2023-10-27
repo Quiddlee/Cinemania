@@ -20,9 +20,11 @@ class MovieList extends Component<object, IMovieListState> {
 
   render() {
     const { movies, isLoading } = this.context;
+    const isNoMovies = !movies?.length;
+    const firstRender = movies === null;
 
-    if (!movies?.length) return <NotFound />;
-    if (isLoading) return <Spinner />;
+    if (isLoading || firstRender) return <Spinner />;
+    if (isNoMovies) return <NotFound />;
 
     return (
       <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
