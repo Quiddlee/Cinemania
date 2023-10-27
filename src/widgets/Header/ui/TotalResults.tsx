@@ -12,7 +12,7 @@ class TotalResults extends Component {
 
   render() {
     return (
-      <p className="hidden text-lime-400 sm:block lg:text-lg">
+      <p className="hidden min-w-[206px] text-lime-400 sm:block lg:text-lg">
         Found <span className="font-semibold">{this.context.totalResults}</span>{' '}
         total results
       </p>
