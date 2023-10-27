@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  ::selection {
+    color: theme(colors.lime.400);
+    background-color: theme(colors.lime.50);
+  }
+
   * {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;

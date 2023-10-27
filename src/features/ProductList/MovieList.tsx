@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+import NotFound from './ui/NotFound.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import { MovieList as MovieListData } from '../../shared/types/types.ts';
 import Spinner from '../../shared/ui/Spinner.tsx';
@@ -20,7 +21,8 @@ class MovieList extends Component<object, IMovieListState> {
   render() {
     const { movies, isLoading } = this.context;
 
-    if (!movies || isLoading) return <Spinner />;
+    if (!movies?.length) return <NotFound />;
+    if (isLoading) return <Spinner />;
 
     return (
       <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
