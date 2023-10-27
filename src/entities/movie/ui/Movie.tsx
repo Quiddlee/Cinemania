@@ -74,7 +74,7 @@ class Movie extends Component<IMovieProps, IMovieState> {
           <article className="h-full p-4">
             <h2 className="truncate text-xl text-gray-100">{Title}</h2>
             <div className="mt-1 grid text-gray-400">
-              <p>{description}</p>
+              <p className="mb-1">{description}</p>
               <span>{genre}</span>
               <span>{Year}</span>
             </div>
