@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import { ISearchContext, SearchContext } from './context/SearchProvider.tsx';
 import Button from './ui/Button.tsx';
-import Input from './ui/Input.tsx';
+import { LOCAL_STORAGE_SEARCH_QUERY } from '../../shared/const/const.ts';
 
 interface ISearchState {
   searchQuery: string;
@@ -18,21 +18,33 @@ class Search extends Component<object, ISearchState> {
   };
 
   componentDidMount() {
-    void this.handleSearch();
+    const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
+
+    if (storedQuery) {
+      this.setState({ searchQuery: storedQuery });
+      void this.handleSearch(storedQuery);
+      return;
+    }
+
+    void this.handleSearch('');
   }
 
-  handleSearch = async () => {
-    this.context.fetchMovies(this.state.searchQuery);
+  handleSearch = async (query: string) => {
+    this.context.fetchMovies(query);
+    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, query);
   };
 
   render() {
     return (
       <article className="relative flex w-fit xl:w-1/3">
-        <Input
+        <input
+          className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-12 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:outline-0 focus:ring focus:ring-lime-300"
+          placeholder="Type to Search..."
+          type="text"
           value={this.state.searchQuery}
-          onChange={(newVal) => this.setState({ searchQuery: newVal })}
+          onChange={(e) => this.setState({ searchQuery: e.target.value })}
         />
-        <Button onClick={this.handleSearch} />
+        <Button onClick={() => this.handleSearch(this.state.searchQuery)} />
       </article>
     );
   }
