@@ -29,8 +29,8 @@ class Search extends Component<object, ISearchState> {
   }
 
   handleSearch = async (query: string) => {
-    this.context.fetchMovies(query);
-    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, query);
+    this.context.fetchMovies(query.trim());
+    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, query.trim());
   };
 
   render() {
