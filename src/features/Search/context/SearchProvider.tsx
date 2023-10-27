@@ -7,12 +7,14 @@ interface ISearchProviderState {
   query: string;
   movies: MovieList | null;
   totalResults: number;
+  isLoading: boolean;
 }
 
 export interface ISearchContext extends ISearchProviderState {
   updateQuery: (newQuery: string) => void;
   updateMovies: (newMovies: MovieList) => void;
   updateTotalResults: (newTotal: number) => void;
+  updateIsLoading: (isLoading: boolean) => void;
 }
 
 export const SearchContext = createContext<ISearchContext>({
@@ -24,6 +26,7 @@ class SearchProvider extends Component<IChildren, ISearchProviderState> {
     query: '',
     movies: null,
     totalResults: 0,
+    isLoading: false,
   };
 
   updateQuery = (newQuery: string) => {
@@ -38,9 +41,14 @@ class SearchProvider extends Component<IChildren, ISearchProviderState> {
     this.setState({ totalResults: newTotal });
   };
 
+  updateIsLoading = (isLoading: boolean) => {
+    this.setState({ isLoading });
+  };
+
   render() {
-    const { query, movies, totalResults } = this.state;
-    const { updateQuery, updateMovies, updateTotalResults } = this;
+    const { query, movies, totalResults, isLoading } = this.state;
+    const { updateQuery, updateMovies, updateTotalResults, updateIsLoading } =
+      this;
 
     return (
       <SearchContext.Provider
@@ -48,9 +56,11 @@ class SearchProvider extends Component<IChildren, ISearchProviderState> {
           query,
           movies,
           totalResults,
+          isLoading,
           updateQuery,
           updateMovies,
           updateTotalResults,
+          updateIsLoading,
         }}>
         {this.props.children}
       </SearchContext.Provider>

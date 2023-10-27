@@ -9,6 +9,19 @@ export default {
       height: {
         screen: '100dvh',
       },
+      keyframes: {
+        'fade-in': {
+          '0%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        'fade-in': 'fade-in .5s cubic-bezier(0.86, 0, 0.07, 1)',
+      },
     },
     fontFamily: {
       sans: 'Poppins, monospace, sans-serif',

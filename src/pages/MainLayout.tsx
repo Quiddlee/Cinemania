@@ -8,7 +8,7 @@ import Main from '../widgets/Main/Main.tsx';
 class MainLayout extends Component {
   render() {
     return (
-      <div className="relative m-auto">
+      <div className="relative m-auto min-h-screen">
         <GradientBackground />
 
         <div className="relative z-20 m-auto grid gap-2 pb-8 sm:gap-10">

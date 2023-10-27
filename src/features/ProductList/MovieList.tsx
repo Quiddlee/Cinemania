@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import { MovieList as MovieListData } from '../../shared/types/types.ts';
+import Spinner from '../../shared/ui/Spinner.tsx';
 import {
   ISearchContext,
   SearchContext,
@@ -17,11 +18,9 @@ class MovieList extends Component<object, IMovieListState> {
   declare context: ISearchContext;
 
   render() {
-    const { movies } = this.context;
+    const { movies, isLoading } = this.context;
 
-    if (!movies) return null;
-
-    // TODO: add loading spinner
+    if (!movies || isLoading) return <Spinner />;
 
     return (
       <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
