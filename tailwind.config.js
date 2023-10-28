@@ -26,11 +26,37 @@ export default {
             translate: '0 0',
           },
         },
+        float: {
+          '0%': {
+            translate3d: '0',
+            rotate: 0,
+          },
+          '20%': {
+            transform: 'translate3d(-50px, 15px, 0)',
+            rotate: '7deg',
+            scale: '0.9',
+          },
+          '40%': {
+            rotate: '-7deg',
+            transform: 'translate3d(-30px, -15px, 0)',
+          },
+          '60%': {
+            rotate: '10deg',
+            scale: 1.2,
+            transform: 'translate3d(30px, 20px, 0)',
+          },
+          '100%': {
+            translate3d: '0',
+            rotate: 0,
+            scale: 1,
+          },
+        },
       },
       animation: {
         'fade-in': 'fade-in .8s cubic-bezier(0.86, 0, 0.07, 1)',
         springish:
           'springish 1.58s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
+        float: 'float 20s ease-in-out infinite',
       },
     },
     fontFamily: {

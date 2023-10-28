@@ -18,10 +18,11 @@ class MovieList extends Component<object, IMovieListState> {
   declare context: ISearchContext;
 
   render() {
-    const { movies } = this.context;
+    const { movies, isLoading } = this.context;
     const isNoMovies = !movies?.length;
 
-    if (isNoMovies) return <NotFound />;
+    if (isNoMovies && !isLoading) return <NotFound />;
+    if (isNoMovies) return null;
 
     return (
       <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
