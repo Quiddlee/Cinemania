@@ -1,6 +1,7 @@
 import { Component } from 'react';
 
 import { ISearchContext, SearchContext } from './context/SearchProvider.tsx';
+import searchIcon from '../../assets/search.svg';
 import { LOCAL_STORAGE_SEARCH_QUERY } from '../../shared/const/const.ts';
 
 interface ISearchState {
@@ -37,7 +38,7 @@ class Search extends Component<object, ISearchState> {
     return (
       <article className="relative mx-auto flex w-full sm:w-fit xl:w-1/3">
         <input
-          className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-12 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
+          className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
           placeholder="Type to Search..."
           type="text"
           value={this.state.searchQuery}
@@ -45,9 +46,10 @@ class Search extends Component<object, ISearchState> {
         />
         <button
           onClick={() => this.handleSearch(this.state.searchQuery)}
-          className="absolute bottom-0 right-0 top-0 m-auto scale-105 rounded-full bg-lime-400 px-4 py-3 font-semibold text-gray-950 transition-all duration-200 hover:scale-110 focus:outline-0 focus:ring focus:ring-lime-300 focus:ring-offset-2 focus:ring-offset-black/70 active:scale-105 active:duration-75 peer-focus:-translate-y-0.5 sm:px-6"
+          className="absolute bottom-0 right-0 top-0 m-auto flex scale-105 items-center gap-2 rounded-full bg-lime-400 px-4 py-3 font-semibold text-gray-950 transition-all duration-200 hover:scale-110 focus:outline-0 focus:ring focus:ring-lime-300 focus:ring-offset-2 focus:ring-offset-black/70 active:scale-105 active:duration-75 peer-focus:-translate-y-0.5 sm:px-6"
           type="button">
-          Search
+          <img className="z-10" src={searchIcon} alt="" />
+          <span>Search</span>
         </button>
       </article>
     );
