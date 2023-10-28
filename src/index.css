@@ -129,6 +129,38 @@
       transform: translate3d(0.03px, 0, 0) scale(0.9997);
     }
   }
+
+  @keyframes springish-letter {
+    0.00% {
+      transform: translate3d(119.4px, 0, 0);
+      opacity: 0;
+    }
+    10.97% {
+      transform: translate3d(-44.48px, 0, 0);
+    }
+    23.69% {
+      transform: translate3d(15.02px, 0, 0);
+      opacity: 1;
+    }
+    36.41% {
+      transform: translate3d(-5.07px, 0, 0);
+    }
+    49.12% {
+      transform: translate3d(1.71px, 0, 0);
+    }
+    61.84% {
+      transform: translate3d(-0.58px, 0, 0);
+    }
+    74.56% {
+      transform: translate3d(0.2px, 0, 0);
+    }
+    87.28% {
+      transform: translate3d(-0.07px, 0, 0);
+    }
+    100.00% {
+      transform: translate3d(0.02px, 0, 0);
+    }
+  }
 }
 
 @layer utilities {

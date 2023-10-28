@@ -53,9 +53,11 @@ export default {
         },
       },
       animation: {
-        'fade-in': 'fade-in .8s cubic-bezier(0.86, 0, 0.07, 1)',
+        'fade-in': 'fade-in .8s cubic-bezier(0.86, 0, 0.07, 1) both',
         springish:
           'springish 1.58s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
+        'springish-letter':
+          'springish-letter 2.73s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
         float: 'float 20s ease-in-out infinite',
       },
     },
