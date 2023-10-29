@@ -57,7 +57,7 @@ export default {
         springish:
           'springish 1.72s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
         'springish-letter':
-          'springish-letter 1.8s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
+          'springish-letter 2s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
         float: 'float 20s ease-in-out infinite',
       },
     },
