@@ -5,14 +5,25 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import GradientBackground from './ui/GradientBackground.tsx';
 import MovieList from '../features/ProductList/MovieList.tsx';
 import Search from '../features/Search/Search.tsx';
+import Button from '../shared/ui/Button.tsx';
 import Spinner from '../shared/ui/Spinner.tsx';
 import Header from '../widgets/Header/Header.tsx';
 import Logo from '../widgets/Header/ui/Logo.tsx';
 import TotalResults from '../widgets/Header/ui/TotalResults.tsx';
 import Main from '../widgets/Main/Main.tsx';
 
-class MainLayout extends Component {
+interface IMainLayoutState {
+  isError: boolean;
+}
+
+class MainLayout extends Component<object, IMainLayoutState> {
+  state = {
+    isError: false,
+  };
+
   render() {
+    if (this.state.isError) throw new Error('test error');
+
     return (
       <OverlayScrollbarsComponent
         element="div"
@@ -33,6 +44,12 @@ class MainLayout extends Component {
             <Header>
               <Logo />
               <Search />
+              <Button
+                className="animate-fade-in"
+                type="empty"
+                onClick={() => this.setState({ isError: true })}>
+                Throw error
+              </Button>
               <TotalResults />
             </Header>
             <Main>

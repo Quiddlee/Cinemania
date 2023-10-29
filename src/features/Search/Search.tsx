@@ -3,6 +3,7 @@ import { Component, createRef } from 'react';
 import { ISearchContext, SearchContext } from './context/SearchProvider.tsx';
 import searchIcon from '../../assets/search.svg';
 import { LOCAL_STORAGE_SEARCH_QUERY } from '../../shared/const/const.ts';
+import Button from '../../shared/ui/Button.tsx';
 
 interface ISearchState {
   searchQuery: string;
@@ -26,11 +27,11 @@ class Search extends Component<object, ISearchState> {
 
     if (storedQuery) {
       this.setState({ searchQuery: storedQuery });
-      void this.handleSearch(storedQuery);
-      return;
+      // void this.handleSearch(storedQuery);
+      // return;
     }
 
-    void this.handleSearch('');
+    // void this.handleSearch('');
   }
 
   componentWillUnmount() {
@@ -75,13 +76,14 @@ class Search extends Component<object, ISearchState> {
           value={this.state.searchQuery}
           onChange={(e) => this.setState({ searchQuery: e.target.value })}
         />
-        <button
+        <Button
           onClick={() => this.handleSearch(this.state.searchQuery)}
-          className="absolute bottom-0 right-0 top-0 m-auto flex scale-105 items-center gap-2 rounded-full bg-lime-400 px-4 py-3 font-semibold text-gray-950 transition-all duration-200 hover:scale-110 focus:outline-0 focus:ring focus:ring-lime-300 focus:ring-offset-2 focus:ring-offset-black/70 active:scale-105 active:duration-75 peer-focus:-translate-y-0.5 sm:px-6"
-          type="button">
-          <img className="z-10" src={searchIcon} alt="" />
-          <span>Search</span>
-        </button>
+          className="absolute bottom-0 right-0 top-0 m-auto flex scale-105 items-center gap-2 active:scale-105 active:duration-75 peer-focus:-translate-y-0.5">
+          <>
+            <img className="z-10" src={searchIcon} alt="" />
+            <span>Search</span>
+          </>
+        </Button>
       </article>
     );
   }
