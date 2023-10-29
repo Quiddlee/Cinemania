@@ -25,7 +25,7 @@ class MovieList extends Component<object, IMovieListState> {
     if (isNoMovies) return null;
 
     return (
-      <ul className="m-auto flex max-w-6xl flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
+      <ul className="animation-delay m-auto flex max-w-6xl animate-fade-in flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
         {movies.map((movie, i) => (
           <Movie key={movie.imdbID} data={movie} delay={i} />
         ))}

@@ -12,7 +12,7 @@ class TotalResults extends Component {
 
   render() {
     return (
-      <p className="ml-auto hidden text-right text-lime-400 sm:block lg:text-lg">
+      <p className="animation-delay ml-auto hidden animate-fade-in text-right text-lime-400 sm:block lg:text-lg">
         Found <span className="font-semibold">{this.context.totalResults}</span>{' '}
         movies
       </p>

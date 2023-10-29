@@ -132,29 +132,36 @@
 
   @keyframes springish-letter {
     0.00% {
-      transform: translate3d(100px, 0, 0);
+      transform: translate3d(129.35px, 0, 0);
       opacity: 0;
     }
-    17.50% {
-      transform: translate3d(-23.4px, 0, 0);
+    14.09% {
+      transform: translate3d(-31.83px, 0, 0);
       opacity: 1;
     }
-    38.13% {
-      transform: translate3d(4.82px, 0, 0);
+    31.27% {
+      transform: translate3d(6.56px, 0, 0);
     }
-    58.75% {
-      transform: translate3d(-0.99px, 0, 0);
+    48.45% {
+      transform: translate3d(-1.35px, 0, 0);
     }
-    79.38% {
-      transform: translate3d(0.21px, 0, 0);
+    65.64% {
+      transform: translate3d(0.28px, 0, 0);
+    }
+    82.82% {
+      transform: translate3d(-0.06px, 0, 0);
     }
     100.00% {
-      transform: translate3d(-0.04px, 0, 0);
+      transform: translate3d(0.01px, 0, 0);
     }
   }
 }
 
 @layer utilities {
+  .animation-delay {
+    animation-delay: 1s;
+  }
+
   .animation-delay-2000 {
     animation-delay: 2s;
   }

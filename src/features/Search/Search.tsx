@@ -66,7 +66,7 @@ class Search extends Component<object, ISearchState> {
 
   render() {
     return (
-      <article className="relative mx-auto flex w-full sm:w-fit xl:w-1/3">
+      <article className="animation-delay relative mx-auto flex w-full animate-fade-in sm:w-fit xl:w-1/3">
         <input
           ref={this.inputRef}
           className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
