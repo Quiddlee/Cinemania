@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import LocomotiveScroll from 'locomotive-scroll';
 
 import GradientBackground from './ui/GradientBackground.tsx';
 import MovieList from '../features/ProductList/MovieList.tsx';
@@ -21,20 +21,20 @@ class MainLayout extends Component<object, IMainLayoutState> {
     isError: false,
   };
 
+  componentDidMount() {
+    // eslint-disable-next-line no-new
+    new LocomotiveScroll({
+      lenisOptions: {
+        duration: 0.55,
+      },
+    });
+  }
+
   render() {
     if (this.state.isError) throw new Error('test error');
 
     return (
-      <OverlayScrollbarsComponent
-        element="div"
-        className="h-screen overflow-scroll"
-        options={{
-          scrollbars: {
-            autoHide: 'scroll',
-            theme: 'os-theme-light',
-          },
-        }}
-        defer>
+      <>
         <Spinner />
 
         <div className="relative m-auto min-h-screen">
@@ -57,7 +57,7 @@ class MainLayout extends Component<object, IMainLayoutState> {
             </Main>
           </section>
         </div>
-      </OverlayScrollbarsComponent>
+      </>
     );
   }
 }
