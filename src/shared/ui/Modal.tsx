@@ -36,7 +36,9 @@ class Modal extends Component<IModalProps> {
           onMouseMove={this.handleMouseMove}
           onMouseOut={this.handleMouseOut}
           onBlur={this.handleMouseOut}
-          className={`h-full w-full px-6 py-10 ${this.props.className ?? ''} `}>
+          className={`h-full w-full px-2 py-8 md:px-6 md:py-10 ${
+            this.props.className ?? ''
+          }`}>
           {this.props.children}
         </div>
       </article>
