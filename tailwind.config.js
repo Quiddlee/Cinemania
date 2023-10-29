@@ -57,12 +57,13 @@ export default {
         springish:
           'springish 1.58s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
         'springish-letter':
-          'springish-letter 2.73s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
+          'springish-letter 1.55s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
         float: 'float 20s ease-in-out infinite',
       },
     },
     fontFamily: {
       sans: 'Poppins, monospace, sans-serif',
+      quicksand: 'Quicksand, sans-serif',
     },
   },
   plugins: [],
