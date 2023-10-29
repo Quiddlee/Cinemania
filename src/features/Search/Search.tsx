@@ -39,12 +39,21 @@ class Search extends Component<object, ISearchState> {
 
   handleKeydown = (e: KeyboardEvent) => {
     const isEnterPressed = e.key === 'Enter';
+    const isEscPressed = e.key === 'Escape';
     const isInputFocus = document.activeElement === this.inputRef.current;
+    const noActiveElement = document.activeElement === document.body;
 
-    if (isEnterPressed && !isInputFocus) {
+    if (isEscPressed && isInputFocus) {
+      this.inputRef.current?.blur();
+    }
+
+    if (isEnterPressed && noActiveElement) {
       this.inputRef.current?.focus();
       this.setState({ searchQuery: '' });
-    } else if (isEnterPressed && isInputFocus) {
+      return;
+    }
+
+    if (isEnterPressed && isInputFocus) {
       void this.handleSearch(this.state.searchQuery);
       this.inputRef.current?.blur();
     }
