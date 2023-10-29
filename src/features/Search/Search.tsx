@@ -26,11 +26,11 @@ class Search extends Component<object, ISearchState> {
 
     if (storedQuery) {
       this.setState({ searchQuery: storedQuery });
-      // void this.handleSearch(storedQuery);
-      // return;
+      void this.handleSearch(storedQuery);
+      return;
     }
 
-    // void this.handleSearch('');
+    void this.handleSearch('');
   }
 
   componentWillUnmount() {
