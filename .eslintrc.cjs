@@ -32,9 +32,10 @@ module.exports = {
     'react/require-default-props': 0,
     'react/state-in-constructor': ['error', 'never'],
     'react/prefer-stateless-function': 0,
-    'no-void': 0,
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'no-void': 0,
+    'no-param-reassign': 0,
     'import/extensions': [
       'error',
       'ignorePackages',

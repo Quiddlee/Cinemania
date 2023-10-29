@@ -1,9 +1,8 @@
 import { Component, createRef, MouseEvent } from 'react';
 
-import colors from 'tailwindcss/colors';
-
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../../shared/const/const.ts';
+import createRadialHover from '../../../shared/lib/helpers/animateRadialHover.ts';
 import { Movie as MovieData } from '../../../shared/types/types.ts';
 import { getMovie } from '../api/apiMovie.ts';
 
@@ -27,6 +26,16 @@ class Movie extends Component<IMovieProps, IMovieState> {
 
   containerRef = createRef<HTMLLIElement>();
 
+  radialHover;
+
+  cleanUp;
+
+  constructor(props: IMovieProps) {
+    super(props);
+
+    [this.radialHover, this.cleanUp] = createRadialHover();
+  }
+
   async componentDidMount() {
     if (this.containerRef.current) {
       this.containerRef.current.style.animationDelay = `0.${String(
@@ -44,20 +53,13 @@ class Movie extends Component<IMovieProps, IMovieState> {
     });
   }
 
-  handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = this.movieRef.current?.getBoundingClientRect();
-
-    if (rect) {
-      const pointerX = e.clientX - rect.left;
-      const pointerY = e.clientY - rect.top;
-
-      if (this.movieRef.current)
-        this.movieRef.current.style.background = `radial-gradient(circle at ${pointerX}px ${pointerY}px, rgb(112, 26, 117, 0.4) 0%, ${colors.neutral['950']} 190px)`;
-    }
+  handleMouseMove = (e: MouseEvent) => {
+    if (this.movieRef.current) this.radialHover(this.movieRef.current, e);
   };
 
   handleMouseOut = () => {
-    if (this.movieRef.current) this.movieRef.current.style.background = '';
+    if (this.movieRef.current)
+      this.cleanUp(this.movieRef.current as HTMLDivElement);
   };
 
   render() {

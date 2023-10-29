@@ -1,24 +1,26 @@
 import { Component, createRef, MouseEvent } from 'react';
 
-import colors from 'tailwindcss/colors';
+import createRadialHover from '../../../shared/lib/helpers/animateRadialHover.ts';
 
 class NotFound extends Component {
   movieRef = createRef<HTMLDivElement>();
 
-  handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = this.movieRef.current?.getBoundingClientRect();
+  radialHover;
 
-    if (rect) {
-      const pointerX = e.clientX - rect.left;
-      const pointerY = e.clientY - rect.top;
+  cleanUp;
 
-      if (this.movieRef.current)
-        this.movieRef.current.style.background = `radial-gradient(circle at ${pointerX}px ${pointerY}px, rgb(112, 26, 117, 0.5) 0%, ${colors.transparent} 160px)`;
-    }
+  constructor(props: NonNullable<unknown>) {
+    super(props);
+
+    [this.radialHover, this.cleanUp] = createRadialHover();
+  }
+
+  handleMouseMove = (e: MouseEvent) => {
+    if (this.movieRef.current) this.radialHover(this.movieRef.current, e);
   };
 
   handleMouseOut = () => {
-    if (this.movieRef.current) this.movieRef.current.style.background = '';
+    if (this.movieRef.current) this.cleanUp(this.movieRef.current);
   };
 
   render() {
