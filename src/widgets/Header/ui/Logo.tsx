@@ -5,7 +5,7 @@ import { LOGO_LETTERS } from '../const/const.ts';
 class Logo extends Component {
   render() {
     return (
-      <h1 className="flex font-quicksand font-bold text-lime-400">
+      <h1 className="mr-auto flex font-quicksand font-bold text-lime-400">
         {LOGO_LETTERS.map((letter, i) => (
           <span
             style={{

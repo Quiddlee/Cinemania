@@ -32,7 +32,7 @@ class Header extends Component<IChildren> {
     return (
       <header
         ref={this.containerRef}
-        className="sticky top-0 z-10 flex w-full flex-wrap items-center justify-between gap-x-6 gap-y-4 p-6 sm:gap-0 lg:px-12 xl:px-24">
+        className="sticky top-0 z-10 flex w-full flex-wrap items-center justify-between gap-x-6 gap-y-4 p-6 sm:gap-0 lg:px-12 xl:px-20">
         {this.props.children}
       </header>
     );
