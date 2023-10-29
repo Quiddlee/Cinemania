@@ -1,5 +1,7 @@
 import { Component } from 'react';
 
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+
 import GradientBackground from './ui/GradientBackground.tsx';
 import MovieList from '../features/ProductList/MovieList.tsx';
 import Search from '../features/Search/Search.tsx';
@@ -12,7 +14,16 @@ import Main from '../widgets/Main/Main.tsx';
 class MainLayout extends Component {
   render() {
     return (
-      <>
+      <OverlayScrollbarsComponent
+        element="div"
+        className="h-screen overflow-scroll"
+        options={{
+          scrollbars: {
+            autoHide: 'scroll',
+            theme: 'os-theme-light',
+          },
+        }}
+        defer>
         <Spinner />
 
         <div className="relative m-auto min-h-screen">
@@ -29,7 +40,7 @@ class MainLayout extends Component {
             </Main>
           </section>
         </div>
-      </>
+      </OverlayScrollbarsComponent>
     );
   }
 }
