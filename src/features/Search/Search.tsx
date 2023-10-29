@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, createRef } from 'react';
 
 import { ISearchContext, SearchContext } from './context/SearchProvider.tsx';
 import searchIcon from '../../assets/search.svg';
@@ -13,21 +13,42 @@ class Search extends Component<object, ISearchState> {
 
   declare context: ISearchContext;
 
+  inputRef = createRef<HTMLInputElement>();
+
   state = {
     searchQuery: '',
   };
 
   componentDidMount() {
+    document.addEventListener('keydown', this.handleKeydown);
+
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
 
     if (storedQuery) {
       this.setState({ searchQuery: storedQuery });
-      void this.handleSearch(storedQuery);
-      return;
+      // void this.handleSearch(storedQuery);
+      // return;
     }
 
-    void this.handleSearch('');
+    // void this.handleSearch('');
   }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeydown);
+  }
+
+  handleKeydown = (e: KeyboardEvent) => {
+    const isEnterPressed = e.key === 'Enter';
+    const isInputFocus = document.activeElement === this.inputRef.current;
+
+    if (isEnterPressed && !isInputFocus) {
+      this.inputRef.current?.focus();
+      this.setState({ searchQuery: '' });
+    } else if (isEnterPressed && isInputFocus) {
+      void this.handleSearch(this.state.searchQuery);
+      this.inputRef.current?.blur();
+    }
+  };
 
   handleSearch = async (query: string) => {
     this.context.fetchMovies(query.trim());
@@ -38,6 +59,7 @@ class Search extends Component<object, ISearchState> {
     return (
       <article className="relative mx-auto flex w-full sm:w-fit xl:w-1/3">
         <input
+          ref={this.inputRef}
           className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
           placeholder="Type to Search..."
           type="text"
