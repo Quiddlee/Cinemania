@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ReactNode } from 'react';
 
 import { IChildren } from '../types/interfaces.ts';
 
@@ -14,23 +14,25 @@ class ErrorBoundary extends Component<
   IErrorBoundaryProps,
   IErrorBoundaryState
 > {
-  state = {
-    hasError: false,
-  };
+  constructor(props: IErrorBoundaryProps) {
+    super(props);
+
+    this.state = {
+      hasError: false,
+    };
+  }
 
   static getDerivedStateFromError = () => ({
     hasError: true,
   });
 
-  componentDidCatch(error: Error, info: ErrorInfo) {
-    // eslint-disable-next-line no-console
-    console.log('Error report =', error, info.componentStack);
-  }
-
   render() {
-    if (this.state.hasError) return this.props.fallback;
+    const { hasError } = this.state;
+    const { fallback, children } = this.props;
 
-    return this.props.children;
+    if (hasError) return fallback;
+
+    return children;
   }
 }
 
