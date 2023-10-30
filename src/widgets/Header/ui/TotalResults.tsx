@@ -1,23 +1,13 @@
-import { Component } from 'react';
+import useSearch from '../../../features/Search/hooks/useSearch.ts';
 
-import {
-  ISearchContext,
-  SearchContext,
-} from '../../../features/Search/context/SearchProvider.tsx';
+function TotalResults() {
+  const { totalResults } = useSearch();
 
-class TotalResults extends Component {
-  static contextType = SearchContext;
-
-  declare context: ISearchContext;
-
-  render() {
-    return (
-      <p className="ml-auto hidden animate-fade-in text-right text-lime-400 sm:block lg:text-lg">
-        Found <span className="font-semibold">{this.context.totalResults}</span>{' '}
-        movies
-      </p>
-    );
-  }
+  return (
+    <p className="ml-auto hidden animate-fade-in text-right text-lime-400 sm:block lg:text-lg">
+      Found <span className="font-semibold">{totalResults}</span> movies
+    </p>
+  );
 }
 
 export default TotalResults;
