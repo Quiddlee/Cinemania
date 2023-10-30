@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 
-import { useSearch } from '../../features/Search/context/SearchProvider.tsx';
+import useSearch from '../../features/Search/hooks/useSearch.ts';
 
 function Spinner() {
   const { isLoading } = useSearch();

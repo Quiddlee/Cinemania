@@ -1,12 +1,7 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useReducer,
-} from 'react';
+import { createContext, useCallback, useMemo, useReducer } from 'react';
 
 import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
+import { LOCAL_STORAGE_SEARCH_QUERY } from '../../../shared/const/const.ts';
 import { IChildren } from '../../../shared/types/interfaces.ts';
 import { MovieList } from '../../../shared/types/types.ts';
 import { NO_MOVIES, NO_RESULTS } from '../const/const.ts';
@@ -74,6 +69,8 @@ function SearchProvider({ children }: IChildren) {
 
   const fetchMovies = useCallback(
     async (searchQuery: string) => {
+      localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, searchQuery);
+
       try {
         dispatch({ type: SearchActions.LOADING });
         const res = await getMovieList(searchQuery);
@@ -102,15 +99,6 @@ function SearchProvider({ children }: IChildren) {
       {children}
     </SearchContext.Provider>
   );
-}
-
-export function useSearch() {
-  const context = useContext(SearchContext);
-
-  if (context === undefined)
-    throw new Error('SearchContext is used outside the SearchProvider!');
-
-  return context;
 }
 
 export default SearchProvider;

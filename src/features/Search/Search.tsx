@@ -1,92 +1,83 @@
-import { Component, createRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { ISearchContext, SearchContext } from './context/SearchProvider.tsx';
+import useSearch from './hooks/useSearch.ts';
 import searchIcon from '../../assets/search.svg';
 import { LOCAL_STORAGE_SEARCH_QUERY } from '../../shared/const/const.ts';
 import Button from '../../shared/ui/Button.tsx';
 
-interface ISearchState {
-  searchQuery: string;
-}
+// TODO - split the component into smaller ones
 
-class Search extends Component<object, ISearchState> {
-  static contextType = SearchContext;
+function Search() {
+  const [query, setQuery] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { fetchMovies } = useSearch();
 
-  declare context: ISearchContext;
+  const handleSearch = useCallback(
+    async (newQuery: string) => {
+      fetchMovies(newQuery.trim());
+    },
+    [fetchMovies],
+  );
 
-  inputRef = createRef<HTMLInputElement>();
+  const handleKeydown = useCallback(
+    (e: KeyboardEvent) => {
+      const isEnterPressed = e.key === 'Enter';
+      const isEscPressed = e.key === 'Escape';
+      const isInputFocus = document.activeElement === inputRef.current;
+      const noActiveElement = document.activeElement === document.body;
 
-  state = {
-    searchQuery: '',
-  };
+      if (isEscPressed && isInputFocus) {
+        inputRef.current?.blur();
+      }
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeydown);
+      if (isEnterPressed && noActiveElement) {
+        inputRef.current?.focus();
+        setQuery('');
+        return;
+      }
 
+      if (isEnterPressed && isInputFocus) {
+        void handleSearch(query);
+        inputRef.current?.blur();
+      }
+    },
+    [handleSearch, query],
+  );
+
+  useEffect(() => {
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
 
-    if (storedQuery) {
-      this.setState({ searchQuery: storedQuery });
-      void this.handleSearch(storedQuery);
-      return;
-    }
+    if (!storedQuery) return;
 
-    void this.handleSearch('');
-  }
+    setQuery(storedQuery);
+    void fetchMovies(storedQuery);
+  }, [fetchMovies]);
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeydown);
-  }
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeydown);
+    return () => document.removeEventListener('keydown', handleKeydown);
+  }, [handleKeydown]);
 
-  handleKeydown = (e: KeyboardEvent) => {
-    const isEnterPressed = e.key === 'Enter';
-    const isEscPressed = e.key === 'Escape';
-    const isInputFocus = document.activeElement === this.inputRef.current;
-    const noActiveElement = document.activeElement === document.body;
-
-    if (isEscPressed && isInputFocus) {
-      this.inputRef.current?.blur();
-    }
-
-    if (isEnterPressed && noActiveElement) {
-      this.inputRef.current?.focus();
-      this.setState({ searchQuery: '' });
-      return;
-    }
-
-    if (isEnterPressed && isInputFocus) {
-      void this.handleSearch(this.state.searchQuery);
-      this.inputRef.current?.blur();
-    }
-  };
-
-  handleSearch = async (query: string) => {
-    this.context.fetchMovies(query.trim());
-    localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, query.trim());
-  };
-
-  render() {
-    return (
-      <article className="relative mx-auto flex w-full animate-fade-in sm:w-fit xl:w-1/3">
-        <input
-          ref={this.inputRef}
-          className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
-          placeholder="Type to Search..."
-          type="text"
-          value={this.state.searchQuery}
-          onChange={(e) => this.setState({ searchQuery: e.target.value })}
-        />
-        <Button
-          onClick={() => this.handleSearch(this.state.searchQuery)}
-          className="absolute bottom-0 right-0 top-0 m-auto flex scale-105 items-center gap-2 active:scale-105 active:duration-75 peer-focus:-translate-y-0.5">
-          <>
-            <img className="z-10" src={searchIcon} alt="" />
-            <span>Search</span>
-          </>
-        </Button>
-      </article>
-    );
-  }
+  return (
+    <article className="relative mx-auto flex w-full animate-fade-in sm:w-fit xl:w-1/3">
+      <input
+        ref={inputRef}
+        className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
+        placeholder="Type to Search..."
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <Button
+        onClick={() => handleSearch(query)}
+        className="absolute bottom-0 right-0 top-0 m-auto flex scale-105 items-center gap-2 active:scale-105 active:duration-75 peer-focus:-translate-y-0.5">
+        <>
+          <img className="z-10" src={searchIcon} alt="" />
+          <span>Search</span>
+        </>
+      </Button>
+    </article>
+  );
 }
 
 export default Search;
