@@ -37,12 +37,6 @@ class Movie extends Component<IMovieProps, IMovieState> {
   }
 
   async componentDidMount() {
-    if (this.containerRef.current) {
-      this.containerRef.current.style.animationDelay = `0.${String(
-        this.props.delay,
-      )}s`;
-    }
-
     const movieData = await getMovie(this.props.data.imdbID);
     const genre = movieData.Genre.split(', ').slice(0, 2).join('/');
     const description = `${movieData.Plot.slice(0, 38)}...`;
@@ -71,6 +65,9 @@ class Movie extends Component<IMovieProps, IMovieState> {
 
     return (
       <li
+        style={{
+          animationDelay: `0.${String(this.props.delay)}s`,
+        }}
         ref={this.containerRef}
         className="w-64 animate-springish cursor-pointer overflow-hidden rounded-[40px] bg-neutral-950 text-gray-100 transition-all duration-200">
         <div
