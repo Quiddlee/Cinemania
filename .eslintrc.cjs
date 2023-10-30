@@ -30,6 +30,7 @@ module.exports = {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'no-void': 0,
     'no-param-reassign': 0,
+    'import/no-extraneous-dependencies': 0,
     'import/extensions': [
       'error',
       'ignorePackages',
