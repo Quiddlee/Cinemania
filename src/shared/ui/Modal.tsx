@@ -1,4 +1,4 @@
-import { Component, createRef, MouseEvent } from 'react';
+import { MouseEvent, useRef } from 'react';
 
 import createRadialHover from '../lib/helpers/animateRadialHover.ts';
 import { IChildren } from '../types/interfaces.ts';
@@ -7,43 +7,31 @@ interface IModalProps extends IChildren {
   className?: string;
 }
 
-class Modal extends Component<IModalProps> {
-  modalRef = createRef<HTMLDivElement>();
+function Modal({ className = '', children }: IModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  radialHover;
+  const [radialHover, cleanUp] = createRadialHover();
 
-  cleanUp;
-
-  constructor(props: IModalProps) {
-    super(props);
-
-    [this.radialHover, this.cleanUp] = createRadialHover();
-  }
-
-  handleMouseMove = (e: MouseEvent) => {
-    if (this.modalRef.current) this.radialHover(this.modalRef.current, e);
+  const handleMouseMove = (e: MouseEvent) => {
+    if (modalRef.current) radialHover(modalRef.current, e);
   };
 
-  handleMouseOut = () => {
-    if (this.modalRef.current) this.cleanUp(this.modalRef.current);
+  const handleMouseOut = () => {
+    if (modalRef.current) cleanUp(modalRef.current);
   };
 
-  render() {
-    return (
-      <article className="mx-auto w-fit animate-springish overflow-hidden rounded-[2rem] border-l border-t border-white/20 bg-white/10 text-center text-gray-400 backdrop-saturate-150">
-        <div
-          ref={this.modalRef}
-          onMouseMove={this.handleMouseMove}
-          onMouseOut={this.handleMouseOut}
-          onBlur={this.handleMouseOut}
-          className={`h-full w-full px-2 py-8 md:px-6 md:py-10 ${
-            this.props.className ?? ''
-          }`}>
-          {this.props.children}
-        </div>
-      </article>
-    );
-  }
+  return (
+    <article className="mx-auto w-fit animate-springish overflow-hidden rounded-[2rem] border-l border-t border-white/20 bg-white/10 text-center text-gray-400 backdrop-saturate-150">
+      <div
+        ref={modalRef}
+        onMouseMove={handleMouseMove}
+        onMouseOut={handleMouseOut}
+        onBlur={handleMouseOut}
+        className={`h-full w-full px-2 py-8 md:px-6 md:py-10 ${className}`}>
+        {children}
+      </div>
+    </article>
+  );
 }
 
 export default Modal;
