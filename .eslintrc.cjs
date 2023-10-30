@@ -24,14 +24,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    // TODO: remove 👇 after 1 module
-    'react/jsx-no-constructed-context-values': 0,
-    'import/no-extraneous-dependencies': 0,
-    'react/static-property-placement': 0,
-    'react/destructuring-assignment': 0,
-    'react/require-default-props': 0,
-    'react/state-in-constructor': ['error', 'never'],
-    'react/prefer-stateless-function': 0,
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'no-void': 0,
