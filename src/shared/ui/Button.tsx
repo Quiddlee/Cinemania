@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { memo } from 'react';
 
 import { IChildren } from '../types/interfaces.ts';
 
@@ -15,19 +15,20 @@ interface IButtonProps extends IChildren {
   className?: string;
 }
 
-class Button extends Component<IButtonProps> {
-  render() {
-    return (
-      <button
-        onClick={this.props.onClick}
-        className={`${buttonTypes[this.props.type ?? 'filled']} ${
-          this.props.className
-        }`}
-        type="button">
-        {this.props.children}
-      </button>
-    );
-  }
-}
+const Button = memo(function Button({
+  type = 'filled',
+  onClick,
+  className = '',
+  children,
+}: IButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className={`${buttonTypes[type]} ${className}`}
+      type="button">
+      {children}
+    </button>
+  );
+});
 
 export default Button;
