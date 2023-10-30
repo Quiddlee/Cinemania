@@ -62,11 +62,12 @@ class Movie extends Component<IMovieProps, IMovieState> {
 
     const isPosterExist = Poster !== NOT_EXIST;
     const poster = isPosterExist ? Poster : ReactLogo;
+    const animationDelay = `0.${String(this.props.delay)}s`;
 
     return (
       <li
         style={{
-          animationDelay: `0.${String(this.props.delay)}s`,
+          animationDelay,
         }}
         ref={this.containerRef}
         className="w-64 animate-springish cursor-pointer overflow-hidden rounded-[40px] bg-neutral-950 text-gray-100 transition-all duration-200">
