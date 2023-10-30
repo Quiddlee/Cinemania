@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 
 import GradientBackground from './ui/GradientBackground.tsx';
 import MovieList from '../features/ProductList/MovieList.tsx';
@@ -10,45 +10,37 @@ import Logo from '../widgets/Header/ui/Logo.tsx';
 import TotalResults from '../widgets/Header/ui/TotalResults.tsx';
 import Main from '../widgets/Main/Main.tsx';
 
-interface IMainLayoutState {
-  isError: boolean;
-}
+function MainLayout() {
+  const [isError, setIsError] = useState(false);
 
-class MainLayout extends Component<object, IMainLayoutState> {
-  state = {
-    isError: false,
-  };
+  if (isError) throw new Error('test error');
 
-  render() {
-    if (this.state.isError) throw new Error('test error');
+  return (
+    <>
+      <Spinner />
 
-    return (
-      <>
-        <Spinner />
+      <div className="relative m-auto min-h-screen">
+        <GradientBackground />
 
-        <div className="relative m-auto min-h-screen">
-          <GradientBackground />
-
-          <section className="relative z-20 m-auto grid gap-2 pb-8 sm:gap-10">
-            <Header>
-              <Logo />
-              <Search />
-              <Button
-                className="animate-fade-in"
-                type="empty"
-                onClick={() => this.setState({ isError: true })}>
-                Throw error
-              </Button>
-              <TotalResults />
-            </Header>
-            <Main>
-              <MovieList />
-            </Main>
-          </section>
-        </div>
-      </>
-    );
-  }
+        <section className="relative z-20 m-auto grid gap-2 pb-8 sm:gap-10">
+          <Header>
+            <Logo />
+            <Search />
+            <Button
+              className="animate-fade-in"
+              type="empty"
+              onClick={() => setIsError(true)}>
+              Throw error
+            </Button>
+            <TotalResults />
+          </Header>
+          <Main>
+            <MovieList />
+          </Main>
+        </section>
+      </div>
+    </>
+  );
 }
 
 export default MainLayout;
