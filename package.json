@@ -14,11 +14,12 @@
     "precommit": "pnpm lint-staged && pnpm type-check"
   },
   "dependencies": {
-    "locomotive-scroll": "^5.0.0-beta.8",
+    "locomotive-scroll": "^4.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/locomotive-scroll": "^4.1.2",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
