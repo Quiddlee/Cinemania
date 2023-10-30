@@ -1,7 +1,5 @@
 import { Component } from 'react';
 
-import LocomotiveScroll from 'locomotive-scroll';
-
 import GradientBackground from './ui/GradientBackground.tsx';
 import MovieList from '../features/ProductList/MovieList.tsx';
 import Search from '../features/Search/Search.tsx';
@@ -20,15 +18,6 @@ class MainLayout extends Component<object, IMainLayoutState> {
   state = {
     isError: false,
   };
-
-  componentDidMount() {
-    // eslint-disable-next-line no-new
-    new LocomotiveScroll({
-      lenisOptions: {
-        duration: 0.55,
-      },
-    });
-  }
 
   render() {
     if (this.state.isError) throw new Error('test error');
