@@ -1,4 +1,8 @@
-import { API_URL, QUERY_FALLBACK } from '../../../shared/const/const.ts';
+import {
+  API_URL,
+  DEFAULT_PAGE,
+  QUERY_FALLBACK,
+} from '../../../shared/const/const.ts';
 import {
   ApiErrorResponse,
   ApiMovieListResponse,
@@ -6,9 +10,10 @@ import {
 } from '../../../shared/types/types.ts';
 
 export async function getMovieList(
-  query: string,
+  query: string = QUERY_FALLBACK,
+  page: number = DEFAULT_PAGE,
 ): Promise<ApiMovieListResponse> {
-  const response = await fetch(`${API_URL}&s=${query || QUERY_FALLBACK}`);
+  const response = await fetch(`${API_URL}&s=${query}&page=${page}`);
 
   if (!response.ok) throw new Error('Something went wrong fetching movies!');
 

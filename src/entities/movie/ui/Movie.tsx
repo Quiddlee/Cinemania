@@ -1,10 +1,9 @@
-import { MouseEvent, useEffect, useRef, useState } from 'react';
+import { MouseEvent, useRef } from 'react';
 
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../../shared/const/const.ts';
 import createRadialHover from '../../../shared/lib/helpers/animateRadialHover.ts';
 import { Movie as MovieData } from '../../../shared/types/types.ts';
-import { getMovie } from '../api/apiMovie.ts';
 
 interface IMovieProps {
   data: MovieData;
@@ -14,8 +13,8 @@ interface IMovieProps {
 // TODO - divide the component into smaller ones
 
 function Movie({ data, delay }: IMovieProps) {
-  const [description, setDescription] = useState('');
-  const [genre, setGenre] = useState('');
+  // const [description, setDescription] = useState('');
+  // const [genre, setGenre] = useState('');
 
   const movieRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLLIElement>(null);
@@ -36,18 +35,18 @@ function Movie({ data, delay }: IMovieProps) {
     if (movieRef.current) cleanUp(movieRef.current as HTMLDivElement);
   };
 
-  useEffect(() => {
-    async function fetchMovies() {
-      const movieData = await getMovie(data.imdbID);
-      const slicedGenre = movieData.Genre.split(', ').slice(0, 2).join('/');
-      const slicedDescription = `${movieData.Plot.slice(0, 38)}...`;
-
-      setDescription(slicedDescription);
-      setGenre(slicedGenre);
-    }
-
-    void fetchMovies();
-  }, [data.imdbID]);
+  // useEffect(() => {
+  //   async function fetchMovies() {
+  //     const movieData = await getMovie(data.imdbID);
+  //     const slicedGenre = movieData.Genre.split(', ').slice(0, 2).join('/');
+  //     const slicedDescription = `${movieData.Plot.slice(0, 38)}...`;
+  //
+  //     setDescription(slicedDescription);
+  //     setGenre(slicedGenre);
+  //   }
+  //
+  //   void fetchMovies();
+  // }, [data.imdbID]);
 
   return (
     <li
@@ -70,8 +69,8 @@ function Movie({ data, delay }: IMovieProps) {
         <article className="h-full p-4">
           <h2 className="truncate text-xl text-gray-100">{Title}</h2>
           <div className="mt-2 grid text-gray-400">
-            <p className="mb-2">{description}</p>
-            <span>{genre}</span>
+            {/* <p className="mb-2">{description}</p> */}
+            {/* <span>{genre}</span> */}
             <span>{Year}</span>
           </div>
         </article>

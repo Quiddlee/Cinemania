@@ -1,5 +1,5 @@
 import GradientBackground from './ui/GradientBackground.tsx';
-import MovieList from '../features/ProductList/MovieList.tsx';
+import MovieList from '../features/MovieList/MovieList.tsx';
 import Search from '../features/Search/Search.tsx';
 import useScroll from '../shared/hooks/useScroll.ts';
 import Spinner from '../shared/ui/Spinner.tsx';

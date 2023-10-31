@@ -15,7 +15,7 @@ export interface IInitialState {
 
 export interface ISearchContext extends IInitialState {
   updateQuery: (newQuery: string) => void;
-  fetchMovies: (searchQuery: string) => void;
+  fetchMovies: (searchQuery: string, page?: number) => void;
 }
 
 export interface IQueryAction {

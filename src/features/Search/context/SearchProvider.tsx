@@ -7,7 +7,12 @@ import {
 } from 'react';
 
 import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
-import { LOCAL_STORAGE_SEARCH_QUERY } from '../../../shared/const/const.ts';
+import {
+  DEFAULT_PAGE,
+  LOCAL_STORAGE_SEARCH_QUERY,
+  PAGE_PARAM,
+} from '../../../shared/const/const.ts';
+import useUrl from '../../../shared/hooks/useUrl.ts';
 import { IChildren } from '../../../shared/types/interfaces.ts';
 import { MovieList } from '../../../shared/types/types.ts';
 import { NO_MOVIES, NO_RESULTS } from '../const/const.ts';
@@ -55,6 +60,7 @@ function SearchProvider({ children }: IChildren) {
     reducer,
     initialState,
   );
+  const { readUrl, setUrl } = useUrl();
 
   const updateQuery = useCallback((newQuery: string) => {
     dispatch({ type: SearchActions.QUERY_UPDATED, payload: newQuery });
@@ -74,27 +80,31 @@ function SearchProvider({ children }: IChildren) {
   );
 
   const fetchMovies = useCallback(
-    async (searchQuery: string) => {
+    async (searchQuery: string, page?: number) => {
       localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, searchQuery);
 
       try {
         dispatch({ type: SearchActions.LOADING });
-        const res = await getMovieList(searchQuery);
+        const res = await getMovieList(searchQuery, page);
         updateMovies(res.Search, Number(res.totalResults));
+        updateQuery(searchQuery);
       } catch (e) {
         updateMovies(NO_MOVIES, NO_RESULTS);
       }
     },
-    [updateMovies],
+    [updateMovies, updateQuery],
   );
 
   useEffect(() => {
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
+    const page = Number(readUrl(PAGE_PARAM)) || DEFAULT_PAGE;
+
+    setUrl(PAGE_PARAM, String(page));
 
     if (storedQuery === null) return;
 
-    void fetchMovies(storedQuery);
-  }, [fetchMovies]);
+    void fetchMovies(storedQuery, page);
+  }, [fetchMovies, readUrl, setUrl]);
 
   const providerValue = useMemo(
     () => ({
