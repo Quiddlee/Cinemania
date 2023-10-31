@@ -1,16 +1,25 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 
+import { useCallback, useRef } from 'react';
+
+import { ENTER_KEY, ESCAPE_KEY } from './const/const.ts';
 import useSearch from './hooks/useSearch.ts';
 import searchIcon from '../../assets/search.svg';
 import { LOCAL_STORAGE_SEARCH_QUERY } from '../../shared/const/const.ts';
+import useKey from '../../shared/hooks/useKey.ts';
+import useLocalStorageState from '../../shared/hooks/useLocalStorageState.ts';
 import Button from '../../shared/ui/Button.tsx';
 
-// TODO - split the component into smaller ones
-
 function Search() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useLocalStorageState(
+    '',
+    LOCAL_STORAGE_SEARCH_QUERY,
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const { fetchMovies } = useSearch();
+
+  useKey(ENTER_KEY, handleEnter);
+  useKey(ESCAPE_KEY, handleEscape);
 
   const handleSearch = useCallback(
     async (newQuery: string) => {
@@ -19,44 +28,29 @@ function Search() {
     [fetchMovies],
   );
 
-  const handleKeydown = useCallback(
-    (e: KeyboardEvent) => {
-      const isEnterPressed = e.key === 'Enter';
-      const isEscPressed = e.key === 'Escape';
-      const isInputFocus = document.activeElement === inputRef.current;
-      const noActiveElement = document.activeElement === document.body;
+  function handleEnter() {
+    const isInputFocus = document.activeElement === inputRef.current;
+    const noActiveElement = document.activeElement === document.body;
 
-      if (isEscPressed && isInputFocus) {
-        inputRef.current?.blur();
-      }
+    if (noActiveElement) {
+      inputRef.current?.focus();
+      setQuery('');
+      return;
+    }
 
-      if (isEnterPressed && noActiveElement) {
-        inputRef.current?.focus();
-        setQuery('');
-        return;
-      }
+    if (isInputFocus) {
+      void handleSearch(query);
+      inputRef.current?.blur();
+    }
+  }
 
-      if (isEnterPressed && isInputFocus) {
-        void handleSearch(query);
-        inputRef.current?.blur();
-      }
-    },
-    [handleSearch, query],
-  );
+  function handleEscape() {
+    const isInputFocus = document.activeElement === inputRef.current;
 
-  useEffect(() => {
-    const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
-
-    if (!storedQuery) return;
-
-    setQuery(storedQuery);
-    void fetchMovies(storedQuery);
-  }, [fetchMovies]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeydown);
-    return () => document.removeEventListener('keydown', handleKeydown);
-  }, [handleKeydown]);
+    if (isInputFocus) {
+      inputRef.current?.blur();
+    }
+  }
 
   return (
     <article className="relative mx-auto flex w-full animate-fade-in sm:w-fit xl:w-1/3">

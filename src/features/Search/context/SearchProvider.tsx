@@ -1,4 +1,10 @@
-import { createContext, useCallback, useMemo, useReducer } from 'react';
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+} from 'react';
 
 import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
 import { LOCAL_STORAGE_SEARCH_QUERY } from '../../../shared/const/const.ts';
@@ -81,6 +87,14 @@ function SearchProvider({ children }: IChildren) {
     },
     [updateMovies],
   );
+
+  useEffect(() => {
+    const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
+
+    if (storedQuery === null) return;
+
+    void fetchMovies(storedQuery);
+  }, [fetchMovies]);
 
   const providerValue = useMemo(
     () => ({
