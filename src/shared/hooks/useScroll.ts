@@ -14,7 +14,7 @@ function useScroll<TContainer extends HTMLElement>() {
       scrollRef.current = new LocomotiveScroll({
         el: containerRef.current,
         smooth: true,
-        lerp: 0.22,
+        lerp: 0.2,
       });
 
       observerRef.current = new ResizeObserver(
