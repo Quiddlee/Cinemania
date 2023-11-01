@@ -1,13 +1,15 @@
 import { useCallback } from 'react';
 
-import { DEFAULT_PAGE, PAGE_PARAM } from '../../../shared/const/const.ts';
-import useUrl from '../../../shared/hooks/useUrl.ts';
-import Button from '../../../shared/ui/Button.tsx';
-import useSearch from '../../Search/hooks/useSearch.ts';
+import Button from './ui/Button.tsx';
+import arrowLeft from '../../assets/arrow-left.svg';
+import arrowRight from '../../assets/arrow-right.svg';
+import { DEFAULT_PAGE, PAGE_PARAM } from '../../shared/const/const.ts';
+import useUrl from '../../shared/hooks/useUrl.ts';
+import useSearch from '../Search/hooks/useSearch.ts';
 
 function Pagination() {
   const { setUrl, readUrl } = useUrl();
-  const { fetchMovies, query } = useSearch();
+  const { fetchMovies, query, isLoading } = useSearch();
 
   const currPage = Number(readUrl(PAGE_PARAM));
   const isPrevDisabled = currPage === 1;
@@ -31,12 +33,20 @@ function Pagination() {
   }, [isPage, currPage, setUrl, fetchMovies, query]);
 
   return (
-    <article className="flex items-center justify-center gap-4">
-      <Button disabled={isPrevDisabled} onClick={handlePrevPage}>
-        Prev
+    <div
+      data-scroll-sticky="true"
+      data-scroll-target="#main"
+      className="absolute h-screen w-screen">
+      <Button
+        position="left"
+        disabled={isPrevDisabled || isLoading}
+        onClick={handlePrevPage}>
+        {arrowLeft}
       </Button>
-      <Button onClick={handleNextPage}>Next</Button>
-    </article>
+      <Button position="right" disabled={isLoading} onClick={handleNextPage}>
+        {arrowRight}
+      </Button>
+    </div>
   );
 }
 

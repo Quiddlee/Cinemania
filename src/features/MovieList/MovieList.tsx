@@ -1,5 +1,4 @@
 import NotFound from './ui/NotFound.tsx';
-import Pagination from './ui/Pagination.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import useSearch from '../Search/hooks/useSearch.ts';
 
@@ -12,15 +11,11 @@ function MovieList() {
   if (isNoMovies) return null;
 
   return (
-    <>
-      <ul className="m-auto mb-8 flex max-w-6xl animate-fade-in flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
-        {movies.map((movie, i) => (
-          <Movie key={movie.imdbID} data={movie} delay={i} />
-        ))}
-      </ul>
-
-      <Pagination />
-    </>
+    <ul className="m-auto mb-8 flex max-w-6xl animate-fade-in flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
+      {movies.map((movie, i) => (
+        <Movie key={movie.imdbID} data={movie} delay={i} />
+      ))}
+    </ul>
   );
 }
 

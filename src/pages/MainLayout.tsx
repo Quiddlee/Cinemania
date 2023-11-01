@@ -1,5 +1,6 @@
 import GradientBackground from './ui/GradientBackground.tsx';
 import MovieList from '../features/MovieList/MovieList.tsx';
+import Pagination from '../features/Pagination/Pagination.tsx';
 import Search from '../features/Search/Search.tsx';
 import useScroll from '../shared/hooks/useScroll.ts';
 import Spinner from '../shared/ui/Spinner.tsx';
@@ -14,10 +15,8 @@ function MainLayout() {
   return (
     <>
       <Spinner />
-
       <div ref={containerRef} className="relative m-auto min-h-screen">
         <GradientBackground />
-
         <section className="relative z-20 m-auto grid gap-2 pb-8 sm:gap-10">
           <Header>
             <Logo />
@@ -27,6 +26,7 @@ function MainLayout() {
           <Main>
             <MovieList />
           </Main>
+          <Pagination />
         </section>
       </div>
     </>
