@@ -6,15 +6,19 @@ import {
   useReducer,
 } from 'react';
 
-import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
+import {
+  getMovie,
+  getMovieList,
+} from '../../../entities/movie/api/apiMovie.ts';
 import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
+  MOVIE_PARAM,
   PAGE_PARAM,
 } from '../../../shared/const/const.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
 import { IChildren } from '../../../shared/types/interfaces.ts';
-import { MovieList } from '../../../shared/types/types.ts';
+import { ApiMovieResponse, MovieList } from '../../../shared/types/types.ts';
 import { NO_MOVIES, NO_RESULTS } from '../const/const.ts';
 import {
   Action,
@@ -28,6 +32,7 @@ const initialState: IInitialState = {
   movies: null,
   totalResults: 0,
   isLoading: false,
+  movieDetails: null,
 };
 
 export const SearchContext = createContext<ISearchContext>({
@@ -50,16 +55,17 @@ function reducer(state: IInitialState, action: Action): IInitialState {
     case SearchActions.LOADING:
       return { ...state, isLoading: true };
 
+    case SearchActions.MOVIE_DETAILS_UPDATED:
+      return { ...state, movieDetails: action.payload, isLoading: false };
+
     default:
       throw new Error('The action does not exist!');
   }
 }
 
 function SearchProvider({ children }: IChildren) {
-  const [{ query, movies, totalResults, isLoading }, dispatch] = useReducer(
-    reducer,
-    initialState,
-  );
+  const [{ query, movies, totalResults, isLoading, movieDetails }, dispatch] =
+    useReducer(reducer, initialState);
   const { readUrl, setUrl } = useUrl();
 
   const updateQuery = useCallback((newQuery: string) => {
@@ -74,6 +80,16 @@ function SearchProvider({ children }: IChildren) {
           movies: newMovies,
           totalResults: newTotalResults,
         },
+      });
+    },
+    [],
+  );
+
+  const updateMovieDetails = useCallback(
+    (newMovie: ApiMovieResponse | null) => {
+      dispatch({
+        type: SearchActions.MOVIE_DETAILS_UPDATED,
+        payload: newMovie,
       });
     },
     [],
@@ -95,6 +111,20 @@ function SearchProvider({ children }: IChildren) {
     [updateMovies, updateQuery],
   );
 
+  const fetchMovie = useCallback(async () => {
+    try {
+      dispatch({ type: SearchActions.LOADING });
+      const id = readUrl(MOVIE_PARAM);
+
+      if (id) {
+        const movie = await getMovie(id);
+        updateMovieDetails(movie);
+      }
+    } catch (e) {
+      updateMovieDetails(null);
+    }
+  }, [readUrl, updateMovieDetails]);
+
   useEffect(() => {
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
     const page = Number(readUrl(PAGE_PARAM)) || DEFAULT_PAGE;
@@ -114,8 +144,19 @@ function SearchProvider({ children }: IChildren) {
       isLoading,
       updateQuery,
       fetchMovies,
+      fetchMovie,
+      movieDetails,
     }),
-    [fetchMovies, isLoading, movies, query, totalResults, updateQuery],
+    [
+      fetchMovie,
+      fetchMovies,
+      isLoading,
+      movieDetails,
+      movies,
+      query,
+      totalResults,
+      updateQuery,
+    ],
   );
 
   return (
