@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
+import { RefObject } from 'react';
+
+import LocomotiveScroll from 'locomotive-scroll';
 
 import NotFound from './ui/NotFound.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
+import useScrollTop from '../../shared/hooks/useScrollTop.ts';
 import useSearch from '../Search/hooks/useSearch.ts';
 
 interface IMovieListProps {
-  onScrollTop: () => void;
+  scroll: RefObject<LocomotiveScroll>;
 }
 
-function MovieList({ onScrollTop }: IMovieListProps) {
+function MovieList({ scroll }: IMovieListProps) {
   const { movies, isLoading } = useSearch();
+  useScrollTop(scroll, movies);
 
   const isNoMovies = !movies?.length;
-
-  useEffect(() => {
-    onScrollTop();
-  }, [onScrollTop, movies]);
 
   if (isNoMovies && !isLoading) return <NotFound />;
   if (isNoMovies) return null;
