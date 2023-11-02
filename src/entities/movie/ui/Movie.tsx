@@ -1,9 +1,9 @@
-import { MouseEvent, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { MOVIE_PARAM, NOT_EXIST } from '../../../shared/const/const.ts';
+import useRadialHover from '../../../shared/hooks/useRadialHover.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
-import createRadialHover from '../../../shared/lib/helpers/animateRadialHover.ts';
 import { Movie as MovieData } from '../../../shared/types/types.ts';
 
 interface IMovieProps {
@@ -12,28 +12,20 @@ interface IMovieProps {
 }
 
 // TODO - divide the component into smaller ones
-// TODO - encapsulate radial hover into separate hook
 
 function Movie({ data, delay }: IMovieProps) {
-  const movieRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLLIElement>(null);
   const { setUrl } = useUrl();
+  const {
+    handleMouseOut,
+    handleMouseMove,
+    containerRef: movieRef,
+  } = useRadialHover<HTMLDivElement>();
 
   const { Poster, Title, Year, imdbID } = data;
 
-  const isPosterExist = Poster !== NOT_EXIST;
-  const poster = isPosterExist ? Poster : ReactLogo;
+  const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
   const animationDelay = `0.${String(delay)}s`;
-
-  const [radialHover, cleanUp] = createRadialHover();
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (movieRef.current) radialHover(movieRef.current, e);
-  };
-
-  const handleMouseOut = () => {
-    if (movieRef.current) cleanUp(movieRef.current);
-  };
 
   const handleMovieClick = useCallback(() => {
     setUrl(MOVIE_PARAM, imdbID);
