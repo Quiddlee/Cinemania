@@ -9,11 +9,15 @@ function useScroll<TContainer extends HTMLElement>() {
 
   useEffect(() => {
     if (containerRef.current) {
-      containerRef.current.setAttribute('data-scroll-container', 'true');
+      containerRef.current.setAttribute('data-Scroll-container', 'true');
 
       scrollRef.current = new LocomotiveScroll({
         el: containerRef.current,
         smooth: true,
+        smartphone: {
+          smooth: true,
+        },
+        touchMultiplier: 6,
         lerp: 0.2,
       });
 

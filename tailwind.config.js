@@ -65,7 +65,7 @@ export default {
       animation: {
         'fade-in': 'fade-in 1s cubic-bezier(0.86, 0, 0.07, 1) both',
         'pagination-fade-in':
-          'Pagination-fade-in 1.4s cubic-bezier(.25,1.55,.6,1) both',
+          'pagination-fade-in 1.4s cubic-bezier(.25,1.55,.6,1) both',
         springish:
           'springish 1.72s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
         'springish-letter':
