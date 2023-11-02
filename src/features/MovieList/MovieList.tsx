@@ -1,11 +1,21 @@
+import { useEffect } from 'react';
+
 import NotFound from './ui/NotFound.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import useSearch from '../Search/hooks/useSearch.ts';
 
-function MovieList() {
+interface IMovieListProps {
+  onScrollTop: () => void;
+}
+
+function MovieList({ onScrollTop }: IMovieListProps) {
   const { movies, isLoading } = useSearch();
 
   const isNoMovies = !movies?.length;
+
+  useEffect(() => {
+    onScrollTop();
+  }, [onScrollTop, movies]);
 
   if (isNoMovies && !isLoading) return <NotFound />;
   if (isNoMovies) return null;

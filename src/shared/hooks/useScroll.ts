@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
@@ -29,7 +29,10 @@ function useScroll<TContainer extends HTMLElement>() {
     };
   }, []);
 
-  return containerRef;
+  return [containerRef, scrollRef] as [
+    RefObject<TContainer>,
+    RefObject<LocomotiveScroll>,
+  ];
 }
 
 export default useScroll;

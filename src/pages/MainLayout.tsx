@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import GradientBackground from './ui/GradientBackground.tsx';
 import MovieList from '../features/MovieList/MovieList.tsx';
 import Pagination from '../features/Pagination/Pagination.tsx';
@@ -10,7 +12,15 @@ import TotalResults from '../widgets/Header/ui/TotalResults.tsx';
 import Main from '../widgets/Main/Main.tsx';
 
 function MainLayout() {
-  const containerRef = useScroll<HTMLDivElement>();
+  const [containerRef, scrollRef] = useScroll<HTMLDivElement>();
+
+  const handleScrollTop = useCallback(
+    function handleScrollTop() {
+      if (scrollRef.current)
+        scrollRef.current.scrollTo('top', { duration: 100 });
+    },
+    [scrollRef],
+  );
 
   return (
     <>
@@ -24,9 +34,9 @@ function MainLayout() {
             <TotalResults />
           </Header>
           <Main>
-            <MovieList />
+            <MovieList onScrollTop={handleScrollTop} />
+            <Pagination />
           </Main>
-          <Pagination />
         </section>
       </div>
     </>
