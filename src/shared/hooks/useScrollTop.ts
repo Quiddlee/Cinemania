@@ -4,11 +4,11 @@ import { DependencyList, RefObject, useEffect } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 
 function useScrollTop(
-  scroll: RefObject<LocomotiveScroll>,
+  scroll: RefObject<LocomotiveScroll> | undefined,
   ...deps: DependencyList
 ) {
   useEffect(() => {
-    scroll.current?.scrollTo('top', { duration: 100 });
+    scroll?.current?.scrollTo('top', { duration: 100 });
   }, [scroll, ...deps]);
 }
 

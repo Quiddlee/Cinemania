@@ -19,7 +19,7 @@ function Button({ disabled, onClick, position, children }: IButtonProps) {
 
   return (
     <button
-      className={`${btnPosition} group absolute bottom-0 top-0 my-auto h-24 w-24 animate-fade-in cursor-pointer text-neutral-200 outline-none disabled:cursor-default md:h-72 md:w-72`}
+      className={`${btnPosition} group pointer-events-auto absolute bottom-0 top-0 my-auto h-24 w-24 animate-fade-in cursor-pointer text-neutral-200 outline-none disabled:cursor-default md:h-72 md:w-72`}
       type="button"
       disabled={disabled}
       onClick={onClick}>

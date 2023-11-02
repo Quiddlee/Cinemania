@@ -8,6 +8,7 @@ import Header from '../widgets/Header/Header.tsx';
 import Logo from '../widgets/Header/ui/Logo.tsx';
 import TotalResults from '../widgets/Header/ui/TotalResults.tsx';
 import Main from '../widgets/Main/Main.tsx';
+import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
 
 function MainLayout() {
   const [containerRef, scrollRef] = useScroll<HTMLDivElement>();
@@ -25,6 +26,7 @@ function MainLayout() {
           </Header>
           <Main>
             <MovieList scroll={scrollRef} />
+            <MovieDetails />
           </Main>
           <Pagination />
         </section>

@@ -33,7 +33,7 @@ function Pagination() {
   }, [isPage, currPage, setUrl, fetchMovies, query]);
 
   return (
-    <div className="absolute h-screen w-screen">
+    <div className="pointer-events-none absolute h-screen w-screen">
       <Button
         position="left"
         disabled={isPrevDisabled || isLoading}

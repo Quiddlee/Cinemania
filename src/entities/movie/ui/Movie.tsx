@@ -50,6 +50,7 @@ function Movie({ data, delay }: IMovieProps) {
 
   return (
     <li
+      data-scroll-section="true"
       style={{
         animationDelay,
       }}
