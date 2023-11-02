@@ -33,7 +33,7 @@ function Pagination() {
   }, [isPage, currPage, setUrl, fetchMovies, query]);
 
   return (
-    <>
+    <div className="absolute h-screen w-screen">
       <Button
         position="left"
         disabled={isPrevDisabled || isLoading}
@@ -43,7 +43,7 @@ function Pagination() {
       <Button position="right" disabled={isLoading} onClick={handleNextPage}>
         {arrowRight}
       </Button>
-    </>
+    </div>
   );
 }
 

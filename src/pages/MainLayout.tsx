@@ -26,9 +26,7 @@ function MainLayout() {
           <Main>
             <MovieList scroll={scrollRef} />
           </Main>
-          <div className="absolute h-screen w-screen">
-            <Pagination />
-          </div>
+          <Pagination />
         </section>
       </div>
     </>
