@@ -1,17 +1,15 @@
-import { MutableRefObject, RefObject, useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-// TODO - change return value from array to object
-
 function useScroll<
   TContainer extends HTMLElement,
-  TScrollbar extends HTMLElement,
+  TScrollbar extends HTMLElement | void = void,
 >() {
-  const containerRef = useRef<TContainer>();
+  const containerRef = useRef<TContainer>(null);
   const scrollRef = useRef<LocomotiveScroll>();
   const observerRef = useRef<ResizeObserver>();
-  const scrollbarRef = useRef<TScrollbar>();
+  const scrollbarRef = useRef<TScrollbar>(null);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -40,11 +38,11 @@ function useScroll<
     };
   }, []);
 
-  return [containerRef, scrollRef, scrollbarRef] as [
-    MutableRefObject<TContainer>,
-    RefObject<LocomotiveScroll>,
-    MutableRefObject<TScrollbar>,
-  ];
+  return { containerRef, scrollRef, scrollbarRef } as {
+    containerRef: RefObject<TContainer>;
+    scrollRef: RefObject<LocomotiveScroll>;
+    scrollbarRef: RefObject<TScrollbar>;
+  };
 }
 
 export default useScroll;
