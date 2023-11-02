@@ -4,4 +4,5 @@ export const QUERY_FALLBACK = 'all';
 export const NOT_EXIST = 'N/A';
 export const LOCAL_STORAGE_SEARCH_QUERY = 'search-query';
 export const PAGE_PARAM = 'page';
+export const MOVIE_PARAM = 'movie';
 export const DEFAULT_PAGE = 1;

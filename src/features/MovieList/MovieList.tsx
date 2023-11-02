@@ -23,7 +23,7 @@ function MovieList({ scroll }: IMovieListProps) {
   return (
     <ul
       data-scroll-section="true"
-      className="m-auto mb-8 flex max-w-6xl animate-fade-in flex-wrap items-center justify-center gap-6 last:m-auto sm:gap-10">
+      className="m-auto mb-8 flex max-w-6xl animate-fade-in flex-wrap items-center justify-between gap-6 last:m-auto sm:gap-10">
       {movies.map((movie, i) => (
         <Movie key={movie.imdbID} data={movie} delay={i} />
       ))}

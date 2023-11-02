@@ -1,11 +1,17 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { MutableRefObject, RefObject, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-function useScroll<TContainer extends HTMLElement>() {
-  const containerRef = useRef<TContainer>(null);
+// TODO - change return value from array to object
+
+function useScroll<
+  TContainer extends HTMLElement,
+  TScrollbar extends HTMLElement,
+>() {
+  const containerRef = useRef<TContainer>();
   const scrollRef = useRef<LocomotiveScroll>();
   const observerRef = useRef<ResizeObserver>();
+  const scrollbarRef = useRef<TScrollbar>();
 
   useEffect(() => {
     if (containerRef.current) {
@@ -19,6 +25,7 @@ function useScroll<TContainer extends HTMLElement>() {
         },
         touchMultiplier: 6,
         lerp: 0.2,
+        scrollbarContainer: scrollbarRef.current ?? false,
       });
 
       observerRef.current = new ResizeObserver(
@@ -33,9 +40,10 @@ function useScroll<TContainer extends HTMLElement>() {
     };
   }, []);
 
-  return [containerRef, scrollRef] as [
-    RefObject<TContainer>,
+  return [containerRef, scrollRef, scrollbarRef] as [
+    MutableRefObject<TContainer>,
     RefObject<LocomotiveScroll>,
+    MutableRefObject<TScrollbar>,
   ];
 }
 

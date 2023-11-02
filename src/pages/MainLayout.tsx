@@ -11,7 +11,10 @@ import Main from '../widgets/Main/Main.tsx';
 import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
 
 function MainLayout() {
-  const [containerRef, scrollRef] = useScroll<HTMLDivElement>();
+  const [containerRef, scrollRef] = useScroll<
+    HTMLDivElement,
+    HTMLUListElement
+  >();
 
   return (
     <>

@@ -21,7 +21,7 @@ function Modal({ className = '', children }: IModalProps) {
   };
 
   return (
-    <article className="mx-auto w-fit animate-springish overflow-hidden rounded-[2rem] border-l border-t border-white/20 bg-white/10 text-center text-gray-400 backdrop-saturate-150">
+    <article className="mx-auto w-fit animate-springish overflow-hidden rounded-4xl border-l border-t border-white/20 bg-white/10 text-center text-gray-400 backdrop-saturate-150">
       <div
         ref={modalRef}
         onMouseMove={handleMouseMove}

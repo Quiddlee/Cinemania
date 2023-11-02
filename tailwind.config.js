@@ -6,6 +6,10 @@ export default {
       transitionTimingFunction: {
         bounce: 'cubic-bezier(.25,1.55,.65,1.4)',
       },
+      borderRadius: {
+        '4xl': '32px',
+        '5xl': '40px',
+      },
       height: {
         screen: '100dvh',
       },

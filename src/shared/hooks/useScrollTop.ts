@@ -1,14 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { DependencyList, RefObject, useEffect } from 'react';
+import { DependencyList, RefObject, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
+
+import useUrl from './useUrl.ts';
+import { PAGE_PARAM } from '../const/const.ts';
 
 function useScrollTop(
   scroll: RefObject<LocomotiveScroll> | undefined,
   ...deps: DependencyList
 ) {
+  const { readUrl } = useUrl();
+  const prevPageRef = useRef(readUrl(PAGE_PARAM));
+
   useEffect(() => {
-    scroll?.current?.scrollTo('top', { duration: 100 });
+    const currPage = readUrl(PAGE_PARAM) as string;
+
+    if (prevPageRef.current !== currPage) {
+      prevPageRef.current = currPage;
+      scroll?.current?.scrollTo('top', { duration: 100 });
+    }
   }, [scroll, ...deps]);
 }
 
