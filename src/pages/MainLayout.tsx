@@ -21,7 +21,7 @@ function MainLayout() {
         <section className="relative z-20 m-auto grid gap-2 pb-8 sm:gap-10">
           <Header>
             <Logo />
-            <Search />
+            <Search scroll={scrollRef} />
             <TotalResults />
           </Header>
           <Main>

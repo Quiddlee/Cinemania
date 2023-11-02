@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
-import { useCallback, useRef } from 'react';
+import { RefObject, useCallback, useRef } from 'react';
+
+import LocomotiveScroll from 'locomotive-scroll';
 
 import { ENTER_KEY, ESCAPE_KEY } from './const/const.ts';
 import useSearch from './hooks/useSearch.ts';
@@ -15,7 +17,11 @@ import useLocalStorageState from '../../shared/hooks/useLocalStorageState.ts';
 import useUrl from '../../shared/hooks/useUrl.ts';
 import Button from '../../shared/ui/Button.tsx';
 
-function Search() {
+interface IMovieListProps {
+  scroll: RefObject<LocomotiveScroll>;
+}
+
+function Search({ scroll }: IMovieListProps) {
   const [query, setQuery] = useLocalStorageState(
     '',
     LOCAL_STORAGE_SEARCH_QUERY,
@@ -31,8 +37,9 @@ function Search() {
     async (newQuery: string) => {
       setUrl(PAGE_PARAM, String(DEFAULT_PAGE));
       fetchMovies(newQuery.trim());
+      scroll?.current?.scrollTo('top', { duration: 100 });
     },
-    [fetchMovies, setUrl],
+    [fetchMovies, scroll, setUrl],
   );
 
   function handleEnter() {

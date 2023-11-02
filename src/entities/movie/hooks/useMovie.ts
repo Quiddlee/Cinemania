@@ -9,6 +9,14 @@ function useMovie() {
     fetchMovie();
   }, [fetchMovie]);
 
+  useEffect(() => {
+    const title = movieDetails?.Title;
+
+    if (title) {
+      document.title = `Cinemania | ${title}`;
+    }
+  }, [movieDetails?.Title]);
+
   return movieDetails;
 }
 
