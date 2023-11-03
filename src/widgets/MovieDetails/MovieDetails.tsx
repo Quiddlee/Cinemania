@@ -1,13 +1,11 @@
-import { useLoaderData } from 'react-router-dom';
-
+import useMovie from './hooks/useMovie.ts';
 import ReactLogo from '../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../shared/const/const.ts';
-import { ApiMovieResponse } from '../../shared/types/types.ts';
 
 function MovieDetails() {
-  const movie = useLoaderData() as ApiMovieResponse;
+  const movie = useMovie();
 
-  if (movie === null) return null;
+  if (!movie) return null;
 
   const {
     Poster,
