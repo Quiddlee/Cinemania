@@ -7,11 +7,8 @@ import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    path: '/',
     children: [
-      {
-        element: null,
-        path: '/',
-      },
       {
         element: <MovieDetails />,
         path: ':movieId',
