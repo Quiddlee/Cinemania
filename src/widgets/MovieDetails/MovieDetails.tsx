@@ -22,7 +22,7 @@ function MovieDetails() {
 
   const hrs = Math.floor(Number(Runtime.slice(0, -4)) / 60);
   const min = Math.floor(Number(Runtime.slice(0, -4)) % 60);
-  const time = `${hrs}h ${min}m`;
+  const time = hrs !== 0 ? `${hrs}h ${min}m` : `${min}m`;
   const description = `${Plot.slice(0, 150)}...`;
   const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
 
