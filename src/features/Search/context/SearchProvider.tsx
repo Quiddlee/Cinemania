@@ -6,19 +6,15 @@ import {
   useReducer,
 } from 'react';
 
-import {
-  getMovie,
-  getMovieList,
-} from '../../../entities/movie/api/apiMovie.ts';
+import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
 import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
-  MOVIE_PARAM,
   PAGE_PARAM,
 } from '../../../shared/const/const.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
 import { IChildren } from '../../../shared/types/interfaces.ts';
-import { ApiMovieResponse, MovieList } from '../../../shared/types/types.ts';
+import { MovieList } from '../../../shared/types/types.ts';
 import { NO_MOVIES, NO_RESULTS } from '../const/const.ts';
 import {
   Action,
@@ -55,9 +51,6 @@ function reducer(state: IInitialState, action: Action): IInitialState {
     case SearchActions.LOADING:
       return { ...state, isLoading: true };
 
-    case SearchActions.MOVIE_DETAILS_UPDATED:
-      return { ...state, movieDetails: action.payload, isLoading: false };
-
     default:
       throw new Error('The action does not exist!');
   }
@@ -85,16 +78,6 @@ function SearchProvider({ children }: IChildren) {
     [],
   );
 
-  const updateMovieDetails = useCallback(
-    (newMovie: ApiMovieResponse | null) => {
-      dispatch({
-        type: SearchActions.MOVIE_DETAILS_UPDATED,
-        payload: newMovie,
-      });
-    },
-    [],
-  );
-
   const fetchMovies = useCallback(
     async (searchQuery: string, page?: number) => {
       localStorage.setItem(LOCAL_STORAGE_SEARCH_QUERY, searchQuery);
@@ -110,20 +93,6 @@ function SearchProvider({ children }: IChildren) {
     },
     [updateMovies, updateQuery],
   );
-
-  const fetchMovie = useCallback(async () => {
-    try {
-      dispatch({ type: SearchActions.LOADING });
-      const id = readUrl(MOVIE_PARAM);
-
-      if (id) {
-        const movie = await getMovie(id);
-        updateMovieDetails(movie);
-      }
-    } catch (e) {
-      updateMovieDetails(null);
-    }
-  }, [readUrl, updateMovieDetails]);
 
   useEffect(() => {
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
@@ -144,11 +113,9 @@ function SearchProvider({ children }: IChildren) {
       isLoading,
       updateQuery,
       fetchMovies,
-      fetchMovie,
       movieDetails,
     }),
     [
-      fetchMovie,
       fetchMovies,
       isLoading,
       movieDetails,
