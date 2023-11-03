@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../../shared/const/const.ts';
 import useRadialHover from '../../../shared/hooks/useRadialHover.ts';
@@ -7,9 +9,11 @@ import LinkWithQuery from '../../../shared/ui/LinkWithQuery.tsx';
 interface IMovieProps {
   data: MovieData;
   delay: number;
+  onMouseIn: (e: MouseEvent) => void;
+  onMouseOut: () => void;
 }
 
-function Movie({ data, delay }: IMovieProps) {
+function Movie({ data, delay, onMouseIn, onMouseOut }: IMovieProps) {
   const { handleMouseOut, handleMouseMove, containerRef } =
     useRadialHover<HTMLDivElement>();
 
@@ -27,8 +31,14 @@ function Movie({ data, delay }: IMovieProps) {
         className="w-64 animate-springish cursor-pointer overflow-hidden rounded-5xl bg-neutral-950 text-gray-100 transition-all duration-200">
         <div
           ref={containerRef}
-          onMouseMove={handleMouseMove}
-          onMouseOut={handleMouseOut}
+          onMouseMove={(e) => {
+            handleMouseMove(e);
+            onMouseIn(e);
+          }}
+          onMouseOut={() => {
+            handleMouseOut();
+            onMouseOut();
+          }}
           onBlur={handleMouseOut}
           className="h-full space-y-4 rounded-4xl p-2">
           <img

@@ -5,7 +5,9 @@ import LocomotiveScroll from 'locomotive-scroll';
 import NotFound from './ui/NotFound.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import useScrollTop from '../../shared/hooks/useScrollTop.ts';
+import useTooltip from '../../shared/hooks/useTooltip.ts';
 import Loader from '../../shared/ui/Loader.tsx';
+import Tooltip from '../../shared/ui/Tooltip.tsx';
 import useSearch from '../Search/hooks/useSearch.ts';
 
 interface IMovieListProps {
@@ -15,6 +17,7 @@ interface IMovieListProps {
 function MovieList({ scroll }: IMovieListProps) {
   const { movies, isLoading } = useSearch();
   useScrollTop(scroll, movies);
+  const { tooltipRef, handleMouseIn, handleMouseOut } = useTooltip(scroll);
 
   const isNoMovies = !movies?.length;
 
@@ -26,8 +29,15 @@ function MovieList({ scroll }: IMovieListProps) {
     <ul
       data-scroll-section="true"
       className="m-auto mb-8 flex max-w-6xl animate-fade-in flex-wrap items-center justify-between gap-6 last:m-auto sm:gap-10">
+      <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
       {movies.map((movie, i) => (
-        <Movie key={movie.imdbID} data={movie} delay={i} />
+        <Movie
+          onMouseIn={handleMouseIn}
+          onMouseOut={handleMouseOut}
+          key={movie.imdbID}
+          data={movie}
+          delay={i}
+        />
       ))}
     </ul>
   );
