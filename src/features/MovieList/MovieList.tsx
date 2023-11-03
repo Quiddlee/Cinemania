@@ -28,7 +28,7 @@ function MovieList({ scroll }: IMovieListProps) {
   return (
     <ul
       data-scroll-section="true"
-      className="m-auto mb-8 flex max-w-6xl animate-fade-in flex-wrap items-center justify-between gap-6 last:m-auto sm:gap-10">
+      className="m-auto mb-8 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-between gap-6 last:m-auto sm:gap-10">
       <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
       {movies.map((movie, i) => (
         <Movie

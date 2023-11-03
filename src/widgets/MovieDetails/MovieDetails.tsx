@@ -28,7 +28,7 @@ function MovieDetails() {
   const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
 
   return (
-    <div className="animate-fade-in overflow-hidden rounded-5xl border-l border-t border-white/20 bg-white/10 p-2 text-neutral-200 shadow-2xl backdrop-saturate-200 [height:_calc(100dvh_-_200px)]">
+    <div className="flex-1 animate-fade-in overflow-hidden rounded-5xl border-l border-t border-white/20 bg-white/10 p-2 text-neutral-200 shadow-2xl backdrop-saturate-200 [height:_calc(100dvh_-_200px)]">
       <div className="relative flex h-full before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-full before:rounded-4xl before:bg-gradient-to-r before:from-neutral-950 before:to-neutral-950/75">
         <img
           className="absolute h-full w-full rounded-4xl object-cover"
