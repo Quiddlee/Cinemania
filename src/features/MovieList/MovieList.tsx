@@ -5,6 +5,7 @@ import LocomotiveScroll from 'locomotive-scroll';
 import NotFound from './ui/NotFound.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import useScrollTop from '../../shared/hooks/useScrollTop.ts';
+import Spinner from '../../shared/ui/Spinner.tsx';
 import useSearch from '../Search/hooks/useSearch.ts';
 
 interface IMovieListProps {
@@ -18,6 +19,7 @@ function MovieList({ scroll }: IMovieListProps) {
   const isNoMovies = !movies?.length;
 
   if (isNoMovies && !isLoading) return <NotFound />;
+  if (isLoading) return <Spinner />;
   if (isNoMovies) return null;
 
   return (
