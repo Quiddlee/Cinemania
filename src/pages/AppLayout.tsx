@@ -7,7 +7,7 @@ import SearchProvider from '../features/Search/context/SearchProvider.tsx';
 import Search from '../features/Search/Search.tsx';
 import { LOADING_STATE } from '../shared/const/const.ts';
 import useScroll from '../shared/hooks/useScroll.ts';
-import Spinner from '../shared/ui/Spinner.tsx';
+import Loader from '../shared/ui/Loader.tsx';
 import Header from '../widgets/Header/Header.tsx';
 import Logo from '../widgets/Header/ui/Logo.tsx';
 import TotalResults from '../widgets/Header/ui/TotalResults.tsx';
@@ -23,7 +23,7 @@ function AppLayout() {
     <SearchProvider>
       <div ref={containerRef} className="relative m-auto min-h-screen">
         <section className="relative z-20 m-auto grid gap-2 pb-8 sm:gap-10">
-          {isLoading && <Spinner />}
+          {isLoading && <Loader />}
           <GradientBackground />
           <Header>
             <Logo />
