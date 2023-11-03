@@ -1,5 +1,3 @@
-import { useCallback, useRef } from 'react';
-
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { MOVIE_PARAM, NOT_EXIST } from '../../../shared/const/const.ts';
 import useRadialHover from '../../../shared/hooks/useRadialHover.ts';
@@ -11,25 +9,19 @@ interface IMovieProps {
   delay: number;
 }
 
-// TODO - divide the component into smaller ones
-
 function Movie({ data, delay }: IMovieProps) {
-  const containerRef = useRef<HTMLLIElement>(null);
   const { setUrl } = useUrl();
-  const {
-    handleMouseOut,
-    handleMouseMove,
-    containerRef: movieRef,
-  } = useRadialHover<HTMLDivElement>();
+  const { handleMouseOut, handleMouseMove, containerRef } =
+    useRadialHover<HTMLDivElement>();
 
   const { Poster, Title, Year, imdbID } = data;
 
   const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
   const animationDelay = `0.${String(delay)}s`;
 
-  const handleMovieClick = useCallback(() => {
+  function handleMovieClick() {
     setUrl(MOVIE_PARAM, imdbID);
-  }, [imdbID, setUrl]);
+  }
 
   return (
     // TODO - fix errors
@@ -39,10 +31,9 @@ function Movie({ data, delay }: IMovieProps) {
       style={{
         animationDelay,
       }}
-      ref={containerRef}
       className="w-64 animate-springish cursor-pointer overflow-hidden rounded-5xl bg-neutral-950 text-gray-100 transition-all duration-200">
       <div
-        ref={movieRef}
+        ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseOut={handleMouseOut}
         onBlur={handleMouseOut}
