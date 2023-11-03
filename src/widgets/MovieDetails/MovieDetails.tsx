@@ -1,4 +1,5 @@
 import useMovie from './hooks/useMovie.ts';
+import BackButton from './ui/BackButton.tsx';
 import ReactLogo from '../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../shared/const/const.ts';
 
@@ -35,14 +36,15 @@ function MovieDetails() {
           src={poster}
           alt={`The poster of ${Title} film`}
         />
-        <article className="z-10 grid max-w-md content-start gap-4 px-12 py-14 text-zinc-400">
+        <article className="z-10 grid max-w-md content-start gap-4 px-8 py-8 text-zinc-400">
+          <BackButton />
           <h2 className="text-2xl font-semibold text-zinc-100">{Title}</h2>
           <span>
             {time} | {Year}
           </span>
           <span>{Genre}</span>
           <span>
-            ⭐{imdbRating}/10 | 🎟️{imdbVotes}
+            ⭐{imdbRating}/10 | 🍿{imdbVotes}
           </span>
           <p className="mb-2">{description}</p>
           <p>
