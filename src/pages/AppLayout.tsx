@@ -10,7 +10,7 @@ import TotalResults from '../widgets/Header/ui/TotalResults.tsx';
 import Main from '../widgets/Main/Main.tsx';
 import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
 
-function MainLayout() {
+function AppLayout() {
   const { containerRef, scrollRef } = useScroll<HTMLDivElement>();
 
   return (
@@ -35,4 +35,4 @@ function MainLayout() {
   );
 }
 
-export default MainLayout;
+export default AppLayout;
