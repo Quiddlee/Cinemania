@@ -1,9 +1,11 @@
+import { useLoaderData } from 'react-router-dom';
+
 import ReactLogo from '../../assets/reactJS-logo.png';
-import useMovie from '../../entities/movie/hooks/useMovie.ts';
 import { NOT_EXIST } from '../../shared/const/const.ts';
+import { ApiMovieResponse } from '../../shared/types/types.ts';
 
 function MovieDetails() {
-  const movie = useMovie();
+  const movie = useLoaderData() as ApiMovieResponse;
 
   if (movie === null) return null;
 
@@ -20,8 +22,9 @@ function MovieDetails() {
     Actors,
   } = movie;
 
-  const hrs = Math.floor(Number(Runtime.slice(0, -4)) / 60);
-  const min = Math.floor(Number(Runtime.slice(0, -4)) % 60);
+  const timeSeconds = Number(Runtime.slice(0, -4));
+  const hrs = Math.floor(timeSeconds / 60);
+  const min = Math.floor(timeSeconds % 60);
   const time = hrs !== 0 ? `${hrs}h ${min}m` : `${min}m`;
   const description = `${Plot.slice(0, 150)}...`;
   const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
