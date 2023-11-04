@@ -12,8 +12,8 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
 
     if (!screenCoord) return;
 
-    const posX = e.clientX - screenCoord.x - 130;
-    const posY = e.clientY - screenCoord.y - 130;
+    const posX = e.clientX - screenCoord.x - 120;
+    const posY = e.clientY - screenCoord.y - 120;
 
     if (tooltipRef.current)
       tooltipRef.current.style.cssText = `
