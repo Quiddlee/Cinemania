@@ -2,7 +2,11 @@ import { RefObject, useEffect, useRef, useState } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-import { DEFAULT_PAGE, PAGE_PARAM } from '../../../shared/const/const.ts';
+import {
+  DEFAULT_PAGE,
+  PAGE_PARAM,
+  SCROLL_TOP_DURATION,
+} from '../../../shared/const/const.ts';
 import useScrollTop from '../../../shared/hooks/useScrollTop.ts';
 import useTooltip from '../../../shared/hooks/useTooltip.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
@@ -21,10 +25,11 @@ function useMovieList(scroll: RefObject<LocomotiveScroll>) {
 
   useEffect(() => {
     if (prevNum.current !== moviesNum) {
+      scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
       setUrl(PAGE_PARAM, String(DEFAULT_PAGE));
       prevNum.current = moviesNum;
     }
-  }, [moviesNum, setUrl]);
+  }, [moviesNum, scroll, setUrl]);
 
   return {
     moviesNum,

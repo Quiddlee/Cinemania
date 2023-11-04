@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 import ReactLogo from '../../../assets/reactJS-logo.png';
-import { NOT_EXIST } from '../../../shared/const/const.ts';
+import { APP_TITLE, NOT_EXIST } from '../../../shared/const/const.ts';
 import { ApiMovieResponse } from '../../../shared/types/types.ts';
 
 function useMovie() {
@@ -13,6 +13,10 @@ function useMovie() {
     const newTitle = movie.Title;
 
     if (newTitle) document.title = `Cinemania | ${newTitle}`;
+
+    return () => {
+      document.title = APP_TITLE;
+    };
   }, [movie.Title]);
 
   if (!movie) return {};

@@ -4,7 +4,7 @@ import { DependencyList, RefObject, useEffect, useRef } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 
 import useUrl from './useUrl.ts';
-import { PAGE_PARAM } from '../const/const.ts';
+import { PAGE_PARAM, SCROLL_TOP_DURATION } from '../const/const.ts';
 
 function useScrollTop(
   scroll: RefObject<LocomotiveScroll> | undefined,
@@ -18,7 +18,7 @@ function useScrollTop(
 
     if (prevPageRef.current !== currPage) {
       prevPageRef.current = currPage;
-      scroll?.current?.scrollTo('top', { duration: 100 });
+      scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
     }
   }, [scroll, ...deps]);
 }

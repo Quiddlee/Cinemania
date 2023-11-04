@@ -21,8 +21,12 @@ function AppLayout() {
 
   return (
     <SearchProvider>
-      <div ref={containerRef} className="relative m-auto min-h-screen">
-        <section className="relative z-20 m-auto grid gap-2 pb-8 sm:gap-10">
+      <div
+        id="section"
+        data-scroll-section="true"
+        ref={containerRef}
+        className="relative m-auto min-h-screen">
+        <section className="relative z-20 m-auto grid min-h-screen gap-2 pb-8 sm:gap-10">
           {isLoading && <Loader />}
           <GradientBackground />
           <Header>

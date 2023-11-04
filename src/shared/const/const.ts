@@ -7,3 +7,4 @@ export const PAGE_PARAM = 'page';
 export const DEFAULT_PAGE = 1;
 export const APP_TITLE = 'Cinemania | Dive into Movie Wonderland';
 export const LOADING_STATE = 'loading';
+export const SCROLL_TOP_DURATION = 300;

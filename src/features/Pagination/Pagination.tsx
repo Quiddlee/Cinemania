@@ -15,7 +15,11 @@ function Pagination() {
   if (noPages) return null;
 
   return (
-    <div className="pointer-events-none absolute h-screen w-screen">
+    <div
+      data-scroll="true"
+      data-scroll-sticky="true"
+      data-scroll-target="section"
+      className="pointer-events-none absolute h-screen w-screen">
       <Button
         position="left"
         disabled={isPrevDisabled}

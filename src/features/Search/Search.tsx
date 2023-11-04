@@ -11,6 +11,7 @@ import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
   PAGE_PARAM,
+  SCROLL_TOP_DURATION,
 } from '../../shared/const/const.ts';
 import useKey from '../../shared/hooks/useKey.ts';
 import useLocalStorageState from '../../shared/hooks/useLocalStorageState.ts';
@@ -37,7 +38,7 @@ function Search({ scroll }: IMovieListProps) {
     async (newQuery: string) => {
       setUrl(PAGE_PARAM, String(DEFAULT_PAGE));
       fetchMovies(newQuery.trim());
-      scroll?.current?.scrollTo('top', { duration: 100 });
+      scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
     },
     [fetchMovies, scroll, setUrl],
   );
