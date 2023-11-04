@@ -11,7 +11,7 @@ function LinkWithQuery({ children, to, ...props }: ILinkWithQueryProps) {
   const { search } = useLocation();
 
   return (
-    <Link to={to + search} {...props}>
+    <Link className="w-fit" to={to + search} {...props}>
       {children}
     </Link>
   );

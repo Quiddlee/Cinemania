@@ -4,8 +4,7 @@ import LinkWithQuery from '../../../shared/ui/LinkWithQuery.tsx';
 function BackButton() {
   return (
     <LinkWithQuery to="/">
-      <div className="group relative flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full py-2">
-        <div className="absolute h-full w-full rounded-full bg-neutral-300 transition-all duration-700 ease-out group-hover:scale-95" />
+      <div className="group relative flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full py-2 before:absolute before:h-full before:w-full before:rounded-full before:bg-neutral-800 before:transition-all before:duration-700 before:ease-out hover:before:scale-95">
         <img
           src={chevronLeft}
           alt=""

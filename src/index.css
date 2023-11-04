@@ -247,8 +247,7 @@ html.has-scroll-dragging {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: theme(colors.neutral.500);
-  opacity: 0.5;
+  background-color: theme(colors.lime.400);
   width: 6.3px;
   border-radius: 10px;
   margin: 4px;
