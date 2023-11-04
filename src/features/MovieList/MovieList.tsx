@@ -16,8 +16,8 @@ interface IMovieListProps {
 function MovieList({ scroll }: IMovieListProps) {
   const {
     isLoading,
-    moviesNum,
-    setMoviesNum,
+    moviesPerPage,
+    setMoviesPerPage,
     hideTooltip,
     showTooltip,
     tooltipRef,
@@ -36,7 +36,7 @@ function MovieList({ scroll }: IMovieListProps) {
       onClick={handleClick}
       className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
       <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
-      <Select<ItemsPerPage> handler={setMoviesNum} value={moviesNum}>
+      <Select<ItemsPerPage> handler={setMoviesPerPage} value={moviesPerPage}>
         <Select.Option<ItemsPerPage> value={3}>3 movies</Select.Option>
         <Select.Option<ItemsPerPage> value={5}>5 movies</Select.Option>
         <Select.Option<ItemsPerPage> value={10}>10 movies</Select.Option>

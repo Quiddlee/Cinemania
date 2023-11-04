@@ -3,24 +3,23 @@ import { DependencyList, RefObject, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-import useUrl from './useUrl.ts';
-import { PAGE_PARAM, SCROLL_TOP_DURATION } from '../const/const.ts';
+import { SCROLL_TOP_DURATION } from '../const/const.ts';
 
 function useScrollTop(
+  currValue: unknown,
   scroll: RefObject<LocomotiveScroll> | undefined,
+  callback?: () => void,
   ...deps: DependencyList
 ) {
-  const { readUrl } = useUrl();
-  const prevPageRef = useRef(readUrl(PAGE_PARAM));
+  const prevValueRef = useRef(currValue);
 
   useEffect(() => {
-    const currPage = readUrl(PAGE_PARAM) as string;
-
-    if (prevPageRef.current !== currPage) {
-      prevPageRef.current = currPage;
+    if (prevValueRef.current !== currValue) {
+      prevValueRef.current = currValue;
       scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+      callback?.();
     }
-  }, [scroll, ...deps]);
+  }, [currValue, scroll, ...deps]);
 }
 
 export default useScrollTop;
