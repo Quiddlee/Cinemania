@@ -8,8 +8,8 @@ interface IButtonProps {
 function Button({ disabled, onClick, position, children }: IButtonProps) {
   const isLeftPosition = position === 'left';
   const btnPosition = isLeftPosition
-    ? 'left-0 md:-left-16'
-    : 'right-0 md:-right-16';
+    ? 'left-0 lg:-left-16'
+    : 'right-0 lg:-right-16';
   const arrowDirectionMain = isLeftPosition
     ? 'group-hover:-translate-x-14'
     : 'group-hover:translate-x-14';
@@ -19,7 +19,7 @@ function Button({ disabled, onClick, position, children }: IButtonProps) {
 
   return (
     <button
-      className={`${btnPosition} group pointer-events-auto absolute bottom-0 top-0 my-auto h-24 w-24 animate-fade-in cursor-pointer text-neutral-200 outline-none disabled:cursor-default md:h-72 md:w-72`}
+      className={`${btnPosition} group pointer-events-auto absolute bottom-0 top-0 my-auto h-24 w-24 animate-fade-in cursor-pointer text-neutral-200 outline-none disabled:cursor-default md:h-32 md:w-32 lg:h-72 lg:w-72`}
       type="button"
       disabled={disabled}
       onClick={onClick}>

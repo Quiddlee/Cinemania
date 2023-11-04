@@ -34,7 +34,7 @@ function MovieList({ scroll }: IMovieListProps) {
   return (
     <ul
       data-scroll-section="true"
-      className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-around gap-6 sm:gap-10">
+      className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
       <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
       <Select<ItemsPerPage> handler={setMoviesNum} value={moviesNum}>
         <Select.Option<ItemsPerPage> value={3}>3 movies</Select.Option>

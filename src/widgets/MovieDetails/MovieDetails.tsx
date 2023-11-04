@@ -16,7 +16,7 @@ function MovieDetails() {
   } = useMovie();
 
   return (
-    <div className="flex-1 animate-fade-in overflow-hidden rounded-5xl border-l border-t border-white/20 bg-white/10 p-2 text-neutral-200 shadow-2xl backdrop-saturate-200 [height:_calc(100dvh_-_200px)]">
+    <div className="h-[540px] flex-1 animate-fade-in overflow-hidden rounded-5xl border-l border-t border-white/20 bg-white/10 p-2 text-neutral-200 shadow-2xl backdrop-saturate-200">
       <div className="relative flex h-full saturate-200 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-full before:rounded-4xl before:bg-gradient-to-r before:from-zinc-950 before:to-neutral-950/70">
         <img
           className="absolute h-full w-full rounded-4xl object-cover"
