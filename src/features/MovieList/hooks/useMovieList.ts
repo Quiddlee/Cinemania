@@ -1,6 +1,7 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { MouseEvent, RefObject, useEffect, useRef, useState } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
+import { useNavigate } from 'react-router-dom';
 
 import {
   DEFAULT_PAGE,
@@ -18,10 +19,15 @@ function useMovieList(scroll: RefObject<LocomotiveScroll>) {
   const [moviesNum, setMoviesNum] = useState<ItemsPerPage>(itemsPerPage.TEN);
   const { setUrl } = useUrl();
   const prevNum = useRef<number>(moviesNum);
+  const listRef = useRef<HTMLUListElement>(null);
+  const navigate = useNavigate();
 
   const { movies, isLoading } = useSearch();
   const { tooltipRef, hideTooltip, showTooltip } = useTooltip(scroll);
   useScrollTop(scroll, movies);
+
+  const renderMovies = movies?.slice(0, moviesNum);
+  const isNoMovies = !movies?.length;
 
   useEffect(() => {
     if (prevNum.current !== moviesNum) {
@@ -31,6 +37,15 @@ function useMovieList(scroll: RefObject<LocomotiveScroll>) {
     }
   }, [moviesNum, scroll, setUrl]);
 
+  function handleClick(e: MouseEvent) {
+    const { target } = e;
+
+    if (target !== listRef.current) return;
+
+    navigate('/');
+    scroll.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+  }
+
   return {
     moviesNum,
     setMoviesNum,
@@ -39,7 +54,11 @@ function useMovieList(scroll: RefObject<LocomotiveScroll>) {
     tooltipRef,
     hideTooltip,
     showTooltip,
-    scroll,
+    listRef,
+    navigate,
+    handleClick,
+    renderMovies,
+    isNoMovies,
   };
 }
 

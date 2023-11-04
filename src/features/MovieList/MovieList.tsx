@@ -15,31 +15,33 @@ interface IMovieListProps {
 
 function MovieList({ scroll }: IMovieListProps) {
   const {
-    movies,
     isLoading,
     moviesNum,
     setMoviesNum,
     hideTooltip,
     showTooltip,
     tooltipRef,
+    listRef,
+    handleClick,
+    renderMovies,
+    isNoMovies,
   } = useMovieList(scroll);
-
-  const isNoMovies = !movies?.length;
 
   if (isNoMovies && !isLoading) return <NotFound />;
   if (isNoMovies) return null;
 
-  const renderMovies = movies.slice(0, moviesNum);
-
   return (
-    <ul className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
+    <ul
+      ref={listRef}
+      onClick={handleClick}
+      className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
       <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
       <Select<ItemsPerPage> handler={setMoviesNum} value={moviesNum}>
         <Select.Option<ItemsPerPage> value={3}>3 movies</Select.Option>
         <Select.Option<ItemsPerPage> value={5}>5 movies</Select.Option>
         <Select.Option<ItemsPerPage> value={10}>10 movies</Select.Option>
       </Select>
-      {renderMovies.map((movie, i) => (
+      {renderMovies?.map((movie, i) => (
         <Movie
           onMouseMove={showTooltip}
           onMouseOut={hideTooltip}

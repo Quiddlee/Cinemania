@@ -27,7 +27,7 @@ function AppLayout() {
         ref={containerRef}
         className="relative m-auto min-h-screen">
         <section className="relative z-20 m-auto grid min-h-screen gap-2 pb-8 sm:gap-10">
-          {isLoading && <Loader />}
+          {isLoading && <Loader scroll={scrollRef} />}
           <GradientBackground />
           <Header>
             <Logo />
