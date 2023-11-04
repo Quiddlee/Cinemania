@@ -1,32 +1,19 @@
 import useMovie from './hooks/useMovie.ts';
 import BackButton from './ui/BackButton.tsx';
-import ReactLogo from '../../assets/reactJS-logo.png';
-import { NOT_EXIST } from '../../shared/const/const.ts';
 
 function MovieDetails() {
-  const movie = useMovie();
-
-  if (!movie) return null;
-
   const {
-    Poster,
-    Title,
-    Runtime,
-    Genre,
-    Plot,
-    Year,
+    description,
     imdbRating,
     imdbVotes,
-    Director,
-    Actors,
-  } = movie;
-
-  const timeSeconds = Number(Runtime.slice(0, -4));
-  const hrs = Math.floor(timeSeconds / 60);
-  const min = Math.floor(timeSeconds % 60);
-  const time = hrs !== 0 ? `${hrs}h ${min}m` : `${min}m`;
-  const description = `${Plot.slice(0, 150)}...`;
-  const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
+    poster,
+    time,
+    actors,
+    director,
+    genre,
+    title,
+    year,
+  } = useMovie();
 
   return (
     <div className="flex-1 animate-fade-in overflow-hidden rounded-5xl border-l border-t border-white/20 bg-white/10 p-2 text-neutral-200 shadow-2xl backdrop-saturate-200 [height:_calc(100dvh_-_200px)]">
@@ -34,26 +21,26 @@ function MovieDetails() {
         <img
           className="absolute h-full w-full rounded-4xl object-cover"
           src={poster}
-          alt={`The poster of ${Title} film`}
+          alt={`The poster of ${title} film`}
         />
         <article className="z-10 grid max-w-md content-start gap-4 px-8 py-8 text-zinc-400">
           <BackButton />
-          <h2 className="text-2xl font-semibold text-zinc-100">{Title}</h2>
+          <h2 className="text-2xl font-semibold text-zinc-100">{title}</h2>
           <span>
-            {time} | {Year}
+            {time} | {year}
           </span>
-          <span>{Genre}</span>
+          <span>{genre}</span>
           <span>
             ⭐{imdbRating}/10 | 🍿{imdbVotes}
           </span>
           <p className="mb-2">{description}</p>
           <p>
             <span className="text-zinc-100">Directed By: </span>
-            <span>{Director}</span>
+            <span>{director}</span>
           </p>
           <p>
             <span className="text-zinc-100">Cast: </span>
-            <span>{Actors}</span>
+            <span>{actors}</span>
           </p>
         </article>
       </div>
