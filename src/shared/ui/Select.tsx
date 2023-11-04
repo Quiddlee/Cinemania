@@ -9,9 +9,9 @@ import {
 import Button from './Button.tsx';
 import { IChildren } from '../types/interfaces.ts';
 
-interface IOptionProps {
+interface IOptionProps<TVal> {
   children: string;
-  value: string | number;
+  value: TVal;
 }
 
 interface ISelectProps<TVal> extends IChildren {
@@ -20,7 +20,7 @@ interface ISelectProps<TVal> extends IChildren {
 }
 
 interface ISelectContext {
-  value: IOptionProps['value'];
+  value: IOptionProps<string | number>['value'];
   handleSetValue: (e: MouseEvent) => void;
 }
 
@@ -54,13 +54,16 @@ function Select<TVal extends string | number>({
   );
 }
 
-function Option({ children, value }: IOptionProps) {
+function Option<TVal extends string | number>({
+  children,
+  value,
+}: IOptionProps<TVal>) {
   const context = useContext(SelectContext);
 
   const isActiveOption = context?.value === value;
   const activeClass = isActiveOption
-    ? 'before:bg-lime-400 before:scale-100 before:opacity-100 text-neutral-950 font-semibold'
-    : 'bg-transparent';
+    ? 'before:!bg-lime-400 before:!scale-100 before:opacity-100 text-neutral-950 font-semibold'
+    : '';
   const className = `${activeClass}`;
 
   return (

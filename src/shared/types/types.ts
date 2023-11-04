@@ -1,3 +1,5 @@
+import itemsPerPage from './enums.ts';
+
 export type Movie = Readonly<{
   Poster: string;
   Title: string;
@@ -51,3 +53,5 @@ export type ApiMovieResponse = Readonly<{
   imdbRating: string;
   imdbVotes: string;
 }>;
+
+export type ItemsPerPage = (typeof itemsPerPage)[keyof typeof itemsPerPage];
