@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ReactNode } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
