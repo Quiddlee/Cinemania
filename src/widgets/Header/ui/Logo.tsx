@@ -6,8 +6,8 @@ import { LOGO_ANIMATION_OFFSET, LOGO_LETTERS } from '../const/const.ts';
 
 function Logo() {
   return (
-    <LinkWithQuery to="/">
-      <h1 className="mr-auto flex font-quicksand font-bold tracking-tighter text-lime-400">
+    <LinkWithQuery className="mr-auto" to="/">
+      <h1 className="flex font-quicksand font-bold tracking-tighter text-lime-400">
         {LOGO_LETTERS.map((letter, i) => (
           <span
             style={{
