@@ -9,11 +9,11 @@ import LinkWithQuery from '../../../shared/ui/LinkWithQuery.tsx';
 interface IMovieProps {
   data: MovieData;
   delay: number;
-  onMouseIn: (e: MouseEvent) => void;
+  onMouseMove: (e: MouseEvent) => void;
   onMouseOut: () => void;
 }
 
-function Movie({ data, delay, onMouseIn, onMouseOut }: IMovieProps) {
+function Movie({ data, delay, onMouseMove, onMouseOut }: IMovieProps) {
   const { handleMouseOut, handleMouseMove, containerRef } =
     useRadialHover<HTMLDivElement>();
 
@@ -33,7 +33,7 @@ function Movie({ data, delay, onMouseIn, onMouseOut }: IMovieProps) {
           ref={containerRef}
           onMouseMove={(e) => {
             handleMouseMove(e);
-            onMouseIn(e);
+            onMouseMove(e);
           }}
           onMouseOut={() => {
             handleMouseOut();

@@ -16,8 +16,8 @@ interface IMovieListProps {
 
 function MovieList({ scroll }: IMovieListProps) {
   const { movies, isLoading } = useSearch();
+  const { tooltipRef, hideTooltip, showTooltip } = useTooltip(scroll);
   useScrollTop(scroll, movies);
-  const { tooltipRef, handleMouseIn, handleMouseOut } = useTooltip(scroll);
 
   const isNoMovies = !movies?.length;
 
@@ -32,8 +32,8 @@ function MovieList({ scroll }: IMovieListProps) {
       <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
       {movies.map((movie, i) => (
         <Movie
-          onMouseIn={handleMouseIn}
-          onMouseOut={handleMouseOut}
+          onMouseMove={showTooltip}
+          onMouseOut={hideTooltip}
           key={movie.imdbID}
           data={movie}
           delay={i}
