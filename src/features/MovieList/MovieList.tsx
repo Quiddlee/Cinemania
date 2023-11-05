@@ -7,6 +7,7 @@ import NotFound from './ui/NotFound.tsx';
 import PageNum from './ui/PageNum.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import { ItemsPerPage } from '../../shared/types/types.ts';
+import Loader from '../../shared/ui/Loader.tsx';
 import Select from '../../shared/ui/Select.tsx';
 import Tooltip from '../../shared/ui/Tooltip.tsx';
 
@@ -39,6 +40,7 @@ function MovieList({ scroll }: IMovieListProps) {
       onClick={handleClick}
       className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
       <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
+      {isLoading && <Loader scroll={scroll} />}
       <div
         data-scroll="true"
         data-scroll-sticky="true"
