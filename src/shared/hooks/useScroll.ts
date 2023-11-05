@@ -2,14 +2,10 @@ import { RefObject, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-function useScroll<
-  TContainer extends HTMLElement,
-  TScrollbar extends HTMLElement | void = void,
->() {
+function useScroll<TContainer extends HTMLElement>() {
   const containerRef = useRef<TContainer>(null);
   const scrollRef = useRef<LocomotiveScroll>();
   const observerRef = useRef<ResizeObserver>();
-  const scrollbarRef = useRef<TScrollbar>(null);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -24,7 +20,6 @@ function useScroll<
         touchMultiplier: 6,
         lerp: 0.2,
         multiplier: 1.6,
-        scrollbarContainer: scrollbarRef.current ?? false,
       });
 
       observerRef.current = new ResizeObserver(
@@ -37,12 +32,11 @@ function useScroll<
       scrollRef.current?.destroy();
       observerRef.current?.disconnect();
     };
-  }, []);
+  }, [containerRef]);
 
-  return { containerRef, scrollRef, scrollbarRef } as {
+  return { containerRef, scrollRef } as {
     containerRef: RefObject<TContainer>;
     scrollRef: RefObject<LocomotiveScroll>;
-    scrollbarRef: RefObject<TScrollbar>;
   };
 }
 
