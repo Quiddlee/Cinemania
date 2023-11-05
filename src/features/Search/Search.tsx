@@ -71,7 +71,7 @@ function Search({ scroll }: IMovieListProps) {
     <article className="relative mx-auto flex w-full animate-fade-in sm:w-fit xl:w-1/3">
       <input
         ref={inputRef}
-        className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-gray-300 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
+        className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-zinc-100 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
         placeholder="Type to Search..."
         type="text"
         value={query}
