@@ -1,10 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 
 import loader from '../entities/movie/loader.ts';
 import AppLayout from '../pages/AppLayout.tsx';
 import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <AppLayout />,
     path: '/',
