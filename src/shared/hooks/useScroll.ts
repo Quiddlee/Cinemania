@@ -23,6 +23,7 @@ function useScroll<
         },
         touchMultiplier: 6,
         lerp: 0.2,
+        multiplier: 1.6,
         scrollbarContainer: scrollbarRef.current ?? false,
       });
 

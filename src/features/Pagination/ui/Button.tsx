@@ -24,7 +24,7 @@ function Button({ disabled, onClick, position, children }: IButtonProps) {
       disabled={disabled}
       onClick={onClick}>
       <div className="flex h-full w-full items-center justify-center transition-all duration-500 group-disabled:opacity-30">
-        <div className="absolute flex h-full w-full animate-pagination-fade-in items-center justify-center rounded-full border border-lime-400/80 [transition:_background-color_0.4s_cubic-bezier(.18,.33,0,.95)_0.3s,_transform_0.3s_cubic-bezier(.18,.33,0,.95)] group-hover:scale-[0.3] group-hover:bg-lime-500 group-hover:duration-[850ms] group-active:scale-[0.25] group-active:duration-300 group-disabled:group-active:scale-[0.3]" />
+        <div className="absolute flex h-full w-full animate-pagination-fade-in items-center justify-center rounded-full border border-lime-400/80 [transition:_background-color_0.4s_cubic-bezier(.18,.33,0,.95)_0.3s,_transform_0.3s_cubic-bezier(.18,.33,0,.95)] group-hover:scale-[0.3] group-hover:bg-lime-400 group-hover:duration-[850ms] group-active:scale-[0.25] group-active:duration-300 group-disabled:group-active:scale-[0.3]" />
         <div className="relative flex h-fit w-1/5 items-center justify-center overflow-hidden">
           <img
             className={`${arrowDirectionMain} z-10 text-5xl group-hover:opacity-0 group-hover:transition-all group-hover:duration-[850ms] group-hover:ease-[cubic-bezier(.18,.33,0,.95)]`}
