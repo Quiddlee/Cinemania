@@ -46,11 +46,7 @@ function Select<TVal extends string | number>({
   );
 
   return (
-    <div
-      data-scroll="true"
-      data-scroll-sticky="true"
-      data-scroll-target="section"
-      className="absolute -top-24 z-50 space-x-2 rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
+    <div className="space-x-2 rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
       <SelectContext.Provider value={contextValue}>
         {children}
       </SelectContext.Provider>

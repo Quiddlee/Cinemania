@@ -17,7 +17,7 @@ function useMovieList(scroll: RefObject<LocomotiveScroll>) {
   const listRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
 
-  const { movies, isLoading } = useSearch();
+  const { movies, isLoading, totalResults } = useSearch();
   const { tooltipRef, hideTooltip, showTooltip } = useTooltip(scroll);
   const { readUrl } = useUrl();
 
@@ -26,6 +26,8 @@ function useMovieList(scroll: RefObject<LocomotiveScroll>) {
   useScrollTop(readUrl(PAGE_PARAM), scroll, undefined, movies);
 
   const isNoMovies = !movies?.length;
+  const currPage = Number(readUrl(PAGE_PARAM));
+  const maxPage = Math.ceil(totalResults / moviesPerPage);
 
   function handleClick(e: MouseEvent) {
     const { target } = e;
@@ -37,6 +39,8 @@ function useMovieList(scroll: RefObject<LocomotiveScroll>) {
   }
 
   return {
+    currPage,
+    maxPage,
     moviesPerPage,
     setMoviesPerPage,
     isLoading,
