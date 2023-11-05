@@ -10,10 +10,12 @@ import {
 } from '../../../shared/types/types.ts';
 
 export async function getMovieList(
-  query: string = QUERY_FALLBACK,
+  query: string,
   page: number = DEFAULT_PAGE,
 ): Promise<ApiMovieListResponse> {
-  const response = await fetch(`${API_URL}&s=${query}&page=${page}`);
+  const response = await fetch(
+    `${API_URL}&s=${query || QUERY_FALLBACK}&page=${page}`,
+  );
 
   if (!response.ok) throw new Error('Something went wrong fetching movies!');
 
