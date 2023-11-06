@@ -26,7 +26,7 @@ interface ISelectContext {
 
 const SelectContext = createContext<ISelectContext | null>(null);
 
-function Select<TVal extends string | number>({
+function Tabs<TVal extends string | number>({
   children,
   handler,
   value,
@@ -54,7 +54,7 @@ function Select<TVal extends string | number>({
   );
 }
 
-function Option<TVal extends string | number>({
+function Tab<TVal extends string | number>({
   children,
   value,
 }: IOptionProps<TVal>) {
@@ -77,6 +77,6 @@ function Option<TVal extends string | number>({
   );
 }
 
-Select.Option = Option;
+Tabs.Tab = Tab;
 
-export default Select;
+export default Tabs;

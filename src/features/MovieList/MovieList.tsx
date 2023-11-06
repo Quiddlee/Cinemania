@@ -8,7 +8,7 @@ import PageNum from './ui/PageNum.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
 import { ItemsPerPage } from '../../shared/types/types.ts';
 import Loader from '../../shared/ui/Loader.tsx';
-import Select from '../../shared/ui/Select.tsx';
+import Tabs from '../../shared/ui/Tabs.tsx';
 import Tooltip from '../../shared/ui/Tooltip.tsx';
 
 interface IMovieListProps {
@@ -46,11 +46,11 @@ function MovieList({ scroll }: IMovieListProps) {
         data-scroll-sticky="true"
         data-scroll-target="section"
         className="absolute -top-24 z-10 flex items-center justify-center gap-4">
-        <Select<ItemsPerPage> handler={setMoviesPerPage} value={moviesPerPage}>
-          <Select.Option<ItemsPerPage> value={3}>3 movies</Select.Option>
-          <Select.Option<ItemsPerPage> value={5}>5 movies</Select.Option>
-          <Select.Option<ItemsPerPage> value={10}>10 movies</Select.Option>
-        </Select>
+        <Tabs<ItemsPerPage> handler={setMoviesPerPage} value={moviesPerPage}>
+          <Tabs.Tab<ItemsPerPage> value={3}>3 movies</Tabs.Tab>
+          <Tabs.Tab<ItemsPerPage> value={5}>5 movies</Tabs.Tab>
+          <Tabs.Tab<ItemsPerPage> value={10}>10 movies</Tabs.Tab>
+        </Tabs>
         <PageNum currPage={currPage} maxPage={maxPage} />
       </div>
       {renderMovies?.map((movie, i) => (
