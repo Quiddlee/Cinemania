@@ -1,10 +1,10 @@
 import { createHashRouter } from 'react-router-dom';
 
 import loader from '../entities/movie/loader.ts';
-import AppLayout from '../pages/AppLayout.tsx';
+import AppLayout from '../pages/AppLayout/AppLayout.tsx';
 import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
 
-const router = createHashRouter([
+export const ROUTES = [
   {
     element: <AppLayout />,
     path: '/',
@@ -16,6 +16,8 @@ const router = createHashRouter([
       },
     ],
   },
-]);
+];
+
+const router = createHashRouter(ROUTES);
 
 export default router;

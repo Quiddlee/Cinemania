@@ -1,17 +1,17 @@
 import { Outlet, useNavigation } from 'react-router-dom';
 
 import GradientBackground from './ui/GradientBackground.tsx';
-import MovieList from '../features/MovieList/MovieList.tsx';
-import Pagination from '../features/Pagination/Pagination.tsx';
-import SearchProvider from '../features/Search/context/SearchProvider.tsx';
-import Search from '../features/Search/Search.tsx';
-import { LOADING_STATE } from '../shared/const/const.ts';
-import useScroll from '../shared/hooks/useScroll.ts';
-import Loader from '../shared/ui/Loader.tsx';
-import Header from '../widgets/Header/Header.tsx';
-import Logo from '../widgets/Header/ui/Logo.tsx';
-import TotalResults from '../widgets/Header/ui/TotalResults.tsx';
-import Main from '../widgets/Main/Main.tsx';
+import MovieList from '../../features/MovieList/MovieList.tsx';
+import Pagination from '../../features/Pagination/Pagination.tsx';
+import SearchProvider from '../../features/Search/context/SearchProvider.tsx';
+import Search from '../../features/Search/Search.tsx';
+import { LOADING_STATE } from '../../shared/const/const.ts';
+import useScroll from '../../shared/hooks/useScroll.ts';
+import Loader from '../../shared/ui/Loader.tsx';
+import Header from '../../widgets/Header/Header.tsx';
+import Logo from '../../widgets/Header/ui/Logo.tsx';
+import TotalResults from '../../widgets/Header/ui/TotalResults.tsx';
+import Main from '../../widgets/Main/Main.tsx';
 
 function AppLayout() {
   const { containerRef, scrollRef } = useScroll<HTMLDivElement>();
