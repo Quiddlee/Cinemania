@@ -31,7 +31,7 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
 
   useEffect(() => {
     if (scroll.current)
-      scroll.current.on('scroll', () => {
+      scroll.current.on?.('scroll', () => {
         if (tooltipRef.current) tooltipRef.current.classList.add(...HIDDEN);
       });
   }, [scroll]);
