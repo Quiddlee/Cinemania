@@ -1,5 +1,5 @@
 {
-  "name": "react-ts-tw-template",
+  "name": "cinemania",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +11,8 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "prepare": "husky install",
-    "precommit": "pnpm lint-staged && pnpm type-check"
+    "precommit": "pnpm lint-staged && pnpm type-check",
+    "test": "vitest --coverage"
   },
   "dependencies": {
     "locomotive-scroll": "^4.1.4",
@@ -20,12 +21,18 @@
     "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
+    "@edge-runtime/vm": "^3.1.7",
+    "@testing-library/dom": "^9.3.3",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
     "@types/locomotive-scroll": "^4.1.2",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "@vitest/coverage-v8": "^0.34.6",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.50.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -47,6 +54,7 @@
     "prettier-plugin-tailwindcss": "^0.5.4",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "vitest": "^0.34.6"
   }
 }
