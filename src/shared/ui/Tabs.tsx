@@ -68,7 +68,7 @@ function Tab<TVal extends string | number>({
 
   return (
     <Button
-      type="select"
+      styleType="select"
       className={className}
       onClick={context?.handleSetValue}
       data-value={value}>
