@@ -61,10 +61,9 @@ function Tab<TVal extends string | number>({
   const context = useContext(SelectContext);
 
   const isActiveOption = context?.value === value;
-  const activeClass = isActiveOption
-    ? 'before:!bg-lime-400 before:!scale-100 before:opacity-100 text-neutral-950 font-semibold'
+  const className = isActiveOption
+    ? 'before:bg-lime-400 before:scale-100 before:opacity-100 text-neutral-950 font-semibold'
     : '';
-  const className = `${activeClass}`;
 
   return (
     <Button
