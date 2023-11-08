@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, memo, PropsWithChildren } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 
 import useSearch from '../../features/Search/hooks/useSearch.ts';
 import cn from '../lib/helpers/cn.ts';
@@ -12,9 +12,7 @@ const buttonTypes = {
     'rounded-full relative py-2 px-4 transition-all before:top-0 before:pointer-events-none before:absolute before:left-0 before:right-0 before:-z-10 before:m-auto before:h-full before:w-full before:scale-75 before:rounded-full before:bg-lime-400/50 before:opacity-0 before:transition-all hover:before:scale-100 hover:before:opacity-100 duration-250 w-[112px]',
 };
 
-interface IButtonProps
-  extends PropsWithChildren,
-    ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   styleType?: keyof typeof buttonTypes;
 }
 

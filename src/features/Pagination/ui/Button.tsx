@@ -1,6 +1,6 @@
-interface IButtonProps {
-  disabled: boolean;
-  onClick: () => void;
+import { ButtonHTMLAttributes } from 'react';
+
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   position: 'left' | 'right';
   children: string;
 }
