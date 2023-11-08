@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, memo, PropsWithChildren } from 'react';
 
+import useSearch from '../../features/Search/hooks/useSearch.ts';
 import cn from '../lib/helpers/cn.ts';
 
 const buttonTypes = {
@@ -24,12 +25,18 @@ const Button = memo(function Button({
   disabled,
   ...props
 }: IButtonProps) {
+  const { isLoading } = useSearch();
+  const isDisabled = disabled || isLoading;
+
   return (
     <button
       {...props}
+      disabled={isDisabled}
       className={cn(buttonTypes[styleType], className, {
-        'opacity-20': disabled,
-        'scale-100': disabled,
+        'opacity-20': isDisabled,
+        'scale-100': isDisabled,
+        'pointer-events-none': isDisabled,
+        'duration-1000': isDisabled,
       })}
       type="button">
       {children}
