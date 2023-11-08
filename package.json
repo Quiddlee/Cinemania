@@ -11,8 +11,9 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "prepare": "husky install",
-    "precommit": "pnpm lint-staged && pnpm type-check",
-    "test": "vitest --coverage"
+    "precommit": "npx lint-staged && npm run type-check",
+    "test": "vitest --coverage",
+    "test:staged": "vitest related --run"
   },
   "dependencies": {
     "clsx": "^2.0.0",
