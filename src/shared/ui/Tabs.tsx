@@ -1,26 +1,26 @@
 import {
   createContext,
   MouseEvent,
+  PropsWithChildren,
   useCallback,
   useContext,
   useMemo,
 } from 'react';
 
 import Button from './Button.tsx';
-import { IChildren } from '../types/interfaces.ts';
 
 interface IOptionProps<TVal> {
   children: string;
   value: TVal;
 }
 
-interface ISelectProps<TVal> extends IChildren {
+interface ISelectProps<TVal> extends PropsWithChildren {
   handler: (value: TVal) => void;
-  value: number | string;
+  activeValue: number | string;
 }
 
 interface ISelectContext {
-  value: IOptionProps<string | number>['value'];
+  activeValue: IOptionProps<string | number>['value'];
   handleSetValue: (e: MouseEvent) => void;
 }
 
@@ -29,7 +29,7 @@ const SelectContext = createContext<ISelectContext | null>(null);
 function Tabs<TVal extends string | number>({
   children,
   handler,
-  value,
+  activeValue,
 }: ISelectProps<TVal>) {
   const handleSetValue = useCallback(
     (e: MouseEvent) => {
@@ -41,8 +41,8 @@ function Tabs<TVal extends string | number>({
   );
 
   const contextValue = useMemo(
-    () => ({ value, handleSetValue }),
-    [handleSetValue, value],
+    () => ({ activeValue, handleSetValue }),
+    [handleSetValue, activeValue],
   );
 
   return (
@@ -60,7 +60,7 @@ function Tab<TVal extends string | number>({
 }: IOptionProps<TVal>) {
   const context = useContext(SelectContext);
 
-  const isActiveOption = context?.value === value;
+  const isActiveOption = context?.activeValue === value;
   const className = isActiveOption
     ? 'before:bg-lime-400 before:scale-100 before:opacity-100 text-neutral-950 font-semibold'
     : '';

@@ -46,7 +46,9 @@ function MovieList({ scroll }: IMovieListProps) {
         data-scroll-sticky="true"
         data-scroll-target="section"
         className="absolute -top-24 z-10 flex items-center justify-center gap-4">
-        <Tabs<ItemsPerPage> handler={setMoviesPerPage} value={moviesPerPage}>
+        <Tabs<ItemsPerPage>
+          handler={setMoviesPerPage}
+          activeValue={moviesPerPage}>
           <Tabs.Tab<ItemsPerPage> value={3}>3 movies</Tabs.Tab>
           <Tabs.Tab<ItemsPerPage> value={5}>5 movies</Tabs.Tab>
           <Tabs.Tab<ItemsPerPage> value={10}>10 movies</Tabs.Tab>
