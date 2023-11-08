@@ -33,7 +33,6 @@ function MovieList({ scroll }: IMovieListProps) {
   } = useMovieList(scroll);
 
   if (isNoMovies && !isLoading) return <NotFound />;
-  if (isNoMovies) return null;
 
   return (
     <ul
