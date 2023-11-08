@@ -30,16 +30,15 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
   }
 
   useEffect(() => {
-    if (scroll.current)
-      scroll.current.on?.('scroll', () => {
-        if (tooltipRef.current) tooltipRef.current.classList.add(...HIDDEN);
-      });
+    scroll.current?.on?.(
+      'scroll',
+      () => tooltipRef.current?.classList.add(...HIDDEN),
+    );
   }, [scroll]);
 
   useEffect(() => {
-    document.body.addEventListener('mousemove', (e) => {
-      moveTooltip(e);
-    });
+    document.addEventListener('mousemove', moveTooltip);
+    return () => document.removeEventListener('mousemove', moveTooltip);
   }, []);
 
   return {
