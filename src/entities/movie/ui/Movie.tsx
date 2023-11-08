@@ -23,7 +23,7 @@ function Movie({ data, delay, onMouseMove, onMouseOut }: IMovieProps) {
   const animationDelay = `0.${String(delay)}s`;
 
   return (
-    <LinkWithQuery to={`/${imdbID}`}>
+    <LinkWithQuery data-testid="movie-item" to={`/${imdbID}`}>
       <li
         data-testid="movie"
         style={{
@@ -43,14 +43,19 @@ function Movie({ data, delay, onMouseMove, onMouseOut }: IMovieProps) {
           onBlur={handleMouseOut}
           className="h-full space-y-4 rounded-4xl p-2">
           <img
+            data-testid="movie-poster"
             className="h-80 w-full rounded-4xl object-cover"
             src={poster}
             alt={`The poster of ${Title} film`}
           />
           <article className="h-full p-4">
-            <h2 className="truncate text-xl text-gray-100">{Title}</h2>
+            <h2
+              data-testid="movie-title"
+              className="truncate text-xl text-gray-100">
+              {Title}
+            </h2>
             <div className="mt-2 grid text-gray-400">
-              <span>{Year}</span>
+              <span data-testid="movie-year">{Year}</span>
             </div>
           </article>
         </div>

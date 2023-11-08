@@ -17,6 +17,7 @@ function MovieDetails() {
 
   return (
     <div
+      data-testid="details-item"
       data-scroll="true"
       data-scroll-sticky="true"
       data-scroll-target="section"
