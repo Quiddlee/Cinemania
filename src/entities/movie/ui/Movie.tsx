@@ -25,6 +25,7 @@ function Movie({ data, delay, onMouseMove, onMouseOut }: IMovieProps) {
   return (
     <LinkWithQuery to={`/${imdbID}`}>
       <li
+        data-testid="movie"
         style={{
           animationDelay,
         }}

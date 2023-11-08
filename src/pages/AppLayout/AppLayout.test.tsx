@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import { describe, it } from 'vitest';
 
-import renderWithRouter from '../../shared/lib/helpers/RenderWithRouter.tsx';
+import renderWithRouter from '../../test/helpers/RenderWithRouter.tsx';
 
 describe('App', () => {
   it('Renders the app', async () => {

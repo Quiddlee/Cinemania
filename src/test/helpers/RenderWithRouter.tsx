@@ -3,12 +3,12 @@ import { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
-import { ROUTES } from '../../../app/router.tsx';
+import { ROUTES } from '../../app/router.tsx';
 
 function RenderWithRouter(
+  element?: ReactNode,
   initialEntries?: string[],
   initialIndex?: number,
-  element?: ReactNode,
 ) {
   const routes = element ? [{ path: '/', element }] : ROUTES;
 
