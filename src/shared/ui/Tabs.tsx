@@ -10,7 +10,7 @@ import {
 import Button from './Button.tsx';
 
 interface IOptionProps<TVal> {
-  children: string;
+  children: string | string[];
   value: TVal;
 }
 

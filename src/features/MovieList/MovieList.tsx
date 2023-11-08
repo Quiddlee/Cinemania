@@ -6,6 +6,7 @@ import useMovieList from './hooks/useMovieList.ts';
 import NotFound from './ui/NotFound.tsx';
 import PageNum from './ui/PageNum.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
+import addLeadingZero from '../../shared/lib/helpers/addLeadingZero.ts';
 import { ItemsPerPage } from '../../shared/types/types.ts';
 import Loader from '../../shared/ui/Loader.tsx';
 import Tabs from '../../shared/ui/Tabs.tsx';
@@ -49,8 +50,12 @@ function MovieList({ scroll }: IMovieListProps) {
         <Tabs<ItemsPerPage>
           handler={setMoviesPerPage}
           activeValue={moviesPerPage}>
-          <Tabs.Tab<ItemsPerPage> value={3}>3 movies</Tabs.Tab>
-          <Tabs.Tab<ItemsPerPage> value={5}>5 movies</Tabs.Tab>
+          <Tabs.Tab<ItemsPerPage> value={3}>
+            {addLeadingZero(3)} movies
+          </Tabs.Tab>
+          <Tabs.Tab<ItemsPerPage> value={5}>
+            {addLeadingZero(5)} movies
+          </Tabs.Tab>
           <Tabs.Tab<ItemsPerPage> value={10}>10 movies</Tabs.Tab>
         </Tabs>
         <PageNum currPage={currPage} maxPage={maxPage} />
