@@ -1,18 +1,18 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 import { createPortal } from 'react-dom';
+
+import useLoader from './hooks/useLoader.ts';
 
 interface ILoaderProps {
   scroll: RefObject<LocomotiveScroll>;
 }
 
-function Loader({ scroll: scrollRef }: ILoaderProps) {
-  useEffect(() => {
-    const scroll = scrollRef.current;
-    scroll?.stop();
-    return () => void scroll?.start();
-  }, [scrollRef]);
+function Loader({ scroll }: ILoaderProps) {
+  const isLoading = useLoader(scroll);
+
+  if (!isLoading) return null;
 
   return createPortal(
     <div
