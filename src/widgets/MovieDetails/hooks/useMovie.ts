@@ -4,6 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { APP_TITLE, NOT_EXIST } from '../../../shared/const/const.ts';
+import convertSecsToHrsAndMins from '../../../shared/lib/helpers/convertSecsToHrsAndMins.ts';
 import { ApiMovieResponse } from '../../../shared/types/types.ts';
 
 function useMovie() {
@@ -19,8 +20,6 @@ function useMovie() {
     };
   }, [movie.Title]);
 
-  if (!movie) return {};
-
   const {
     Poster,
     Title,
@@ -34,10 +33,7 @@ function useMovie() {
     Actors,
   } = movie;
 
-  const timeSeconds = Number(Runtime.slice(0, -4));
-  const hrs = Math.floor(timeSeconds / 60);
-  const min = Math.floor(timeSeconds % 60);
-  const time = hrs !== 0 ? `${hrs}h ${min}m` : `${min}m`;
+  const time = convertSecsToHrsAndMins(Runtime);
   const description = `${Plot.slice(0, 150)}...`;
   const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
 
