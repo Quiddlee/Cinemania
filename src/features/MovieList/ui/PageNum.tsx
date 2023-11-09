@@ -10,8 +10,9 @@ import useSearch from '../../Search/hooks/useSearch.ts';
 function PageNum() {
   const { readUrl } = useUrl();
   const { totalResults } = useSearch();
-  const moviesPerPage =
-    Number(readUrl(MOVIES_PER_PAGE_PARAM)) ?? DEFAULT_MOVIES_PER_PAGE;
+  const moviesPerPage = Number(
+    readUrl(MOVIES_PER_PAGE_PARAM) ?? DEFAULT_MOVIES_PER_PAGE,
+  );
 
   const currPage = addLeadingZero(Number(readUrl(PAGE_PARAM)));
   const maxPage = Math.ceil(totalResults / moviesPerPage);
