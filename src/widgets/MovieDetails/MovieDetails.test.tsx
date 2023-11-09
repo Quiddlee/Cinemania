@@ -84,18 +84,20 @@ describe('Movie details', () => {
   it('should hide the component on close button click', async () => {
     renderWithRouter(null, ['/test']);
 
-    const backBtn = await screen.findByTestId('details-close');
-    const detailsSection = await screen.findByTestId('details-section');
+    const [closeButton, detailsSection] = await Promise.all([
+      screen.findByTestId('details-close'),
+      screen.findByTestId('details-section'),
+    ]);
 
-    expect(backBtn).toBeInTheDocument();
+    expect(closeButton).toBeInTheDocument();
     expect(detailsSection).toBeInTheDocument();
 
-    await userEvent.click(backBtn);
+    await userEvent.click(closeButton);
 
-    const backBtnAfterClose = screen.queryByTestId('details-close');
+    const closeButtonAfterClose = screen.queryByTestId('details-close');
     const detailsSectionAfterClose = screen.queryByTestId('details-section');
 
-    expect(backBtnAfterClose).toBeNull();
+    expect(closeButtonAfterClose).toBeNull();
     expect(detailsSectionAfterClose).toBeNull();
   });
 });
