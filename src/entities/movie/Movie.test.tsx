@@ -28,18 +28,17 @@ describe('Movie', () => {
       />,
     );
 
-    expect(screen.getByTestId('movie-poster')).toBeInTheDocument();
-    expect(screen.getByTestId('movie-title')).toBeInTheDocument();
-    expect(screen.getByTestId('movie-year')).toBeInTheDocument();
+    const poster = screen.getByTestId('movie-poster');
+    const title = screen.getByTestId('movie-title');
+    const year = screen.getByTestId('movie-year');
 
-    expect(screen.getByTestId('movie-poster')).toHaveAttribute(
-      'src',
-      mockMovie.Poster,
-    );
-    expect(screen.getByTestId('movie-title')).toHaveTextContent(
-      mockMovie.Title,
-    );
-    expect(screen.getByTestId('movie-year')).toHaveTextContent(mockMovie.Year);
+    expect(poster).toBeInTheDocument();
+    expect(title).toBeInTheDocument();
+    expect(year).toBeInTheDocument();
+
+    expect(poster).toHaveAttribute('src', mockMovie.Poster);
+    expect(title).toHaveTextContent(mockMovie.Title);
+    expect(year).toHaveTextContent(mockMovie.Year);
   });
 
   it('Clicking on a card opens a detailed card component', async () => {
@@ -54,7 +53,6 @@ describe('Movie', () => {
     await userEvent.click(movie);
 
     const detailsSection = await screen.findByTestId('details-item');
-
     expect(detailsSection).toBeInTheDocument();
   });
 
