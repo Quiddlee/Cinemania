@@ -1,24 +1,14 @@
-import { useEffect } from 'react';
-
 import { useLoaderData } from 'react-router-dom';
 
 import ReactLogo from '../../../assets/reactJS-logo.png';
-import { APP_TITLE, NOT_EXIST } from '../../../shared/const/const.ts';
+import { NOT_EXIST } from '../../../shared/const/const.ts';
+import useDocumentTitle from '../../../shared/hooks/useDocumentTitle.ts';
 import convertSecsToHrsAndMins from '../../../shared/lib/helpers/convertSecsToHrsAndMins.ts';
 import { ApiMovieResponse } from '../../../shared/types/types.ts';
 
 function useMovie() {
   const movie = useLoaderData() as ApiMovieResponse;
-
-  useEffect(() => {
-    const newTitle = movie.Title;
-
-    if (newTitle) document.title = `Cinemania | ${newTitle}`;
-
-    return () => {
-      document.title = APP_TITLE;
-    };
-  }, [movie.Title]);
+  useDocumentTitle(`Cinemania | ${movie.Title}`);
 
   const {
     Poster,
