@@ -2,10 +2,12 @@ import { RefObject } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
+import useListClick from './hooks/useListClick.ts';
 import useMovieList from './hooks/useMovieList.ts';
 import NotFound from './ui/NotFound.tsx';
 import PageNum from './ui/PageNum.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
+import useTooltip from '../../shared/hooks/useTooltip.ts';
 import { ItemsPerPage } from '../../shared/types/types.ts';
 import Tabs from '../../shared/ui/Tabs.tsx';
 import Tooltip from '../../shared/ui/Tooltip.tsx';
@@ -18,15 +20,12 @@ function MovieList({ scroll }: IMovieListProps) {
   const {
     isLoading,
     moviesPerPage,
-    hideTooltip,
-    showTooltip,
-    tooltipRef,
-    listRef,
-    handleClick,
     renderMovies,
     isNoMovies,
     handleMoviesPerPage,
   } = useMovieList(scroll);
+  const { listRef, handleClick } = useListClick(scroll);
+  const { tooltipRef, hideTooltip, showTooltip } = useTooltip(scroll);
 
   if (isNoMovies && !isLoading) return <NotFound />;
 
