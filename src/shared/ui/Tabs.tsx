@@ -1,5 +1,6 @@
 import {
   createContext,
+  memo,
   MouseEvent,
   PropsWithChildren,
   useCallback,
@@ -10,7 +11,7 @@ import {
 import Button from './Button.tsx';
 
 interface IOptionProps<TVal> {
-  children: string | string[];
+  children: string;
   value: TVal;
 }
 
@@ -76,6 +77,6 @@ function Tab<TVal extends string | number>({
   );
 }
 
-Tabs.Tab = Tab;
+Tabs.Tab = memo(Tab) as typeof Tab;
 
 export default Tabs;

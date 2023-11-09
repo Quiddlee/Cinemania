@@ -2,6 +2,14 @@ import { useCallback } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
+/*
+TODO - add default params
+{
+  [PAGE_PARAM]: String(DEFAULT_PAGE),
+  [MOVIES_PER_PAGE_PARAM]: String(DEFAULT_MOVIES_PER_PAGE),
+}
+ */
+
 function useUrl() {
   const [searchParams, setSearchParams] = useSearchParams();
 

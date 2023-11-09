@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useCallback, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
@@ -10,7 +10,7 @@ const ELEMENT_POSITION_OFFSET = 120;
 function useTooltip(scroll: RefObject<LocomotiveScroll>) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  function moveTooltip(e: MouseEvent) {
+  const moveTooltip = useCallback((e: MouseEvent) => {
     const { posX, posY } = getElementMouseCoord(document.body, e);
 
     const pointerX = posX - ELEMENT_POSITION_OFFSET;
@@ -18,15 +18,15 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
 
     if (tooltipRef.current)
       tooltipRef.current.style.translate = `${pointerX}px ${pointerY}px`;
-  }
+  }, []);
 
-  function showTooltip() {
+  const showTooltip = useCallback(() => {
     tooltipRef.current?.classList.remove(...HIDDEN);
-  }
+  }, []);
 
-  function hideTooltip() {
+  const hideTooltip = useCallback(() => {
     tooltipRef.current?.classList.add(...HIDDEN);
-  }
+  }, []);
 
   useEffect(() => {
     scroll.current?.on?.(
@@ -38,7 +38,7 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
   useEffect(() => {
     document.addEventListener('mousemove', moveTooltip);
     return () => document.removeEventListener('mousemove', moveTooltip);
-  }, []);
+  }, [moveTooltip]);
 
   return {
     tooltipRef,

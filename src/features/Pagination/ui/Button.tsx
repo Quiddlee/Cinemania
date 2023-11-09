@@ -1,11 +1,16 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   position: 'left' | 'right';
   children: string;
 }
 
-function Button({ disabled, onClick, position, children }: IButtonProps) {
+const Button = memo(function Button({
+  disabled,
+  onClick,
+  position,
+  children,
+}: IButtonProps) {
   const isLeftPosition = position === 'left';
   const btnPosition = isLeftPosition
     ? 'left-0 lg:-left-16'
@@ -40,6 +45,6 @@ function Button({ disabled, onClick, position, children }: IButtonProps) {
       </div>
     </button>
   );
-}
+});
 
 export default Button;

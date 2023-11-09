@@ -14,10 +14,10 @@ function useListClick(scroll: RefObject<LocomotiveScroll>) {
   const listRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
   const { readUrl } = useUrl();
-  const currPage = Number(readUrl(PAGE_PARAM));
 
   function handleClick(e: MouseEvent) {
     const { target } = e;
+    const currPage = Number(readUrl(PAGE_PARAM));
 
     if (target !== listRef.current || currPage === DEFAULT_PAGE) return;
 

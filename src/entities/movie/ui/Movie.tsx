@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
 
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../../shared/const/const.ts';
@@ -13,7 +13,12 @@ interface IMovieProps {
   onMouseOut: () => void;
 }
 
-function Movie({ data, delay, onMouseMove, onMouseOut }: IMovieProps) {
+const Movie = memo(function Movie({
+  data,
+  delay,
+  onMouseMove,
+  onMouseOut,
+}: IMovieProps) {
   const { handleMouseOut, handleMouseMove, containerRef } =
     useRadialHover<HTMLDivElement>();
 
@@ -62,5 +67,5 @@ function Movie({ data, delay, onMouseMove, onMouseOut }: IMovieProps) {
       </li>
     </LinkWithQuery>
   );
-}
+});
 export default Movie;
