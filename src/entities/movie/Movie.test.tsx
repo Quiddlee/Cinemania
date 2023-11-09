@@ -46,13 +46,12 @@ describe('Movie', () => {
 
     renderWithRouter();
 
-    expect(screen.queryByTestId('details-item')).toBeNull();
+    expect(screen.queryByTestId('details-section')).toBeNull();
 
     const [movie] = screen.getAllByTestId('movie-item');
-
     await userEvent.click(movie);
 
-    const detailsSection = await screen.findByTestId('details-item');
+    const detailsSection = await screen.findByTestId('details-section');
     expect(detailsSection).toBeInTheDocument();
   });
 
@@ -62,7 +61,6 @@ describe('Movie', () => {
     renderWithRouter();
 
     const [movie] = screen.getAllByTestId('movie-item');
-
     await userEvent.click(movie);
 
     expect(mockedApiMovie).toBeCalledTimes(1);

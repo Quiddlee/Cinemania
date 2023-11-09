@@ -6,7 +6,7 @@ import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { ROUTES } from '../../app/router.tsx';
 
 function RenderWithRouter(
-  element?: ReactNode,
+  element?: ReactNode | null,
   initialEntries?: string[],
   initialIndex?: number,
 ) {

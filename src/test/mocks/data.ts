@@ -1,3 +1,4 @@
+import { NOT_EXIST } from '../../shared/const/const.ts';
 import {
   ApiMovieResponse,
   MovieList as TMovieList,
@@ -107,7 +108,12 @@ export const mockMovieDetails: ApiMovieResponse = {
   Website: 'test',
   BoxOffice: 'test',
   DVD: 'test',
-  Runtime: 'test',
+  Runtime: '101 min',
   Rated: 'test',
   Ratings: [],
+};
+
+export const mockMovieDetailsNoPoster = {
+  ...mockMovieDetails,
+  Poster: NOT_EXIST,
 };
