@@ -96,9 +96,10 @@ function SearchProvider({ children }: IChildren) {
 
   useEffect(() => {
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
-    const page = Number(readUrl(PAGE_PARAM)) || DEFAULT_PAGE;
+    const urlPage = Number(readUrl(PAGE_PARAM));
+    const page = urlPage || DEFAULT_PAGE;
 
-    setUrl(PAGE_PARAM, String(page));
+    if (!urlPage) setUrl(PAGE_PARAM, String(page));
 
     if (storedQuery === null) return;
 
