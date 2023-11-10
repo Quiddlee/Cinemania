@@ -1,10 +1,13 @@
-import { useCallback } from 'react';
+import { RefObject, useCallback } from 'react';
+
+import LocomotiveScroll from 'locomotive-scroll';
 
 import { DEFAULT_PAGE, PAGE_PARAM } from '../../../shared/const/const.ts';
+import useScrollTop from '../../../shared/hooks/useScrollTop.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
 import useSearch from '../../Search/hooks/useSearch.ts';
 
-function usePagination() {
+function usePagination(scroll: RefObject<LocomotiveScroll>) {
   const { setUrl, readUrl } = useUrl();
   const { fetchMovies, query, isLoading, totalResults } = useSearch();
 
@@ -13,6 +16,8 @@ function usePagination() {
   const isNextDisabled = isLoading;
   const isPage = Boolean(currPage);
   const noPages = totalResults <= 10;
+
+  useScrollTop(currPage, scroll, undefined, currPage);
 
   const handleNextPage = useCallback(() => {
     const newPage = currPage + 1;
