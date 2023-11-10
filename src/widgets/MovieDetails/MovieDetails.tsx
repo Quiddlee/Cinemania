@@ -1,7 +1,9 @@
-import { PropsWithChildren } from 'react';
+// ⬇️ needs to be disable in order lazy route to work
+/* eslint-disable import/prefer-default-export */
 
 import useMovie from './hooks/useMovie.ts';
 import Actors from './ui/Actors.tsx';
+import BackButton from './ui/BackButton.tsx';
 import Description from './ui/Description.tsx';
 import Director from './ui/Director.tsx';
 import Genre from './ui/Genre.tsx';
@@ -10,7 +12,7 @@ import Rating from './ui/Rating.tsx';
 import Runtime from './ui/Runtime.tsx';
 import Title from './ui/Title.tsx';
 
-function MovieDetails({ children }: PropsWithChildren) {
+export function Component() {
   const {
     description,
     imdbRating,
@@ -34,7 +36,7 @@ function MovieDetails({ children }: PropsWithChildren) {
       <div className="relative flex h-full saturate-200 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-full before:rounded-4xl before:bg-gradient-to-r before:from-zinc-950 before:to-neutral-950/70">
         <Poster poster={poster} title={title} />
         <article className="z-10 grid max-w-md content-start gap-4 px-8 py-8 text-zinc-400">
-          {children}
+          <BackButton />
           <Title>{title}</Title>
           <Runtime year={year} time={time} />
           <Genre>{genre}</Genre>
@@ -48,4 +50,4 @@ function MovieDetails({ children }: PropsWithChildren) {
   );
 }
 
-export default MovieDetails;
+Component.displayName = 'MovieDetails';

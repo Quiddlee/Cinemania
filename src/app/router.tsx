@@ -2,8 +2,6 @@ import { createHashRouter, RouteObject } from 'react-router-dom';
 
 import loader from '../entities/movie/loader.ts';
 import AppLayout from '../pages/AppLayout/AppLayout.tsx';
-import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
-import BackButton from '../widgets/MovieDetails/ui/BackButton.tsx';
 
 export const ROUTES: RouteObject[] = [
   {
@@ -11,11 +9,7 @@ export const ROUTES: RouteObject[] = [
     path: '/',
     children: [
       {
-        element: (
-          <MovieDetails>
-            <BackButton />
-          </MovieDetails>
-        ),
+        lazy: () => import('../widgets/MovieDetails/MovieDetails.tsx'),
         path: ':movieId',
         loader,
       },

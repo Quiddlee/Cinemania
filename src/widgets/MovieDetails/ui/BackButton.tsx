@@ -1,7 +1,9 @@
+import { memo } from 'react';
+
 import chevronLeft from '../../../assets/chevron-left.svg';
 import LinkWithQuery from '../../../shared/ui/LinkWithQuery.tsx';
 
-function BackButton() {
+const BackButton = memo(function BackButton() {
   return (
     <LinkWithQuery data-testid="details-close" to="/">
       <div className="group relative my-auto flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full py-2 before:absolute before:h-full before:w-full before:rounded-full before:bg-neutral-800 before:transition-all before:duration-700 before:ease-out hover:before:scale-95">
@@ -18,6 +20,6 @@ function BackButton() {
       </div>
     </LinkWithQuery>
   );
-}
+});
 
 export default BackButton;
