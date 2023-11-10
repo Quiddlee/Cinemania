@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-
 import { RefObject, useCallback, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
@@ -30,9 +28,6 @@ function Search({ scroll }: IMovieListProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { fetchMovies, query: currQuery, updateQuery } = useSearch();
   const { setUrl } = useUrl();
-
-  useKey(ENTER_KEY, handleEnter);
-  useKey(ESCAPE_KEY, handleEscape);
 
   const handleSearch = useCallback(
     async (newQuery: string) => {
@@ -70,6 +65,9 @@ function Search({ scroll }: IMovieListProps) {
       inputRef.current?.blur();
     }
   }
+
+  useKey(ENTER_KEY, handleEnter);
+  useKey(ESCAPE_KEY, handleEscape);
 
   return (
     <article className="relative mx-auto flex w-full animate-fade-in sm:w-fit xl:w-1/3">
