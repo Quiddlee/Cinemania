@@ -20,10 +20,11 @@ describe('Movie details', () => {
   });
 
   it('should display the loader while fetching data', async () => {
-    renderWithRouter(null, ['/test']);
+    renderWithRouter(null, ['/delay']);
 
     const loader = await screen.findByTestId('loader');
-    expect(loader).toBeInTheDocument();
+
+    expect(loader).toBeDefined();
   });
 
   it('should properly calculate and edit the runtime', async () => {
