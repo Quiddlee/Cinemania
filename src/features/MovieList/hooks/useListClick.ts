@@ -10,6 +10,14 @@ import {
 import useUrl from '../../../shared/hooks/useUrl.ts';
 import { urlParams } from '../../../shared/types/enums.ts';
 
+/**
+ * Closes the details section on list click.
+ *
+ * @param {RefObject<LocomotiveScroll>} scroll - A reference to the scroll container. Used to scroll to the top of the page
+ * @return obj - An object containing the list reference and the click handler.
+ * @return {RefObject<HTMLUListElement>} obj.listRef - A reference to the list element.
+ * @return {(e: MouseEvent) => void} obj.handleClick - A function to handle the click event.
+ * */
 function useListClick(scroll: RefObject<LocomotiveScroll>) {
   const listRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
