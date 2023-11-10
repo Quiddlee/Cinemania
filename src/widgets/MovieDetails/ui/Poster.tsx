@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 interface IMoviePosterProps {
   poster: string;
   title: string;
 }
 
-function Poster({ poster, title }: IMoviePosterProps) {
+const Poster = memo(function Poster({ poster, title }: IMoviePosterProps) {
   return (
     <img
       data-testid="details-poster"
@@ -12,6 +14,6 @@ function Poster({ poster, title }: IMoviePosterProps) {
       alt={`The poster of ${title} film`}
     />
   );
-}
+});
 
 export default Poster;

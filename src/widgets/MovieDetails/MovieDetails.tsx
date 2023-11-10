@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import useMovie from './hooks/useMovie.ts';
 import Actors from './ui/Actors.tsx';
-import Desctiption from './ui/Desctiption.tsx';
+import Description from './ui/Description.tsx';
 import Director from './ui/Director.tsx';
 import Genre from './ui/Genre.tsx';
 import Poster from './ui/Poster.tsx';
@@ -39,7 +39,7 @@ function MovieDetails({ children }: PropsWithChildren) {
           <Runtime year={year} time={time} />
           <Genre>{genre}</Genre>
           <Rating rating={imdbRating} votes={imdbVotes} />
-          <Desctiption>{description}</Desctiption>
+          <Description>{description}</Description>
           <Director>{director}</Director>
           <Actors>{actors}</Actors>
         </article>

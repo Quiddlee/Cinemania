@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
+import { memo, PropsWithChildren } from 'react';
 
-function Title({ children }: PropsWithChildren) {
+const Title = memo(function Title({ children }: PropsWithChildren) {
   return (
     <h2
       data-testid="details-title"
@@ -8,6 +8,6 @@ function Title({ children }: PropsWithChildren) {
       {children}
     </h2>
   );
-}
+});
 
 export default Title;

@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
+import { memo, PropsWithChildren } from 'react';
 
-function Genre({ children }: PropsWithChildren) {
+const Genre = memo(function Genre({ children }: PropsWithChildren) {
   return <span data-testid="details-genre">{children}</span>;
-}
+});
 
 export default Genre;
