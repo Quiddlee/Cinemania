@@ -28,7 +28,7 @@ function Search({ scroll }: IMovieListProps) {
     LOCAL_STORAGE_SEARCH_QUERY,
   );
   const inputRef = useRef<HTMLInputElement>(null);
-  const { fetchMovies } = useSearch();
+  const { fetchMovies, query: currQuery, updateQuery } = useSearch();
   const { setUrl } = useUrl();
 
   useKey(ENTER_KEY, handleEnter);
@@ -36,11 +36,15 @@ function Search({ scroll }: IMovieListProps) {
 
   const handleSearch = useCallback(
     async (newQuery: string) => {
+      if (newQuery === currQuery) return;
+
       setUrl(urlParams.PAGE, DEFAULT_PAGE);
-      fetchMovies(newQuery.trim());
       scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+
+      fetchMovies(newQuery.trim());
+      updateQuery(query);
     },
-    [fetchMovies, scroll, setUrl],
+    [currQuery, fetchMovies, query, scroll, setUrl, updateQuery],
   );
 
   function handleEnter() {
