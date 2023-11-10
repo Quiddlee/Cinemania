@@ -2,14 +2,10 @@ import { PropsWithChildren, RefObject, useCallback } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-import {
-  DEFAULT_MOVIES_PER_PAGE,
-  DEFAULT_PAGE,
-  MOVIES_PER_PAGE_PARAM,
-  PAGE_PARAM,
-} from '../../../shared/const/const.ts';
+import { DEFAULT_PAGE } from '../../../shared/const/const.ts';
 import useScrollTop from '../../../shared/hooks/useScrollTop.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
+import { urlParams } from '../../../shared/types/enums.ts';
 import { ItemsPerPage } from '../../../shared/types/types.ts';
 import Tabs from '../../../shared/ui/Tabs.tsx';
 
@@ -22,20 +18,17 @@ function MovieListHeader({ children, scroll }: IMovieListHeader) {
 
   const handleMoviesPerPage = useCallback(
     (value: number) => {
-      setUrl(MOVIES_PER_PAGE_PARAM, String(value));
+      setUrl({
+        'movies-per-page': String(value),
+        page: String(DEFAULT_PAGE),
+      });
     },
     [setUrl],
   );
 
-  const moviesPerPage = Number(
-    readUrl(MOVIES_PER_PAGE_PARAM) || DEFAULT_MOVIES_PER_PAGE,
-  );
+  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
 
-  function resetPage() {
-    setUrl(PAGE_PARAM, String(DEFAULT_PAGE));
-  }
-
-  useScrollTop(moviesPerPage, scroll, resetPage);
+  useScrollTop(moviesPerPage, scroll);
 
   return (
     <header

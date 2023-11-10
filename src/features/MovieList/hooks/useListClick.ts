@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   DEFAULT_PAGE,
-  PAGE_PARAM,
   SCROLL_TOP_DURATION,
 } from '../../../shared/const/const.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
+import { urlParams } from '../../../shared/types/enums.ts';
 
 function useListClick(scroll: RefObject<LocomotiveScroll>) {
   const listRef = useRef<HTMLUListElement>(null);
@@ -17,7 +17,7 @@ function useListClick(scroll: RefObject<LocomotiveScroll>) {
 
   function handleClick(e: MouseEvent) {
     const { target } = e;
-    const currPage = Number(readUrl(PAGE_PARAM));
+    const currPage = Number(readUrl(urlParams.PAGE));
 
     if (target !== listRef.current || currPage === DEFAULT_PAGE) return;
 

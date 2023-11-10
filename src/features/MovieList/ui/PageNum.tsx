@@ -1,20 +1,14 @@
-import {
-  DEFAULT_MOVIES_PER_PAGE,
-  MOVIES_PER_PAGE_PARAM,
-  PAGE_PARAM,
-} from '../../../shared/const/const.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
 import addLeadingZero from '../../../shared/lib/helpers/addLeadingZero.ts';
+import { urlParams } from '../../../shared/types/enums.ts';
 import useSearch from '../../Search/hooks/useSearch.ts';
 
 function PageNum() {
   const { readUrl } = useUrl();
   const { totalResults } = useSearch();
-  const moviesPerPage = Number(
-    readUrl(MOVIES_PER_PAGE_PARAM) ?? DEFAULT_MOVIES_PER_PAGE,
-  );
+  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
 
-  const currPage = addLeadingZero(Number(readUrl(PAGE_PARAM)));
+  const currPage = addLeadingZero(Number(readUrl(urlParams.PAGE)));
   const maxPage = Math.ceil(totalResults / moviesPerPage);
 
   return (

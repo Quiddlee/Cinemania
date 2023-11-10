@@ -1,4 +1,4 @@
-import itemsPerPage from './enums.ts';
+import { itemsPerPage, urlParams } from './enums.ts';
 
 export type Movie = Readonly<{
   Poster: string;
@@ -55,3 +55,4 @@ export type ApiMovieResponse = Readonly<{
 }>;
 
 export type ItemsPerPage = (typeof itemsPerPage)[keyof typeof itemsPerPage];
+export type UrlParams = (typeof urlParams)[keyof typeof urlParams];

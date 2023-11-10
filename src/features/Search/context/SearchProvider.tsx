@@ -10,9 +10,9 @@ import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
 import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
-  PAGE_PARAM,
 } from '../../../shared/const/const.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
+import { urlParams } from '../../../shared/types/enums.ts';
 import { IChildren } from '../../../shared/types/interfaces.ts';
 import { MovieList } from '../../../shared/types/types.ts';
 import { NO_MOVIES, NO_RESULTS } from '../const/const.ts';
@@ -96,10 +96,10 @@ function SearchProvider({ children }: IChildren) {
 
   useEffect(() => {
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
-    const urlPage = Number(readUrl(PAGE_PARAM));
+    const urlPage = Number(readUrl(urlParams.PAGE));
     const page = urlPage || DEFAULT_PAGE;
 
-    if (!urlPage) setUrl(PAGE_PARAM, String(page));
+    if (!urlPage) setUrl(urlParams.PAGE, String(page));
 
     if (storedQuery === null) return;
 

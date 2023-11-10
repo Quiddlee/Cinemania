@@ -10,12 +10,12 @@ import searchIcon from '../../assets/search.svg';
 import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
-  PAGE_PARAM,
   SCROLL_TOP_DURATION,
 } from '../../shared/const/const.ts';
 import useKey from '../../shared/hooks/useKey.ts';
 import useLocalStorageState from '../../shared/hooks/useLocalStorageState.ts';
 import useUrl from '../../shared/hooks/useUrl.ts';
+import { urlParams } from '../../shared/types/enums.ts';
 import Button from '../../shared/ui/Button.tsx';
 
 interface IMovieListProps {
@@ -36,7 +36,7 @@ function Search({ scroll }: IMovieListProps) {
 
   const handleSearch = useCallback(
     async (newQuery: string) => {
-      setUrl(PAGE_PARAM, String(DEFAULT_PAGE));
+      setUrl(urlParams.PAGE, String(DEFAULT_PAGE));
       fetchMovies(newQuery.trim());
       scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
     },
