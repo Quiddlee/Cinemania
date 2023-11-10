@@ -36,7 +36,7 @@ function Search({ scroll }: IMovieListProps) {
 
   const handleSearch = useCallback(
     async (newQuery: string) => {
-      setUrl(urlParams.PAGE, String(DEFAULT_PAGE));
+      setUrl(urlParams.PAGE, DEFAULT_PAGE);
       fetchMovies(newQuery.trim());
       scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
     },
