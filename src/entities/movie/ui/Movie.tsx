@@ -41,7 +41,7 @@ const Movie = memo(function Movie({
             handleMouseMove(e);
             onMouseMove(e);
           }}
-          onMouseOut={() => {
+          onMouseLeave={() => {
             handleMouseOut();
             onMouseOut();
           }}
