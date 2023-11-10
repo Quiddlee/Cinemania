@@ -4,7 +4,7 @@ import { describe, it } from 'vitest';
 import renderWithRouter from '../../test/helpers/RenderWithRouter.tsx';
 
 describe('App', () => {
-  it('Renders the app', async () => {
+  it('should render the app', async () => {
     // 1. arrange
     renderWithRouter();
     // 2. act

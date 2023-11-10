@@ -1,6 +1,8 @@
+import { RefObject } from 'react';
+
 import { screen } from '@testing-library/react';
 import LocomotiveScroll from 'locomotive-scroll';
-import { describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import MovieList from './MovieList.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
@@ -9,10 +11,18 @@ import renderWithRouter from '../../test/helpers/RenderWithRouter.tsx';
 import * as useSearch from '../Search/hooks/useSearch.ts';
 
 const mockedUseSearch = vi.spyOn(useSearch, 'default');
-const scroll = { current: new LocomotiveScroll() };
+let scroll: RefObject<LocomotiveScroll>;
 
 describe('MovieList', () => {
-  it('Creates an empty movie list', () => {
+  beforeAll(() => {
+    scroll = { current: new LocomotiveScroll() };
+  });
+
+  afterAll(() => {
+    scroll.current?.destroy();
+  });
+
+  it('should create an empty movie list', () => {
     mockedUseSearch.mockReturnValue(createMockSearchContext(null));
 
     renderWithRouter(
@@ -35,7 +45,7 @@ describe('MovieList', () => {
     ).toBeInTheDocument();
   });
 
-  it('Creates the movie list with movies', () => {
+  it('should create the movie list with movies', () => {
     mockedUseSearch.mockReturnValue(createMockSearchContext());
 
     renderWithRouter(

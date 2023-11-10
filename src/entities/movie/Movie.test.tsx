@@ -18,7 +18,7 @@ describe('Movie', () => {
     vi.clearAllMocks();
   });
 
-  it('Movie component renders the relevant movie data', () => {
+  it('should render the relevant movie data', () => {
     renderWithRouter(
       <Movie
         onMouseMove={vi.fn()}
@@ -41,7 +41,7 @@ describe('Movie', () => {
     expect(year).toHaveTextContent(mockMovie.Year);
   });
 
-  it('Clicking on a card opens a detailed card component', async () => {
+  it('should open a detailed card component when clicking on a card', async () => {
     mockedUseSearch.mockReturnValue(createMockSearchContext());
 
     renderWithRouter();
@@ -55,7 +55,7 @@ describe('Movie', () => {
     expect(detailsSection).toBeInTheDocument();
   });
 
-  it('Clicking on the card triggers an additional API call to fetch detailed information', async () => {
+  it('should triggers an additional API call to fetch detailed information when clicking on the card', async () => {
     mockedUseSearch.mockReturnValue(createMockSearchContext());
 
     renderWithRouter();
