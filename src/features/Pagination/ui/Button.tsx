@@ -24,6 +24,7 @@ const Button = memo(function Button({
 
   return (
     <button
+      data-testid="pagination"
       className={`${btnPosition} group pointer-events-auto absolute bottom-0 top-0 my-auto h-24 w-24 animate-fade-in cursor-pointer text-neutral-200 outline-none disabled:cursor-default md:h-32 md:w-32 lg:h-72 lg:w-72`}
       type="button"
       disabled={disabled}
