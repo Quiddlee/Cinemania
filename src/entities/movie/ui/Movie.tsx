@@ -1,5 +1,7 @@
 import { memo, MouseEvent } from 'react';
 
+import { useLocation } from 'react-router-dom';
+
 import ReactLogo from '../../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../../shared/const/const.ts';
 import useRadialHover from '../../../shared/hooks/useRadialHover.ts';
@@ -21,18 +23,24 @@ const Movie = memo(function Movie({
 }: IMovieProps) {
   const { handleMouseOut, handleMouseMove, containerRef } =
     useRadialHover<HTMLDivElement>();
+  const { pathname } = useLocation();
 
   const { Poster, Title, Year, imdbID } = data;
 
   const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
   const animationDelay = `0.${String(delay)}s`;
+  const isDetailsClose = pathname.slice(1) === '';
 
   return (
-    <LinkWithQuery data-testid="movie-item" to={`/${imdbID}`}>
+    <LinkWithQuery
+      data-testid="movie-item"
+      to={`/${imdbID}`}
+      viewTransition={isDetailsClose}>
       <li
         data-testid="movie"
         style={{
           animationDelay,
+          viewTransitionName: `movie-${imdbID}`,
         }}
         className="w-64 animate-springish cursor-pointer overflow-hidden rounded-5xl bg-neutral-950 text-gray-100 transition-all duration-200">
         <div

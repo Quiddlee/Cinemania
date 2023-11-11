@@ -12,7 +12,11 @@ function PageNum() {
   const maxPage = Math.ceil(totalResults / moviesPerPage);
 
   return (
-    <span className="flex h-12 min-w-[125px] items-center justify-center rounded-full border-l border-t border-white/20 bg-white/10 px-4 py-1 text-zinc-100 shadow-2xl backdrop-blur-xl backdrop-saturate-200">
+    <span
+      style={{
+        viewTransitionName: 'page',
+      }}
+      className="flex h-12 min-w-[125px] items-center justify-center rounded-full border-l border-t border-white/20 bg-white/10 px-4 py-1 text-zinc-100 shadow-2xl backdrop-blur-xl backdrop-saturate-200">
       {currPage} of {maxPage}
     </span>
   );
