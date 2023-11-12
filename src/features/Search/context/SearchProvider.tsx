@@ -28,7 +28,6 @@ const initialState: IInitialState = {
   movies: null,
   totalResults: 0,
   isLoading: false,
-  movieDetails: null,
 };
 
 export const SearchContext = createContext<ISearchContext>({
@@ -57,8 +56,10 @@ function reducer(state: IInitialState, action: Action): IInitialState {
 }
 
 function SearchProvider({ children }: IChildren) {
-  const [{ query, movies, totalResults, isLoading, movieDetails }, dispatch] =
-    useReducer(reducer, initialState);
+  const [{ query, movies, totalResults, isLoading }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
   const { readUrl, setUrl } = useUrl();
 
   const updateQuery = useCallback((newQuery: string) => {
@@ -114,17 +115,8 @@ function SearchProvider({ children }: IChildren) {
       isLoading,
       updateQuery,
       fetchMovies,
-      movieDetails,
     }),
-    [
-      fetchMovies,
-      isLoading,
-      movieDetails,
-      movies,
-      query,
-      totalResults,
-      updateQuery,
-    ],
+    [fetchMovies, isLoading, movies, query, totalResults, updateQuery],
   );
 
   return (
