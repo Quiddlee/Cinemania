@@ -6,20 +6,20 @@ import { AnimeParams } from 'animejs';
 import anime from 'animejs/lib/anime.es.js';
 import deepEqual from 'deep-equal';
 
-interface IPrams extends Omit<AnimeParams, 'targets'> {}
+type Params = Omit<AnimeParams, 'targets'>;
 
 /**
  * Applies anime.js animation to the element using the specified parameters and dependencies.
  *
  * @template TElem - The type of the HTML element to animate.
- * @param {IPrams} params - The parameters used to configure the animation.
+ * @param {Params} params - The parameters used to configure the animation.
  * @param {DependencyList} [deps=[]] - The list of dependencies that trigger the animation when changed.
  * For example if you want to trigger the animation on some state change.
  * However the useAnime hook is able to determine if your params object properties is changed between renders
  * @return {React.MutableRefObject<TElem>} The reference to the HTML element being animated.
  */
 function useAnime<TElem extends HTMLElement>(
-  params: IPrams,
+  params: Params,
   deps: DependencyList = [],
 ) {
   const elementRef = useRef<TElem>(null);
