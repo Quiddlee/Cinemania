@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "precommit": "npx lint-staged && npm run type-check",
     "test": "vitest --coverage",
-    "test:staged": "vitest related --run"
+    "test:staged": "vitest related --run",
+    "test:committed": "vitest --run"
   },
   "dependencies": {
     "animejs": "^3.2.1",
