@@ -74,11 +74,14 @@ function Tabs<TVal extends string | number>({
     duration: 1600,
   });
 
-  const tabSliderRef = useAnime<HTMLSpanElement>({
-    translateX: position,
-    scaleX: [1.4, 1],
-    easing: 'spring(.2, 80, 4, 0)',
-  });
+  const tabSliderRef = useAnime<HTMLSpanElement>(
+    {
+      translateX: position,
+      scaleX: [1.4, 1],
+      easing: 'spring(.2, 80, 4, 0)',
+    },
+    [position],
+  );
 
   useEffect(() => {
     setContainerRef(animateContainerRef.current);
@@ -91,7 +94,7 @@ function Tabs<TVal extends string | number>({
       style={{
         viewTransitionName: `tab-${activeValue}`,
       }}
-      className="relative w-fit overflow-hidden rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
+      className="relative w-fit rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
       <SelectContext.Provider value={contextValue}>
         <span
           ref={tabSliderRef}
