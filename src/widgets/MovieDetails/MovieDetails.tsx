@@ -1,5 +1,4 @@
-// ⬇️ needs to be disable in order lazy route to work
-/* eslint-disable import/prefer-default-export */
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
 import useMovie from './hooks/useMovie.ts';
 import Actors from './ui/Actors.tsx';
@@ -11,6 +10,7 @@ import Poster from './ui/Poster.tsx';
 import Rating from './ui/Rating.tsx';
 import Runtime from './ui/Runtime.tsx';
 import Title from './ui/Title.tsx';
+import FallbackUi from '../../shared/ui/FallbackUi.tsx';
 
 export function Component() {
   const {
@@ -51,3 +51,19 @@ export function Component() {
 }
 
 Component.displayName = 'MovieDetails';
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  const errorMessage = isRouteErrorResponse(error) ? (
+    <h1>
+      {error.status} {error.statusText}
+    </h1>
+  ) : (
+    <h1>{(error as Error).message}</h1>
+  );
+
+  return <FallbackUi>{errorMessage}</FallbackUi>;
+}
+
+ErrorBoundary.displayName = 'MovieDetailsErrorBoundary';

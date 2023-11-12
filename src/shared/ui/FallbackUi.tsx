@@ -1,18 +1,27 @@
+import { PropsWithChildren } from 'react';
+
+import LinkWithQuery from './LinkWithQuery.tsx';
 import Modal from './Modal.tsx';
 
-function FallbackUi() {
+function FallbackUi({ children }: PropsWithChildren) {
   return (
-    <main className="flex h-screen items-center justify-center p-6">
-      <Modal className="px-8 py-10">
+    <div
+      data-scroll="true"
+      data-scroll-sticky="true"
+      data-scroll-target="section"
+      className="flex h-screen items-center justify-center p-6">
+      <Modal className="grid justify-items-center gap-4 px-8 py-10">
         <h2 className="mb-2 text-2xl font-semibold text-gray-200">
-          Something went really wrong 😱
+          Something went wrong 😱
         </h2>
+        {children}
         <p>If you faced any issues, please contact our support team</p>
-        <a className="block text-blue-400" href="/#">
-          cinemania-help@gmail.com
-        </a>
+        <div className="flex gap-4 text-blue-400 underline">
+          <p>cinemania-help@gmail.com</p>
+          <LinkWithQuery to="/">Go back</LinkWithQuery>
+        </div>
       </Modal>
-    </main>
+    </div>
   );
 }
 

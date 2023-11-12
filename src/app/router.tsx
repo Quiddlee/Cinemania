@@ -2,15 +2,17 @@ import { createHashRouter, RouteObject } from 'react-router-dom';
 
 import loader from '../entities/movie/loader.ts';
 import AppLayout from '../pages/AppLayout/AppLayout.tsx';
+import NotFound from '../pages/NotFound/NotFound.tsx';
 
 export const ROUTES: RouteObject[] = [
   {
-    element: <AppLayout />,
     path: '/',
+    element: <AppLayout />,
+    errorElement: <NotFound />,
     children: [
       {
-        lazy: () => import('../widgets/MovieDetails/MovieDetails.tsx'),
         path: ':movieId',
+        lazy: () => import('../widgets/MovieDetails/MovieDetails.tsx'),
         loader,
       },
     ],
