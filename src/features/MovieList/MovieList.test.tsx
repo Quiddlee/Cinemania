@@ -22,7 +22,7 @@ describe('MovieList', () => {
     scroll.current?.destroy();
   });
 
-  it('should create an empty movie list', () => {
+  it('should display an empty list message', () => {
     mockedUseSearch.mockReturnValue(createMockSearchContext(null));
 
     renderWithRouter(
@@ -45,7 +45,7 @@ describe('MovieList', () => {
     ).toBeInTheDocument();
   });
 
-  it('should create the movie list with movies', () => {
+  it('should renders the specified number of cards', () => {
     mockedUseSearch.mockReturnValue(createMockSearchContext());
 
     renderWithRouter(
