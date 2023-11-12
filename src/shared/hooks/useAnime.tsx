@@ -1,51 +1,41 @@
-import { useEffect, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { DependencyList, useEffect, useRef, useState } from 'react';
 
 import { AnimeParams } from 'animejs';
 import anime from 'animejs/lib/anime.es.js';
+import deepEqual from 'deep-equal';
 
 interface IPrams extends Omit<AnimeParams, 'targets'> {}
 
-interface IOptions<TElem extends HTMLElement> {
-  once?: boolean;
-  targetElement?: TElem | null;
-}
-
 /**
- * Applies anime.js animation to the specified element.
+ * Applies anime.js animation to the element using the specified parameters and dependencies.
  *
- * @template TElem - The type of the element to be animated.
- * @param {IPrams} params - The parameters for the animation.
- * @param {IOptions<TElem>} options - The options for the animation.
- * @param {boolean} options.once - Flag indicating if the animation should only be executed once.
- * @param {TElem} options.targetElement - The target element to apply the animation.
- * Used if the component already have ref of the element that needs to be animated.
- * So simply pass this ref.current instead of defining the returned ref
- * @return {React.RefObject<TElem>} - A reference to the animated element.
+ * @template TElem - The type of the HTML element to animate.
+ * @param {IPrams} params - The parameters used to configure the animation.
+ * @param {DependencyList} [deps=[]] - The list of dependencies that trigger the animation when changed.
+ * For example if you want to trigger the animation on some state change.
+ * However the useAnime hook is able to determine if your params object properties is changed between renders
+ * @return {React.MutableRefObject<TElem | null>} The reference to the HTML element being animated.
  */
 function useAnime<TElem extends HTMLElement>(
   params: IPrams,
-  { once, targetElement }: IOptions<TElem> = {},
+  deps: DependencyList = [],
 ) {
   const elementRef = useRef<TElem>(null);
-  const isOnceAnimated = useRef(false);
+  const [paramsCache, setParamsCache] = useState(params);
 
   useEffect(() => {
-    if (once && !isOnceAnimated.current && targetElement) {
-      anime({
-        targets: elementRef.current ?? targetElement,
-        ...params,
-      });
+    const isEqual = deepEqual(params, paramsCache, { strict: true });
+    if (!isEqual) setParamsCache(params);
+  }, [params]);
 
-      isOnceAnimated.current = true;
-    }
-
-    if (!once) {
-      anime({
-        targets: elementRef.current ?? targetElement,
-        ...params,
-      });
-    }
-  }, [once, params, targetElement]);
+  useEffect(() => {
+    anime({
+      targets: elementRef.current,
+      ...paramsCache,
+    });
+  }, [...deps, paramsCache]);
 
   return elementRef;
 }

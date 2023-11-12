@@ -5,6 +5,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -66,18 +67,12 @@ function Tabs<TVal extends string | number>({
   if (activeValue === itemsPerPage.FIVE) position = middle;
   if (activeValue === itemsPerPage.TEN) position = end;
 
-  useAnime(
-    {
-      scale: [0, 1],
-      opacity: [0, 1],
-      easing: 'easeInOutElastic(1, .34)',
-      duration: 1600,
-    },
-    {
-      once: true,
-      targetElement: containerRef,
-    },
-  );
+  const animateContainerRef = useAnime<HTMLDivElement>({
+    scale: [0, 1],
+    opacity: [0, 1],
+    easing: 'easeInOutElastic(1, .34)',
+    duration: 1600,
+  });
 
   const tabSliderRef = useAnime<HTMLSpanElement>({
     translateX: position,
@@ -85,9 +80,14 @@ function Tabs<TVal extends string | number>({
     easing: 'spring(.2, 80, 4, 0)',
   });
 
+  useEffect(() => {
+    setContainerRef(animateContainerRef.current);
+  }, [animateContainerRef]);
+
   return (
     <div
-      ref={(ref) => setContainerRef(ref)}
+      data-animate="tabs"
+      ref={animateContainerRef}
       style={{
         viewTransitionName: `tab-${activeValue}`,
       }}
