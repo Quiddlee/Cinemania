@@ -2,7 +2,7 @@ import { delay, http, HttpResponse } from 'msw';
 
 import { mockMovieDetails, mockMovieDetailsNoPoster } from './data.ts';
 import { API_URL_NO_KEY } from '../../shared/const/const.ts';
-import NO_POSTER_QUERY_TEST_CASE from '../const/const.ts';
+import { NO_POSTER_QUERY_TEST_CASE } from '../const/const.ts';
 
 const handlers = [
   http.get(`${API_URL_NO_KEY}`, async ({ request }) => {

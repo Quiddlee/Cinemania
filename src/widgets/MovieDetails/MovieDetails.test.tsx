@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import reactLogo from '../../assets/reactJS-logo.png';
 import convertSecsToHrsAndMins from '../../shared/lib/helpers/convertSecsToHrsAndMins.ts';
-import NO_POSTER_QUERY_TEST_CASE from '../../test/const/const.ts';
+import { NO_POSTER_QUERY_TEST_CASE } from '../../test/const/const.ts';
 import renderWithRouter from '../../test/helpers/RenderWithRouter.tsx';
 import { mockMovieDetails } from '../../test/mocks/data.ts';
 
