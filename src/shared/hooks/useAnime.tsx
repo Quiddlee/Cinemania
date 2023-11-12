@@ -16,7 +16,7 @@ interface IPrams extends Omit<AnimeParams, 'targets'> {}
  * @param {DependencyList} [deps=[]] - The list of dependencies that trigger the animation when changed.
  * For example if you want to trigger the animation on some state change.
  * However the useAnime hook is able to determine if your params object properties is changed between renders
- * @return {React.MutableRefObject<TElem | null>} The reference to the HTML element being animated.
+ * @return {React.MutableRefObject<TElem>} The reference to the HTML element being animated.
  */
 function useAnime<TElem extends HTMLElement>(
   params: IPrams,
