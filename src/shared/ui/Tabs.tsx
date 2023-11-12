@@ -2,22 +2,26 @@ import {
   createContext,
   memo,
   MouseEvent,
-  PropsWithChildren,
+  ReactNode,
   useCallback,
   useContext,
   useMemo,
+  useState,
 } from 'react';
 
 import Button from './Button.tsx';
+import useAnime from '../hooks/useAnime.tsx';
+import { itemsPerPage } from '../types/enums.ts';
 
 interface IOptionProps<TVal> {
   children: string;
   value: TVal;
 }
 
-interface ISelectProps<TVal> extends PropsWithChildren {
+interface ISelectProps<TVal> {
   handler: (value: TVal) => void;
   activeValue: number | string;
+  children: ReactNode | ReactNode[];
 }
 
 interface ISelectContext {
@@ -32,6 +36,8 @@ function Tabs<TVal extends string | number>({
   handler,
   activeValue,
 }: ISelectProps<TVal>) {
+  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+
   const handleSetValue = useCallback(
     (e: MouseEvent) => {
       const target = e.target as HTMLOptionElement;
@@ -46,13 +52,54 @@ function Tabs<TVal extends string | number>({
     [handleSetValue, activeValue],
   );
 
+  const containerPadding = 4;
+  const containerWidth = containerRef?.offsetWidth ?? 0;
+  const numOfTabs = (children as ReactNode[])?.length || 1;
+  const tabSliderWidth = containerWidth / numOfTabs - containerPadding;
+
+  const start = containerPadding;
+  const middle = containerWidth / 2 - tabSliderWidth / 2;
+  const end = containerWidth - tabSliderWidth - containerPadding;
+
+  let position = start;
+
+  if (activeValue === itemsPerPage.FIVE) position = middle;
+  if (activeValue === itemsPerPage.TEN) position = end;
+
+  useAnime(
+    {
+      scale: [0, 1],
+      opacity: [0, 1],
+      easing: 'easeInOutElastic(1, .34)',
+      duration: 1600,
+    },
+    {
+      once: true,
+      targetElement: containerRef,
+    },
+  );
+
+  const tabSliderRef = useAnime<HTMLSpanElement>({
+    translateX: position,
+    scaleX: [1.4, 1],
+    easing: 'spring(.2, 80, 4, 0)',
+  });
+
   return (
     <div
+      ref={(ref) => setContainerRef(ref)}
       style={{
         viewTransitionName: `tab-${activeValue}`,
       }}
-      className="space-x-2 rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
+      className="relative w-fit overflow-hidden rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
       <SelectContext.Provider value={contextValue}>
+        <span
+          ref={tabSliderRef}
+          style={{
+            width: tabSliderWidth,
+          }}
+          className="pointer-events-none absolute bottom-0 left-0 top-0 -z-10 m-auto h-[80%] rounded-full bg-lime-400"
+        />
         {children}
       </SelectContext.Provider>
     </div>
@@ -67,7 +114,7 @@ function Tab<TVal extends string | number>({
 
   const isActiveOption = context?.activeValue === value;
   const className = isActiveOption
-    ? 'before:bg-lime-400 before:scale-100 before:opacity-100 text-neutral-950 font-semibold'
+    ? 'text-neutral-950 font-semibold before:hover:bg-transparent'
     : '';
 
   return (

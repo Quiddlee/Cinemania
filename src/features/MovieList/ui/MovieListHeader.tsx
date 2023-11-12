@@ -16,19 +16,21 @@ interface IMovieListHeader extends PropsWithChildren {
 function MovieListHeader({ children, scroll }: IMovieListHeader) {
   const { setUrl, readUrl } = useUrl();
 
+  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
+
+  useScrollTop(moviesPerPage, scroll);
+
   const handleMoviesPerPage = useCallback(
     (value: number) => {
+      if (value === moviesPerPage) return;
+
       setUrl({
         'movies-per-page': String(value),
         page: String(DEFAULT_PAGE),
       });
     },
-    [setUrl],
+    [moviesPerPage, setUrl],
   );
-
-  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
-
-  useScrollTop(moviesPerPage, scroll);
 
   return (
     <header

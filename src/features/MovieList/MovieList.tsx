@@ -22,7 +22,7 @@ function MovieList({ scroll, render, children }: IMovieListProps) {
     <ul
       ref={listRef}
       onClick={handleClick}
-      className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 animate-fade-in flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
+      className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
       {children}
       {renderMovies?.map(render)}
     </ul>
