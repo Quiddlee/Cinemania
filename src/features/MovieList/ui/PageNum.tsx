@@ -9,16 +9,16 @@ function PageNum() {
   const { readUrl } = useUrl();
   const { totalResults } = useSearch();
   const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
-  const prevCurrPage = useRef(0);
   const prevMaxPage = useRef(0);
 
   const currPage = Number(readUrl(urlParams.PAGE));
   const maxPage = Math.ceil(totalResults / moviesPerPage);
 
   const currPageRef = useAnime({
-    textContent: [prevCurrPage.current, currPage],
+    textContent: [0, currPage],
     round: 1,
     easing: 'easeInOutExpo',
+    delay: 500,
   });
 
   const maxPageRef = useAnime(
@@ -39,9 +39,8 @@ function PageNum() {
   });
 
   useEffect(() => {
-    prevCurrPage.current = currPage;
     prevMaxPage.current = maxPage;
-  }, [currPage, maxPage]);
+  }, [maxPage]);
 
   return (
     <span
