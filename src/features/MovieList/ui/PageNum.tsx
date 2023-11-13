@@ -14,14 +14,14 @@ function PageNum() {
   const currPage = Number(readUrl(urlParams.PAGE));
   const maxPage = Math.ceil(totalResults / moviesPerPage);
 
-  const currPageRef = useAnime({
+  const currPageRef = useAnime<HTMLSpanElement>({
     textContent: [0, currPage],
     round: 1,
     easing: 'easeInOutExpo',
     delay: 500,
   });
 
-  const maxPageRef = useAnime(
+  const maxPageRef = useAnime<HTMLSpanElement>(
     {
       textContent: [prevMaxPage.current, maxPage],
       round: 1,
@@ -31,6 +31,7 @@ function PageNum() {
   );
 
   const containerRef = useAnime<HTMLParagraphElement>({
+    targets: '',
     scale: [0, 1],
     opacity: [0, 1],
     easing: 'easeInOutElastic(1, .34)',

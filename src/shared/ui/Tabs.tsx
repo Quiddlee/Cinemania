@@ -92,7 +92,7 @@ function Tabs<TVal extends string | number>({
       data-animate="tabs"
       ref={animateContainerRef}
       style={{
-        viewTransitionName: `tab-${activeValue}`,
+        viewTransitionName: 'tabs',
       }}
       className="relative w-fit overflow-hidden rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
       <SelectContext.Provider value={contextValue}>
