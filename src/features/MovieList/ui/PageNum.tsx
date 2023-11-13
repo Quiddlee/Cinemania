@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import useAnime from '../../../shared/hooks/useAnime.tsx';
+import useAnime from '../../../shared/hooks/useAnime.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
 import { urlParams } from '../../../shared/types/enums.ts';
 import useSearch from '../../Search/hooks/useSearch.ts';
@@ -14,14 +14,14 @@ function PageNum() {
   const currPage = Number(readUrl(urlParams.PAGE));
   const maxPage = Math.ceil(totalResults / moviesPerPage);
 
-  const currPageRef = useAnime<HTMLSpanElement>({
+  const { elementRef: currPageRef } = useAnime<HTMLSpanElement>({
     textContent: [0, currPage],
     round: 1,
     easing: 'easeInOutExpo',
     delay: 500,
   });
 
-  const maxPageRef = useAnime<HTMLSpanElement>(
+  const { elementRef: maxPageRef } = useAnime<HTMLSpanElement>(
     {
       textContent: [prevMaxPage.current, maxPage],
       round: 1,
@@ -30,8 +30,7 @@ function PageNum() {
     [maxPage],
   );
 
-  const containerRef = useAnime<HTMLParagraphElement>({
-    targets: '',
+  const { elementRef: containerRef } = useAnime<HTMLParagraphElement>({
     scale: [0, 1],
     opacity: [0, 1],
     easing: 'easeInOutElastic(1, .34)',

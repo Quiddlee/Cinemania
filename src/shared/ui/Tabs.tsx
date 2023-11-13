@@ -11,7 +11,7 @@ import {
 } from 'react';
 
 import Button from './Button.tsx';
-import useAnime from '../hooks/useAnime.tsx';
+import useAnime from '../hooks/useAnime.ts';
 import { itemsPerPage } from '../types/enums.ts';
 
 interface IOptionProps<TVal> {
@@ -67,14 +67,14 @@ function Tabs<TVal extends string | number>({
   if (activeValue === itemsPerPage.FIVE) position = middle;
   if (activeValue === itemsPerPage.TEN) position = end;
 
-  const animateContainerRef = useAnime<HTMLDivElement>({
+  const { elementRef: animateContainerRef } = useAnime<HTMLDivElement>({
     scale: [0, 1],
     opacity: [0, 1],
     easing: 'easeInOutElastic(1, .34)',
     duration: 1600,
   });
 
-  const tabSliderRef = useAnime<HTMLSpanElement>(
+  const { elementRef: tabSliderRef } = useAnime<HTMLSpanElement>(
     {
       translateX: position,
       scaleX: [1.4, 1],
