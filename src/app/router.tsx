@@ -1,21 +1,24 @@
-import { createHashRouter } from 'react-router-dom';
+import { createHashRouter, RouteObject } from 'react-router-dom';
 
 import loader from '../entities/movie/loader.ts';
-import AppLayout from '../pages/AppLayout.tsx';
-import MovieDetails from '../widgets/MovieDetails/MovieDetails.tsx';
+import AppLayout from '../pages/AppLayout/AppLayout.tsx';
+import NotFound from '../pages/NotFound/NotFound.tsx';
 
-const router = createHashRouter([
+export const ROUTES: RouteObject[] = [
   {
-    element: <AppLayout />,
     path: '/',
+    element: <AppLayout />,
+    errorElement: <NotFound />,
     children: [
       {
-        element: <MovieDetails />,
         path: ':movieId',
+        lazy: () => import('../widgets/MovieDetails/MovieDetails.tsx'),
         loader,
       },
     ],
   },
-]);
+];
+
+const router = createHashRouter(ROUTES);
 
 export default router;

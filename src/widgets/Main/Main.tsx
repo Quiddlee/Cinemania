@@ -1,6 +1,6 @@
-import { IChildren } from '../../shared/types/interfaces.ts';
+import { PropsWithChildren } from 'react';
 
-function Main({ children }: IChildren) {
+function Main({ children }: PropsWithChildren) {
   return (
     <main className="relative flex px-6 lg:gap-28 lg:px-20">{children}</main>
   );

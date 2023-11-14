@@ -1,46 +1,44 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useCallback, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-const HIDDEN = ['invisible', 'opacity-0', '!scale-[.3]', 'text-lime-500'];
+import getElementMouseCoord from '../lib/helpers/getElementMouseCoord.ts';
+
+const HIDDEN = ['invisible', 'opacity-0', '!scale-[.3]'];
+const ELEMENT_POSITION_OFFSET = 120;
 
 function useTooltip(scroll: RefObject<LocomotiveScroll>) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  function moveTooltip(e: MouseEvent) {
-    const screenCoord = document.body.getBoundingClientRect();
+  const moveTooltip = useCallback((e: MouseEvent) => {
+    const { posX, posY } = getElementMouseCoord(document.body, e);
 
-    if (!screenCoord) return;
-
-    const posX = e.clientX - screenCoord.x - 120;
-    const posY = e.clientY - screenCoord.y - 120;
+    const pointerX = posX - ELEMENT_POSITION_OFFSET;
+    const pointerY = posY - ELEMENT_POSITION_OFFSET;
 
     if (tooltipRef.current)
-      tooltipRef.current.style.cssText = `
-        translate: ${posX}px ${posY}px;
-      `;
-  }
+      tooltipRef.current.style.translate = `${pointerX}px ${pointerY}px`;
+  }, []);
 
-  function showTooltip() {
+  const showTooltip = useCallback(() => {
     tooltipRef.current?.classList.remove(...HIDDEN);
-  }
+  }, []);
 
-  function hideTooltip() {
+  const hideTooltip = useCallback(() => {
     tooltipRef.current?.classList.add(...HIDDEN);
-  }
+  }, []);
 
   useEffect(() => {
-    if (scroll.current)
-      scroll.current.on('scroll', () => {
-        if (tooltipRef.current) tooltipRef.current.classList.add(...HIDDEN);
-      });
+    scroll.current?.on?.(
+      'scroll',
+      () => tooltipRef.current?.classList.add(...HIDDEN),
+    );
   }, [scroll]);
 
   useEffect(() => {
-    document.body.addEventListener('mousemove', (e) => {
-      moveTooltip(e);
-    });
-  }, []);
+    document.addEventListener('mousemove', moveTooltip);
+    return () => document.removeEventListener('mousemove', moveTooltip);
+  }, [moveTooltip]);
 
   return {
     tooltipRef,

@@ -1,4 +1,4 @@
-import { ApiMovieResponse, MovieList } from '../../../shared/types/types.ts';
+import { MovieList } from '../../../shared/types/types.ts';
 
 export enum SearchActions {
   QUERY_UPDATED = 'search/queryUpdated',
@@ -9,7 +9,6 @@ export enum SearchActions {
 export interface IInitialState {
   query: string;
   movies: MovieList | null;
-  movieDetails: ApiMovieResponse | null;
   totalResults: number;
   isLoading: boolean;
 }

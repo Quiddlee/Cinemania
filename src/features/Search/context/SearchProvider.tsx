@@ -10,9 +10,9 @@ import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
 import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
-  PAGE_PARAM,
 } from '../../../shared/const/const.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
+import { urlParams } from '../../../shared/types/enums.ts';
 import { IChildren } from '../../../shared/types/interfaces.ts';
 import { MovieList } from '../../../shared/types/types.ts';
 import { NO_MOVIES, NO_RESULTS } from '../const/const.ts';
@@ -28,7 +28,6 @@ const initialState: IInitialState = {
   movies: null,
   totalResults: 0,
   isLoading: false,
-  movieDetails: null,
 };
 
 export const SearchContext = createContext<ISearchContext>({
@@ -57,8 +56,10 @@ function reducer(state: IInitialState, action: Action): IInitialState {
 }
 
 function SearchProvider({ children }: IChildren) {
-  const [{ query, movies, totalResults, isLoading, movieDetails }, dispatch] =
-    useReducer(reducer, initialState);
+  const [{ query, movies, totalResults, isLoading }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
   const { readUrl, setUrl } = useUrl();
 
   const updateQuery = useCallback((newQuery: string) => {
@@ -96,9 +97,10 @@ function SearchProvider({ children }: IChildren) {
 
   useEffect(() => {
     const storedQuery = localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY);
-    const page = Number(readUrl(PAGE_PARAM)) || DEFAULT_PAGE;
+    const urlPage = Number(readUrl(urlParams.PAGE));
+    const page = urlPage || DEFAULT_PAGE;
 
-    setUrl(PAGE_PARAM, String(page));
+    if (!urlPage) setUrl(urlParams.PAGE, String(page));
 
     if (storedQuery === null) return;
 
@@ -113,17 +115,8 @@ function SearchProvider({ children }: IChildren) {
       isLoading,
       updateQuery,
       fetchMovies,
-      movieDetails,
     }),
-    [
-      fetchMovies,
-      isLoading,
-      movieDetails,
-      movies,
-      query,
-      totalResults,
-      updateQuery,
-    ],
+    [fetchMovies, isLoading, movies, query, totalResults, updateQuery],
   );
 
   return (

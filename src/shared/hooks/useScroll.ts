@@ -8,19 +8,24 @@ function useScroll<TContainer extends HTMLElement>() {
   const observerRef = useRef<ResizeObserver>();
 
   useEffect(() => {
-    if (containerRef.current) {
+    if (containerRef.current && LocomotiveScroll) {
       containerRef.current.setAttribute('data-Scroll-container', 'true');
 
-      scrollRef.current = new LocomotiveScroll({
-        el: containerRef.current,
-        smooth: true,
-        smartphone: {
+      try {
+        scrollRef.current = new LocomotiveScroll({
+          el: containerRef.current,
           smooth: true,
-        },
-        touchMultiplier: 6,
-        lerp: 0.2,
-        multiplier: 1.6,
-      });
+          smartphone: {
+            smooth: true,
+          },
+          touchMultiplier: 6,
+          lerp: 0.2,
+          multiplier: 1.6,
+        });
+      } catch (e) {
+        // if the error is caught that means the test environment is used
+        observerRef.current?.disconnect?.();
+      }
 
       observerRef.current = new ResizeObserver(
         () => scrollRef.current?.update(),

@@ -67,13 +67,13 @@ export default {
         },
       },
       animation: {
-        'fade-in': 'fade-in 1s cubic-bezier(0.86, 0, 0.07, 1) both',
+        'fade-in': 'fade-in 1s cubic-bezier(0.86, 0, 0.07, 1) backwards',
         'pagination-fade-in':
-          'pagination-fade-in 1s cubic-bezier(.25,1.55,1,1) both',
+          'pagination-fade-in 1s cubic-bezier(.25,1.55,1,1) backwards',
         springish:
-          'springish 1.72s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
+          'springish 1.72s cubic-bezier(0.445, 0.050, 0.550, 0.950) backwards',
         'springish-letter':
-          'springish-letter 2.35s cubic-bezier(0.445, 0.050, 0.550, 0.950) both',
+          'springish-letter 2.35s cubic-bezier(0.445, 0.050, 0.550, 0.950) backwards',
         float: 'float 16s ease-in-out infinite',
       },
     },

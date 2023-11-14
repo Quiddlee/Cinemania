@@ -78,9 +78,12 @@ module.exports = {
       typescript: {
         alwaysTryTypes: true,
       },
-      react: {
-        version: 'detect',
+      node: {
+        extensions: ['.js','.jsx','.ts','.tsx']
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
 };

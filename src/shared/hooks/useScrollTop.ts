@@ -16,7 +16,7 @@ function useScrollTop(
   useEffect(() => {
     if (prevValueRef.current !== currValue) {
       prevValueRef.current = currValue;
-      scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+      scroll?.current?.scrollTo?.('top', { duration: SCROLL_TOP_DURATION });
       callback?.();
     }
   }, [currValue, scroll, ...deps]);

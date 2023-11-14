@@ -1,35 +1,34 @@
-import { useCallback } from 'react';
+import { RefObject, useCallback } from 'react';
 
-import { DEFAULT_PAGE, PAGE_PARAM } from '../../../shared/const/const.ts';
+import LocomotiveScroll from 'locomotive-scroll';
+
+import {
+  DEFAULT_MOVIES_PER_PAGE,
+  DEFAULT_PAGE,
+} from '../../../shared/const/const.ts';
+import useScrollTop from '../../../shared/hooks/useScrollTop.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
+import { urlParams } from '../../../shared/types/enums.ts';
 import useSearch from '../../Search/hooks/useSearch.ts';
 
-function usePagination() {
+function usePagination(scroll: RefObject<LocomotiveScroll>) {
   const { setUrl, readUrl } = useUrl();
-  const { fetchMovies, query, isLoading, totalResults } = useSearch();
+  const { isLoading, totalResults } = useSearch();
 
-  const currPage = Number(readUrl(PAGE_PARAM));
-  const isPrevDisabled = currPage === 1 || isLoading;
+  const currPage = Number(readUrl(urlParams.PAGE));
+  const isPrevDisabled = currPage === DEFAULT_PAGE || isLoading;
   const isNextDisabled = isLoading;
-  const isPage = Boolean(currPage);
-  const noPages = totalResults <= 10;
+  const noPages = totalResults <= DEFAULT_MOVIES_PER_PAGE;
+
+  useScrollTop(currPage, scroll, undefined, currPage);
 
   const handleNextPage = useCallback(() => {
-    const newPage = currPage + 1;
-
-    setUrl(PAGE_PARAM, isPage ? String(newPage) : String(DEFAULT_PAGE));
-
-    fetchMovies(query, newPage);
-  }, [isPage, setUrl, fetchMovies, query, currPage]);
+    setUrl(urlParams.PAGE, currPage + 1);
+  }, [setUrl, currPage]);
 
   const handlePrevPage = useCallback(() => {
-    if (!isPage || currPage === 1) return;
-
-    const newPage = currPage - 1;
-
-    setUrl(PAGE_PARAM, String(newPage));
-    fetchMovies(query, newPage);
-  }, [isPage, currPage, setUrl, fetchMovies, query]);
+    setUrl(urlParams.PAGE, currPage - 1);
+  }, [currPage, setUrl]);
 
   return {
     handleNextPage,
