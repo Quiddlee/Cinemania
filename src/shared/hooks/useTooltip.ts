@@ -1,6 +1,5 @@
 import { RefObject, useCallback, useEffect, useRef } from 'react';
 
-import anime from 'animejs/lib/anime.es.js';
 import LocomotiveScroll from 'locomotive-scroll';
 
 import useAnime from './useAnime.ts';
@@ -11,7 +10,7 @@ const ELEMENT_POSITION_OFFSET = 120;
 function useTooltip(scroll: RefObject<LocomotiveScroll>) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  const { animation: showTooltipAnimation } = useAnime<HTMLDivElement>({
+  const { animation: showTooltipAnimation } = useAnime({
     targets: tooltipRef,
     scale: [0, 1],
     opacity: [0, 1],
@@ -48,7 +47,11 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
 
   useEffect(() => {
     scroll.current?.on?.('scroll', () => {
-      if (anime.running.length === 0) hideTooltipAnimation.current?.restart();
+      const isVisible =
+        tooltipRef.current &&
+        getComputedStyle(tooltipRef.current).opacity === '1';
+
+      if (isVisible) hideTooltipAnimation.current?.restart();
     });
   }, [scroll, hideTooltipAnimation]);
 
