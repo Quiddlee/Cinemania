@@ -59,12 +59,14 @@ function Tabs<TVal extends string | number>({
     scale: [0, 1],
     opacity: [0, 1],
     easing: 'easeInOutElastic(1, .34)',
+    translateZ: 0,
     duration: 1600,
   });
 
   const { elementRef: tabSliderRef } = useAnime<HTMLSpanElement>(
     {
       translateX: position,
+      translateZ: 0,
       scaleX: [1.4, 1],
       easing: 'spring(.2, 80, 4, 0)',
     },
@@ -83,7 +85,7 @@ function Tabs<TVal extends string | number>({
         <span
           ref={tabSliderRef}
           style={{
-            width: tabSliderWidth.current,
+            width: tabSliderWidth,
           }}
           className="pointer-events-none absolute bottom-0 left-0 top-0 -z-10 m-auto h-[80%] rounded-full bg-lime-400"
         />

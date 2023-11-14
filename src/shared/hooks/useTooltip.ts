@@ -14,6 +14,7 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
     targets: tooltipRef,
     scale: [0, 1],
     opacity: [0, 1],
+    translateZ: 0,
     duration: 1200,
   });
 
@@ -21,6 +22,7 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
     targets: tooltipRef,
     scale: [1, 0],
     opacity: [1, 0],
+    translateZ: 0,
     duration: 1200,
   });
 
