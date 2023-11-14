@@ -33,19 +33,15 @@ function useAnime<T extends AnimeParams['targets']>(
   const animeRef = useRef<AnimeInstance>();
 
   useEffect(() => {
-    if (params.targets && 'current' in params.targets) {
-      animeRef.current = anime({
-        ...params,
-        targets: params.targets.current,
-      });
-    }
+    const targets =
+      elementRef.current ||
+      (params.targets as unknown as RefObject<T>)?.current ||
+      params.targets;
 
-    if (!params.targets || !('current' in params.targets)) {
-      animeRef.current = anime({
-        ...params,
-        targets: elementRef.current,
-      });
-    }
+    animeRef.current = anime({
+      ...params,
+      targets,
+    });
   }, [...deps]);
 
   return { elementRef, animation: animeRef };
