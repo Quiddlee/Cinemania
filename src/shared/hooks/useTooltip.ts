@@ -7,6 +7,16 @@ import getElementMouseCoord from '../lib/helpers/getElementMouseCoord.ts';
 
 const ELEMENT_POSITION_OFFSET = 120;
 
+/**
+ * Floating tooltip bubble following the mouse.
+ * The tooltip is displayed when the element is hovered and follows the mouse movement.
+ *
+ * @param {RefObject<LocomotiveScroll>} scroll - The reference to the LocomotiveScroll instance. Used to hide the tooltip on scroll
+ * @return {Object} obj - An object containing the tooltip reference, hideTooltip function, and showTooltip function.
+ * @return {HTMLDivElement} obj.tooltipRef - The ref with the tooltip element.
+ * @return {() => void} obj.hideTooltip - Function that is used to hide the tooltip. For example on mouseLeave event.
+ * @return {() => void} obj.showTooltip - Function that is used to show the tooltip. For example on mouseEnter event.
+ */
 function useTooltip(scroll: RefObject<LocomotiveScroll>) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 

@@ -2,6 +2,14 @@ import { RefObject, useEffect, useRef } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
+/**
+ * Hook for using Locomotive Scroll.
+ *
+ * @template TContainer - The type of the container element.
+ * @returns obj - An object containing `containerRef` and `scrollRef` as React Ref Objects.
+ * @returns obj.containerRef {TContainer} - ref with the container element that scroll is attached to.
+ * @returns obj.scrollRef {LocomotiveScroll} - ref with the locomotive scroll instance.
+ */
 function useScroll<TContainer extends HTMLElement>() {
   const containerRef = useRef<TContainer>(null);
   const scrollRef = useRef<LocomotiveScroll>();
