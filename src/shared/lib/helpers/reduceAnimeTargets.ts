@@ -6,6 +6,7 @@ import { AnimeTarget } from '../../types/types.ts';
 /**
  * Reduces the list of Anime.js targets based on the provided parameters.
  *
+ * @template {AnimeTarget} T - Generic elementRef
  * @param {IParams} params - The parameters for reducing the anime targets.
  * @param {RefObject<T> | null} elementRef - The reference to the anime target element.
  * @param {boolean} isChildren - Indicates whether to consider the children of the anime target element.
