@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import * as apiMovie from './api/apiMovie.ts';
+import * as apiMovie from './api/apiMovie-v1.ts';
 import Movie from './ui/Movie.tsx';
 import * as useSearch from '../../features/Search/hooks/useSearch.ts';
 import createMockSearchContext from '../../test/helpers/createMockSearchContext.ts';

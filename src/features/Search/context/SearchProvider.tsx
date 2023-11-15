@@ -6,7 +6,7 @@ import {
   useReducer,
 } from 'react';
 
-import { getMovieList } from '../../../entities/movie/api/apiMovie.ts';
+import { getMovieList } from '../../../entities/movie/api/apiMovie-v1.ts';
 import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
