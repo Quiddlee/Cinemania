@@ -1,13 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+import { movieApi } from '../../entities/movie/api/movieApi.ts';
+import { searchReducer } from '../../features/Search/model/slice.ts';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  [movieApi.reducerPath]: movieApi.reducer,
+  searchReducer,
+});
 
-export const setupStore = (preloadedState?: Partial<RootState>) =>
+export const setupStore = () =>
   configureStore({
-    preloadedState,
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(movieApi.middleware),
   });
+
+export type AppStore = ReturnType<typeof setupStore>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = AppStore['dispatch'];
