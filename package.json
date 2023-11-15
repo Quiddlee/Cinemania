@@ -17,6 +17,7 @@
     "test:committed": "vitest --run"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.7",
     "animejs": "^3.2.1",
     "clsx": "^2.0.0",
     "locomotive-scroll": "^4.1.4",
@@ -36,6 +37,7 @@
     "@types/locomotive-scroll": "^4.1.2",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/react-redux": "^7.1.30",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
