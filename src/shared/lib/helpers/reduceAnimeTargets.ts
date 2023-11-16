@@ -15,8 +15,8 @@ import { AnimeTarget } from '../../types/types.ts';
  */
 function reduceAnimeTargets<T extends AnimeTarget>(
   params: IParams,
-  elementRef: RefObject<T> | null,
-  isChildren: boolean,
+  elementRef: RefObject<T> | null = null,
+  isChildren: boolean = false,
 ) {
   let { targets } = params;
 
@@ -36,7 +36,7 @@ function reduceAnimeTargets<T extends AnimeTarget>(
     }
   }
 
-  return targets;
+  return targets as AnimeTarget;
 }
 
 export default reduceAnimeTargets;
