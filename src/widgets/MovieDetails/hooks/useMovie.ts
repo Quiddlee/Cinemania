@@ -1,44 +1,14 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import ReactLogo from '../../../assets/reactJS-logo.png';
-import { NOT_EXIST } from '../../../shared/const/const.ts';
-import useDocumentTitle from '../../../shared/hooks/useDocumentTitle.ts';
-import convertSecsToHrsAndMins from '../../../shared/lib/helpers/convertSecsToHrsAndMins.ts';
-import { ApiMovieResponse } from '../../../shared/types/types.ts';
+import { useGetMovieQuery } from '../../../entities/movie/api/movieApi.ts';
 
 function useMovie() {
-  const movie = useLoaderData() as ApiMovieResponse;
-  useDocumentTitle(`Cinemania | ${movie.Title}`);
+  const { pathname } = useLocation();
+  const id = pathname.slice(1);
 
-  const {
-    Poster,
-    Title,
-    Runtime,
-    Genre,
-    Plot,
-    Year,
-    imdbRating,
-    imdbVotes,
-    Director,
-    Actors,
-  } = movie;
+  const { data: movie, isLoading } = useGetMovieQuery(id);
 
-  const time = convertSecsToHrsAndMins(Runtime);
-  const description = `${Plot.slice(0, 150)}...`;
-  const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
-
-  return {
-    title: Title,
-    time,
-    description,
-    poster,
-    genre: Genre,
-    year: Year,
-    imdbRating,
-    imdbVotes,
-    director: Director,
-    actors: Actors,
-  };
+  return { movie, isLoading };
 }
 
 export default useMovie;
