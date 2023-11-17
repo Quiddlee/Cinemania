@@ -1,6 +1,5 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
-import useMovie from './hooks/useMovie.ts';
 import Actors from './ui/Actors.tsx';
 import BackButton from './ui/BackButton.tsx';
 import Description from './ui/Description.tsx';
@@ -13,14 +12,15 @@ import Title from './ui/Title.tsx';
 import ReactLogo from '../../assets/reactJS-logo.png';
 import { NOT_EXIST } from '../../shared/const/const.ts';
 import useDocumentTitle from '../../shared/hooks/useDocumentTitle.ts';
+import useGetMovie from '../../shared/hooks/useGetMovie.ts';
 import convertSecsToHrsAndMins from '../../shared/lib/helpers/convertSecsToHrsAndMins.ts';
 import FallbackUi from '../../shared/ui/FallbackUi.tsx';
 
 export function Component() {
-  const { movie, isLoading } = useMovie();
+  const movie = useGetMovie();
   useDocumentTitle(`Cinemania | ${movie?.Title}`);
 
-  if (isLoading || !movie) return null;
+  if (!movie) return null;
 
   const {
     Poster: poster,
