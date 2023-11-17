@@ -45,10 +45,8 @@ const Movie = memo(function Movie({
         className="w-64 animate-springish cursor-pointer overflow-hidden rounded-5xl bg-neutral-950 text-gray-100 transition-all duration-200">
         <div
           ref={containerRef}
-          onMouseEnter={(e) => {
-            handleMouseMove(e);
-            onMouseMove(e);
-          }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={onMouseMove}
           onMouseLeave={() => {
             handleMouseOut();
             onMouseOut();
