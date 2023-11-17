@@ -1,11 +1,13 @@
-import useSearch from '../../../features/Search/hooks/useSearch.ts';
+import useGetMovieList from '../../../shared/hooks/useGetMovieList.ts';
 
 function TotalResults() {
-  const { totalResults } = useSearch();
+  const movieList = useGetMovieList();
 
   return (
     <p className="ml-auto hidden animate-fade-in text-right text-lime-400 sm:block lg:text-lg">
-      Found <span className="font-semibold">{totalResults}</span> movies
+      Found{' '}
+      <span className="font-semibold">{movieList?.totalResults ?? 0}</span>{' '}
+      movies
     </p>
   );
 }

@@ -3,13 +3,8 @@ import { PropsWithChildren, ReactNode, RefObject } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 
 import useListClick from './hooks/useListClick.ts';
-import { useGetMovieListQuery } from '../../entities/movie/api/movieApi.ts';
-import useAppSelector from '../../shared/hooks/useAppSelector.ts';
-import useUrl from '../../shared/hooks/useUrl.ts';
-import { urlParams } from '../../shared/types/enums.ts';
+import useGetMovieList from '../../shared/hooks/useGetMovieList.ts';
 import { Movie } from '../../shared/types/types.ts';
-import Loader from '../../widgets/Loader/Loader.tsx';
-import selectSearchQuery from '../Search/lib/selectors/selectSearchQuery.ts';
 
 interface IMovieListProps extends PropsWithChildren {
   scroll: RefObject<LocomotiveScroll>;
@@ -18,17 +13,7 @@ interface IMovieListProps extends PropsWithChildren {
 
 function MovieList({ scroll, render, children }: IMovieListProps) {
   const { listRef, handleClick } = useListClick(scroll);
-  const { readUrl } = useUrl();
-
-  const query = useAppSelector(selectSearchQuery);
-  const page = readUrl(urlParams.PAGE);
-
-  const { data: movieList, isLoading } = useGetMovieListQuery({
-    page,
-    query,
-  });
-
-  if (isLoading) return <Loader scroll={scroll} />;
+  const movieList = useGetMovieList();
 
   return (
     <ul
