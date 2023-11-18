@@ -16,9 +16,9 @@ interface IOptions {
 }
 
 function renderWithRouterProvider(
-  ui?: ReactElement,
+  ui?: ReactElement | null,
   {
-    preloadedState = {},
+    preloadedState,
     store = setupStore(preloadedState),
     initialEntries,
     initialIndex,
