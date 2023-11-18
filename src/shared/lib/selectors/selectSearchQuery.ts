@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { RootState } from '../../../../app/store/store.ts';
+import { RootState } from '../../../app/store/store.ts';
 
 const selectSearchQuery = createSelector(
   (state: RootState) => state.searchReducer.query,

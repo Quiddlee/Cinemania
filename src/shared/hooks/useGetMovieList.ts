@@ -2,7 +2,7 @@ import useAppSelector from './useAppSelector.ts';
 import useDispatchIsFetching from './useDispatchIsFetching.ts';
 import useUrl from './useUrl.ts';
 import { useGetMovieListQuery } from '../../entities/movie/api/movieApi.ts';
-import selectSearchQuery from '../../features/Search/lib/selectors/selectSearchQuery.ts';
+import selectSearchQuery from '../lib/selectors/selectSearchQuery.ts';
 import { urlParams } from '../types/enums.ts';
 
 /**
