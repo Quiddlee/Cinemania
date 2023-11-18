@@ -13,7 +13,7 @@ interface IMovieListProps extends PropsWithChildren {
 
 function MovieList({ scroll, render, children }: IMovieListProps) {
   const { listRef, handleClick } = useListClick(scroll);
-  const movieList = useGetMovieList();
+  const { movieList } = useGetMovieList();
 
   return (
     <ul
@@ -21,7 +21,7 @@ function MovieList({ scroll, render, children }: IMovieListProps) {
       onClick={handleClick}
       className="relative m-auto mb-8 mt-24 flex max-w-6xl flex-1 flex-wrap items-center justify-start gap-6 sm:gap-10 2xl:justify-around">
       {children}
-      {movieList?.Search.map(render)}
+      {movieList?.map(render)}
     </ul>
   );
 }

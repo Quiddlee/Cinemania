@@ -16,14 +16,17 @@ function useGetMovieList() {
   const query = useAppSelector(selectSearchQuery);
   const page = readUrl(urlParams.PAGE);
 
-  const { data: movieList, isFetching } = useGetMovieListQuery({
+  const { data, isFetching } = useGetMovieListQuery({
     page,
     query,
   });
 
+  const movieList = data?.Search;
+  const totalResults = Number.parseInt(data?.totalResults ?? '0', 10);
+
   useDispatchIsFetching(isFetching);
 
-  return movieList;
+  return { movieList, totalResults };
 }
 
 export default useGetMovieList;

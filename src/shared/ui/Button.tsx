@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes, memo } from 'react';
 
-import useSearch from '../../features/Search/hooks/useSearch.ts';
+import useAppSelector from '../hooks/useAppSelector.ts';
 import cn from '../lib/helpers/cn.ts';
+import selectIsFetching from '../lib/selectors/selectIsFetching.ts';
 
 const buttonTypes = {
   filled:
@@ -23,8 +24,8 @@ const Button = memo(function Button({
   disabled,
   ...props
 }: IButtonProps) {
-  const { isLoading } = useSearch();
-  const isDisabled = disabled || isLoading;
+  const isFetching = useAppSelector(selectIsFetching);
+  const isDisabled = disabled || isFetching;
 
   return (
     <button
