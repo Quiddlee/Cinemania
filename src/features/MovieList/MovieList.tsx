@@ -3,6 +3,7 @@ import { PropsWithChildren, ReactNode, RefObject } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 
 import useListClick from './hooks/useListClick.ts';
+import MovieNotFound from './ui/MovieNotFound.tsx';
 import useGetMovieList from '../../shared/hooks/useGetMovieList.ts';
 import useUrl from '../../shared/hooks/useUrl.ts';
 import { urlParams } from '../../shared/types/enums.ts';
@@ -17,9 +18,11 @@ function MovieList({ scroll, render, children }: IMovieListProps) {
   const { listRef, handleClick } = useListClick(scroll);
   const { movieList } = useGetMovieList();
   const { readUrl } = useUrl();
-  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
 
+  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
   const renderMovies = movieList?.slice(0, moviesPerPage);
+
+  if (!movieList) return <MovieNotFound />;
 
   return (
     <ul

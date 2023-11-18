@@ -2,10 +2,7 @@ import { RefObject, useCallback } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-import {
-  DEFAULT_MOVIES_PER_PAGE,
-  DEFAULT_PAGE,
-} from '../../../shared/const/const.ts';
+import { DEFAULT_PAGE, MOVIES_PER_PAGE } from '../../../shared/const/const.ts';
 import useAppSelector from '../../../shared/hooks/useAppSelector.ts';
 import useGetMovieList from '../../../shared/hooks/useGetMovieList.ts';
 import useScrollTop from '../../../shared/hooks/useScrollTop.ts';
@@ -21,7 +18,7 @@ function usePagination(scroll: RefObject<LocomotiveScroll>) {
   const currPage = Number(readUrl(urlParams.PAGE));
   const isPrevDisabled = currPage === DEFAULT_PAGE || isFetching;
   const isNextDisabled = isFetching;
-  const noPages = totalResults <= DEFAULT_MOVIES_PER_PAGE;
+  const noPages = totalResults <= MOVIES_PER_PAGE;
 
   useScrollTop(currPage, scroll, undefined, currPage);
 
