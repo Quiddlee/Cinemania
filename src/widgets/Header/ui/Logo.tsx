@@ -19,7 +19,7 @@ function Logo() {
         {
           value: [40, -20],
           duration: 280,
-          easing: 'cubicBezier(0.225, 1, 0.915, 0.980)',
+          easing: 'easeOutQuad',
           endDelay: 20,
         },
         { value: 0, duration: 120, easing: 'easeInQuad' },
@@ -29,7 +29,7 @@ function Logo() {
         { value: 1, duration: 600, easing: 'easeOutElastic' },
       ],
       scaleY: [
-        { value: [0.4, 2], duration: 300, easing: 'easeOutSine' },
+        { value: [0.4, 1.5], duration: 300, easing: 'easeOutSine' },
         { value: 0.6, duration: 200, easing: 'easeOutSine' },
         { value: 1, duration: 1000, easing: 'easeOutElastic' },
       ],
