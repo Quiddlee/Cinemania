@@ -17,28 +17,25 @@ function Logo() {
       transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
       translateY: [
         {
-          value: [200, -30],
-          duration: 300,
+          value: [40, -20],
+          duration: 280,
           easing: 'cubicBezier(0.225, 1, 0.915, 0.980)',
           endDelay: 20,
         },
         { value: 0, duration: 120, easing: 'easeInQuad' },
       ],
       scaleX: [
-        { value: [0, 0.8], duration: 190, easing: 'easeInQuad' },
-        { value: 0.8, duration: 300, easing: 'easeInQuad' },
-        { value: 1.1, duration: 90, easing: 'easeOutQuad' },
-        { value: 0.95, duration: 120, easing: 'easeOutCirc' },
-        { value: 1, duration: 100, easing: 'easeOutCirc' },
+        { value: [0.4, 1.1], duration: 300, easing: 'easeInQuad' },
+        { value: 1, duration: 600, easing: 'easeOutElastic' },
       ],
       scaleY: [
-        { value: [0.2, 1.3], duration: 200, easing: 'easeInSine' },
-        { value: 0.7, duration: 440, easing: 'easeOutQuad' },
-        { value: 1.2, duration: 100, easing: 'easeOutCirc' },
-        { value: 1, duration: 100, easing: 'easeOutCirc' },
+        { value: [0.4, 2], duration: 300, easing: 'easeOutSine' },
+        { value: 0.6, duration: 200, easing: 'easeOutSine' },
+        { value: 1, duration: 1000, easing: 'easeOutElastic' },
       ],
+      opacity: [{ value: [0, 1], duration: 400, easing: 'linear' }],
       translateZ: 0,
-      delay: anime.stagger(120, { easing: 'easeInCirc' }),
+      delay: anime.stagger(50),
     })
       .add(
         {
@@ -78,7 +75,7 @@ function Logo() {
           ],
           scaleX: [
             { value: 1.4, duration: 100, easing: 'easeOutCirc' },
-            { value: 1, duration: 300, easing: 'easeOutCirc' },
+            { value: 1, duration: 120, easing: 'easeOutCirc' },
           ],
           delay: anime.stagger(200),
         },
@@ -90,25 +87,25 @@ function Logo() {
           opacity: [0, 1],
           transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
           translateY: [
-            { value: [-250, 0], duration: 120, easing: 'easeInCubic' },
+            { value: [-250, 0], duration: 100, easing: 'easeInCubic' },
           ],
           scaleX: [
-            { value: [0, 0.8], duration: 120, easing: 'easeInQuad' },
-            { value: 2, duration: 150, easing: 'easeOutQuad' },
+            { value: [0, 0.8], duration: 100, easing: 'easeInQuad' },
+            { value: 2, duration: 120, easing: 'easeOutQuad' },
             { value: 1, duration: 120, easing: 'easeInQuad' },
             { value: 0.9, duration: 120, easing: 'easeOutQuad' },
             { value: 1, duration: 700, easing: 'easeOutElastic' },
           ],
           scaleY: [
-            { value: 3, duration: 120, easing: 'easeInQuad' },
-            { value: 0.4, duration: 150, easing: 'easeOutQuad' },
+            { value: 3, duration: 100, easing: 'easeInQuad' },
+            { value: 0.4, duration: 120, easing: 'easeOutQuad' },
             { value: 1, duration: 120, easing: 'easeInCirc' },
             { value: 1.2, duration: 120, easing: 'easeOutCirc' },
-            { value: 1, duration: 700, easing: 'easeOutElastic' },
+            { value: 1, duration: 500, easing: 'easeOutElastic' },
           ],
           translateZ: 0,
         },
-        '-=600',
+        '-=700',
       )
       .add(
         {
@@ -124,7 +121,7 @@ function Logo() {
           ],
           scaleX: [
             { value: 0.8, duration: 360, easing: 'easeOutQuad' },
-            { value: 1.4, duration: 80, easing: 'easeOutQuad' },
+            { value: 1.4, duration: 100, easing: 'easeOutQuad' },
             { value: 1, duration: 80, easing: 'easeOutQuad' },
           ],
           scaleY: [
@@ -133,9 +130,9 @@ function Logo() {
             { value: 1, duration: 600, easing: 'easeOutElastic(1, .45)' },
           ],
           translateZ: 0,
-          delay: anime.stagger(30),
+          delay: anime.stagger(20),
         },
-        '-=930',
+        '-=900',
       )
       .add(
         {
@@ -144,21 +141,21 @@ function Logo() {
           translateY: [
             { value: -80, duration: 270, easing: 'easeOutQuint' },
             { value: 15, duration: 100, easing: 'easeInQuad' },
-            { value: -30, duration: 300, easing: 'easeOutQuad' },
+            { value: -30, duration: 225, easing: 'easeOutQuad' },
             { value: 12, duration: 140, easing: 'easeInQuad' },
             { value: -6, duration: 1200, easing: 'easeOutElastic(1, 0.3)' },
           ],
           scaleX: [
             { value: 0.8, duration: 240, easing: 'easeOutQuad' },
             { value: 1.4, duration: 220, easing: 'easeInQuint' },
-            { value: 0.8, duration: 300, easing: 'easeOutQuad' },
+            { value: 0.8, duration: 225, easing: 'easeOutQuad' },
             { value: 1.7, duration: 140, easing: 'easeOutQuad' },
             { value: 1, duration: 80, easing: 'easeInQuad' },
           ],
           scaleY: [
             { value: 4, duration: 240, easing: 'easeOutQuad' },
             { value: 0.8, duration: 220, easing: 'easeInQuint' },
-            { value: 3, duration: 300, easing: 'easeOutQuint' },
+            { value: 3, duration: 225, easing: 'easeOutQuint' },
             { value: 0.5, duration: 140, easing: 'easeOutQuad' },
             { value: 1, duration: 1200, easing: 'easeOutElastic' },
           ],
@@ -171,7 +168,7 @@ function Logo() {
           targets: '.letter-i',
           transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
           scaleY: [
-            { value: 0.6, duration: 120, easing: 'easeOutQuad' },
+            { value: 0.3, duration: 120, easing: 'easeOutQuad' },
             { value: 1, duration: 900, easing: 'easeOutElastic(1, 0.3)' },
           ],
           scaleX: [
@@ -221,7 +218,7 @@ function Logo() {
             </svg>
           </span>
           <span className="relative">
-            <div className="dot absolute -top-[5.34px] left-0 right-0 mx-auto h-[4.5px] w-[5px] rounded-[2px] bg-lime-400" />
+            <div className="dot absolute -top-[7px] left-0 right-0 mx-auto h-[4.5px] w-[5px] rounded-[2px] bg-lime-400" />
             <svg
               data-animation="letter"
               className="letter-i"
@@ -295,7 +292,7 @@ function Logo() {
             </svg>
           </span>
           <span className="relative">
-            <div className="dot absolute -top-[5.34px] left-0 right-0 mx-auto h-[4.5px] w-[5px] rounded-[2px] bg-lime-400" />
+            <div className="dot absolute -top-[7px] left-0 right-0 mx-auto h-[4.5px] w-[5px] rounded-[2px] bg-lime-400" />
             <svg
               data-animation="letter"
               className="letter-i"
