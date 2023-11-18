@@ -108,7 +108,7 @@ function Logo() {
           ],
           translateZ: 0,
         },
-        '-=500',
+        '-=600',
       )
       .add(
         {
