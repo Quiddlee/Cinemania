@@ -2,6 +2,7 @@ import { IInitialState } from '../../../features/Search/types/types.ts';
 import rootApi from '../../../shared/api/rootApi.ts';
 import { QUERY_FALLBACK } from '../../../shared/const/const.ts';
 import {
+  ApiErrorResponse,
   ApiMovieListResponse,
   ApiMovieResponse,
 } from '../../../shared/types/types.ts';
@@ -21,7 +22,7 @@ export const movieApi = rootApi.injectEndpoints({
         }&page=${page}`,
     }),
 
-    getMovie: build.query<ApiMovieResponse, string>({
+    getMovie: build.query<ApiErrorResponse | ApiMovieResponse, string>({
       query: (id) => `?apikey=${import.meta.env.VITE_API_KEY}&i=${id}`,
     }),
   }),
