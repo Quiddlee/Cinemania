@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 
 import useAnime from '../../../shared/hooks/useAnime.ts';
+import useGetMovieList from '../../../shared/hooks/useGetMovieList.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
 import { urlParams } from '../../../shared/types/enums.ts';
-import useSearch from '../../Search/hooks/useSearch.ts';
 
 function PageNum() {
   const { readUrl } = useUrl();
-  const { totalResults } = useSearch();
+  const { totalResults } = useGetMovieList();
   const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
   const prevMaxPage = useRef(0);
 
