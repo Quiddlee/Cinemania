@@ -26,7 +26,7 @@ function renderWithRouterProvider(
 ) {
   setupListeners(store.dispatch);
 
-  const routes = ui ? [{ path: '/', ui }] : ROUTES;
+  const routes = ui ? [{ path: '/', element: ui }] : ROUTES;
 
   const router = createMemoryRouter(routes, {
     initialEntries,
