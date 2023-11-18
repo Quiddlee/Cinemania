@@ -120,7 +120,7 @@ function Logo() {
               duration: 170,
               easing: 'cubicBezier(0.225, 1, 0.915, 0.980)',
             },
-            { value: 0, duration: 160, easing: 'easeInQuad' },
+            { value: -6, duration: 160, easing: 'easeInQuad' },
           ],
           scaleX: [
             { value: 0.8, duration: 360, easing: 'easeOutQuad' },
@@ -146,7 +146,7 @@ function Logo() {
             { value: 15, duration: 100, easing: 'easeInQuad' },
             { value: -30, duration: 300, easing: 'easeOutQuad' },
             { value: 12, duration: 140, easing: 'easeInQuad' },
-            { value: 0, duration: 1200, easing: 'easeOutElastic(1, 0.3)' },
+            { value: -6, duration: 1200, easing: 'easeOutElastic(1, 0.3)' },
           ],
           scaleX: [
             { value: 0.8, duration: 240, easing: 'easeOutQuad' },
