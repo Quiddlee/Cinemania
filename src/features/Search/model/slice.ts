@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { LOCAL_STORAGE_SEARCH_QUERY } from '../../../shared/const/const.ts';
+
 interface IInitialState {
   query: string;
 }
 
 const initialState: IInitialState = {
-  query: '',
+  query: localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY) ?? '',
 };
 
 export const searchSlice = createSlice({
