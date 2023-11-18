@@ -9,14 +9,15 @@ import {
 interface IMovieListParams {
   query: IInitialState['query'];
   page: string;
+  moviesPerPage: number;
 }
 
 export const movieApi = rootApi.injectEndpoints({
   endpoints: (build) => ({
     getMovieList: build.query<ApiMovieListResponse, IMovieListParams>({
-      query: ({ query, page }) =>
+      query: ({ query, page, moviesPerPage }) =>
         `?apikey=${import.meta.env.VITE_API_KEY}&s=${
-          query || QUERY_FALLBACK
+          query || QUERY_FALLBACK || moviesPerPage
         }&page=${page}`,
     }),
 
