@@ -25,12 +25,6 @@ function MovieListHeader({ children, scroll }: IMovieListHeader) {
       if (newMoviesPerPage === moviesPerPage) return;
 
       dispatch(moviesPerPageUpdated(newMoviesPerPage));
-
-      // TODO - change dispatch to url state
-      // setUrl({
-      //   'movies-per-page': newMoviesPerPage,
-      //   page: DEFAULT_PAGE,
-      // });
     },
     [dispatch, moviesPerPage],
   );
