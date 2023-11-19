@@ -1,6 +1,10 @@
 import { delay, http, HttpResponse } from 'msw';
 
-import { mockMovieDetails, mockMovieDetailsNoPoster } from './data.ts';
+import {
+  mockMovieDetails,
+  mockMovieDetailsNoPoster,
+  mockMovies,
+} from './data.ts';
 import { NO_POSTER_QUERY_TEST_CASE } from '../const/const.ts';
 
 const handlers = [
@@ -10,15 +14,19 @@ const handlers = [
     const url = new URL(request.url);
     const movieId = url.searchParams.get('i');
 
-    if (!movieId) {
-      return new HttpResponse(null, { status: 404 });
-    }
-
     if (movieId === NO_POSTER_QUERY_TEST_CASE) {
       return HttpResponse.json(mockMovieDetailsNoPoster);
     }
 
-    return HttpResponse.json(mockMovieDetails);
+    if (movieId) {
+      return HttpResponse.json(mockMovieDetails);
+    }
+
+    if (!movieId) {
+      return HttpResponse.json(mockMovies);
+    }
+
+    return new HttpResponse(null, { status: 404 });
   }),
 ];
 
