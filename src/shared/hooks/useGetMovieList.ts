@@ -29,9 +29,10 @@ function useGetMovieList() {
     moviesPerPage,
   });
 
-  const movies = data?.Search;
+  const movieList = data?.Search?.slice(0, moviesPerPage) as
+    | MovieList
+    | undefined;
   const totalResults = Number.parseInt(data?.totalResults ?? '0', 10);
-  const movieList = movies?.slice(0, moviesPerPage) as MovieList | undefined;
 
   useEffect(() => {
     dispatch(dataFetchedDetailsPage(isFetching || isLoading));
