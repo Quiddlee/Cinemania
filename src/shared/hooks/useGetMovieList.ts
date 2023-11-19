@@ -8,6 +8,7 @@ import { useGetMovieListQuery } from '../../entities/movie/api/movieApi.ts';
 import selectMoviesPerPage from '../lib/selectors/selectMoviesPerPage.ts';
 import selectSearchQuery from '../lib/selectors/selectSearchQuery.ts';
 import { urlParams } from '../types/enums.ts';
+import { MovieList } from '../types/types.ts';
 
 /**
  * Retrieves a list of movies using the `useGetMovieListQuery` hook.
@@ -22,18 +23,19 @@ function useGetMovieList() {
   const dispatch = useAppDispatch();
   const page = readUrl(urlParams.PAGE);
 
-  const { data, isFetching } = useGetMovieListQuery({
+  const { data, isLoading, isFetching } = useGetMovieListQuery({
     page,
     query,
     moviesPerPage,
   });
 
-  const movieList = data?.Search;
+  const movies = data?.Search;
   const totalResults = Number.parseInt(data?.totalResults ?? '0', 10);
+  const movieList = movies?.slice(0, moviesPerPage) as MovieList | undefined;
 
   useEffect(() => {
-    dispatch(dataFetchedDetailsPage(isFetching));
-  }, [dispatch, isFetching]);
+    dispatch(dataFetchedDetailsPage(isFetching || isLoading));
+  }, [dispatch, isFetching, isLoading]);
 
   return { movieList, totalResults };
 }

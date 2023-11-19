@@ -16,12 +16,12 @@ function useGetMovie() {
   const { pathname } = useLocation();
 
   const id = pathname.slice(1);
-  const { data: movie, isFetching } = useGetMovieQuery(id);
+  const { data: movie, isLoading, isFetching } = useGetMovieQuery(id);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(dataFetchedDetailsPage(isFetching));
-  }, [dispatch, isFetching]);
+    dispatch(dataFetchedDetailsPage(isFetching || isLoading));
+  }, [dispatch, isFetching, isLoading]);
 
   if (movie && 'Error' in movie) throw new Error(movie.Error);
 
