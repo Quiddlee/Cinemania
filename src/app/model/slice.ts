@@ -8,7 +8,7 @@ interface IInitialState {
   moviesPerPage: number;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   isFetchingMainPage: false,
   isFetchingDetailsPage: false,
   moviesPerPage: MOVIES_PER_PAGE,

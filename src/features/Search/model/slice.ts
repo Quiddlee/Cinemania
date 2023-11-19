@@ -6,7 +6,7 @@ interface IInitialState {
   query: string;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   query: localStorage.getItem(LOCAL_STORAGE_SEARCH_QUERY) ?? '',
 };
 
