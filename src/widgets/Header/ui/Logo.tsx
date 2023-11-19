@@ -43,14 +43,14 @@ function Logo() {
           transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
           translateY: [
             { value: -40, duration: 600, easing: 'easeOutCubic' },
-            { value: 0, duration: 1000, easing: 'easeOutElastic(1, .3)' },
+            { value: 0, duration: 1100, easing: 'easeOutElastic(1, .3)' },
           ],
           scaleY: [
             { value: 5, duration: 300, easing: 'easeOutCubic' },
             { value: 1, duration: 300, easing: 'easeInCubic' },
             { value: 3, duration: 100, easing: 'easeOutCirc' },
             { value: 0.6, duration: 100, easing: 'easeOutCirc' },
-            { value: 1, duration: 1000, easing: 'easeOutElastic' },
+            { value: 1, duration: 1200, easing: 'easeOutElastic' },
           ],
           scaleX: [
             { value: 0.5, duration: 300, easing: 'easeOutCirc' },
@@ -61,25 +61,39 @@ function Logo() {
           ],
           opacity: [{ value: [0, 1], duration: 600, easing: 'linear' }],
           easing: 'easeInCirc',
-          delay: anime.stagger(200),
+          delay: anime.stagger(250),
         },
-        555,
+        '-=1980',
       )
       .add(
         {
-          targets: '.letter-i',
+          targets: ['[data-animation-2="letter-i"]'],
           transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
           scaleY: [
             { value: 0.4, duration: 120, easing: 'easeOutCirc' },
-            { value: 1, duration: 120, easing: 'easeOutCirc' },
+            { value: 1, duration: 1000, easing: 'easeOutElastic(1, .3)' },
           ],
           scaleX: [
             { value: 1.4, duration: 100, easing: 'easeOutCirc' },
-            { value: 1, duration: 120, easing: 'easeOutCirc' },
+            { value: 1, duration: 1000, easing: 'easeOutElastic(1, .3)' },
           ],
-          delay: anime.stagger(200),
         },
-        '-=1470',
+        '-=1600',
+      )
+      .add(
+        {
+          targets: '[data-animation-3="letter-i"]',
+          transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
+          scaleY: [
+            { value: 0.4, duration: 120, easing: 'easeOutCirc' },
+            { value: 1, duration: 1000, easing: 'easeOutElastic(1, .3)' },
+          ],
+          scaleX: [
+            { value: 1.4, duration: 100, easing: 'easeOutCirc' },
+            { value: 1, duration: 1000, easing: 'easeOutElastic(1, .3)' },
+          ],
+        },
+        '-=1350',
       )
       .add(
         {
@@ -105,7 +119,7 @@ function Logo() {
           ],
           translateZ: 0,
         },
-        '-=700',
+        '-=1000',
       )
       .add(
         {
@@ -141,8 +155,8 @@ function Logo() {
           translateY: [
             { value: -80, duration: 270, easing: 'easeOutQuint' },
             { value: 15, duration: 100, easing: 'easeInQuad' },
-            { value: -30, duration: 225, easing: 'easeOutQuad' },
-            { value: 12, duration: 140, easing: 'easeInQuad' },
+            { value: -40, duration: 225, easing: 'easeOutQuad' },
+            { value: 7, duration: 140, easing: 'easeInQuad' },
             { value: -6, duration: 1200, easing: 'easeOutElastic(1, 0.3)' },
           ],
           scaleX: [
@@ -159,13 +173,13 @@ function Logo() {
             { value: 0.5, duration: 140, easing: 'easeOutQuad' },
             { value: 1, duration: 1200, easing: 'easeOutElastic' },
           ],
-          delay: anime.stagger(200),
+          delay: anime.stagger(150),
         },
         '-=1250',
       )
       .add(
         {
-          targets: '.letter-i',
+          targets: ['[data-animation-2="letter-i"]'],
           transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
           scaleY: [
             { value: 0.3, duration: 120, easing: 'easeOutQuad' },
@@ -175,9 +189,23 @@ function Logo() {
             { value: 1.4, duration: 120, easing: 'easeOutQuad' },
             { value: 1, duration: 200, easing: 'easeOutQuad' },
           ],
-          delay: anime.stagger(200),
         },
         '-=1500',
+      )
+      .add(
+        {
+          targets: '[data-animation-3="letter-i"]',
+          transformOrigin: ['50% 100% 0px', '50% 100% 0px'],
+          scaleY: [
+            { value: 0.3, duration: 120, easing: 'easeOutQuad' },
+            { value: 1, duration: 900, easing: 'easeOutElastic(1, 0.3)' },
+          ],
+          scaleX: [
+            { value: 1.4, duration: 120, easing: 'easeOutQuad' },
+            { value: 1, duration: 200, easing: 'easeOutQuad' },
+          ],
+        },
+        '-=1350',
       );
   }, []);
 
@@ -221,7 +249,7 @@ function Logo() {
             <div className="dot absolute -top-[7px] left-0 right-0 mx-auto h-[4.5px] w-[5px] rounded-[2px] bg-lime-400" />
             <svg
               data-animation="letter"
-              className="letter-i"
+              data-animation-2="letter-i"
               width="5"
               height="20"
               viewBox="0 0 5 20">
@@ -295,7 +323,7 @@ function Logo() {
             <div className="dot absolute -top-[7px] left-0 right-0 mx-auto h-[4.5px] w-[5px] rounded-[2px] bg-lime-400" />
             <svg
               data-animation="letter"
-              className="letter-i"
+              data-animation-3="letter-i"
               width="5"
               height="20"
               viewBox="0 0 5 20">
