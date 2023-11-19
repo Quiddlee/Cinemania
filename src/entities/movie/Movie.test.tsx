@@ -2,16 +2,15 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import * as apiMovie from './api/apiMovie.ts';
+import * as movieApi from './api/movieApi.ts';
 import Movie from './ui/Movie.tsx';
-import * as useSearch from '../../features/Search/hooks/useSearch.ts';
-import createMockSearchContext from '../../test/helpers/createMockSearchContext.ts';
+import * as useGetMovieList from '../../shared/hooks/useGetMovieList.ts';
 import renderWithRouter from '../../test/helpers/RenderWithRouter.tsx';
-import { mockMovieItem } from '../../test/mocks/data.ts';
+import renderWithRouterProvider from '../../test/helpers/renderWithRouterProvider.tsx';
+import { mockMovieItem, mockMovies } from '../../test/mocks/data.ts';
 
-const mockMovie = mockMovieItem;
-const mockedUseSearch = vi.spyOn(useSearch, 'default');
-const mockedApiMovie = vi.spyOn(apiMovie, 'getMovie');
+const mockedUseGetMovieList = vi.spyOn(useGetMovieList, 'default');
+const mockedUseGetMovieQuery = vi.spyOn(movieApi, 'useGetMovieQuery');
 
 describe('Movie', () => {
   afterEach(() => {
@@ -23,7 +22,7 @@ describe('Movie', () => {
       <Movie
         onMouseMove={vi.fn()}
         onMouseOut={vi.fn()}
-        data={mockMovie}
+        data={mockMovieItem}
         delay={0}
       />,
     );
@@ -36,15 +35,18 @@ describe('Movie', () => {
     expect(title).toBeInTheDocument();
     expect(year).toBeInTheDocument();
 
-    expect(poster).toHaveAttribute('src', mockMovie.Poster);
-    expect(title).toHaveTextContent(mockMovie.Title);
-    expect(year).toHaveTextContent(mockMovie.Year);
+    expect(poster).toHaveAttribute('src', mockMovieItem.Poster);
+    expect(title).toHaveTextContent(mockMovieItem.Title);
+    expect(year).toHaveTextContent(mockMovieItem.Year);
   });
 
   it('should open a detailed card component when clicking on a card', async () => {
-    mockedUseSearch.mockReturnValue(createMockSearchContext());
+    mockedUseGetMovieList.mockReturnValue({
+      movieList: mockMovies,
+      totalResults: mockMovies.length,
+    });
 
-    renderWithRouter();
+    renderWithRouterProvider();
 
     expect(screen.queryByTestId('details-section')).toBeNull();
 
@@ -56,13 +58,11 @@ describe('Movie', () => {
   });
 
   it('should triggers an additional API call to fetch detailed information when clicking on the card', async () => {
-    mockedUseSearch.mockReturnValue(createMockSearchContext());
-
-    renderWithRouter();
+    renderWithRouterProvider();
 
     const [movie] = screen.getAllByTestId('movie-item');
     await userEvent.click(movie);
 
-    expect(mockedApiMovie).toBeCalledTimes(1);
+    expect(mockedUseGetMovieQuery).toHaveBeenCalled();
   });
 });

@@ -10,9 +10,9 @@ interface ILoaderProps {
 }
 
 function Loader({ scroll }: ILoaderProps) {
-  const isLoading = useLoader(scroll);
+  const isFetching = useLoader(scroll);
 
-  if (!isLoading) return null;
+  if (!isFetching) return null;
 
   return createPortal(
     <div

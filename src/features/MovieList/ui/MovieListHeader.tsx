@@ -2,10 +2,11 @@ import { PropsWithChildren, RefObject, useCallback } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-import { DEFAULT_PAGE } from '../../../shared/const/const.ts';
+import { moviesPerPageUpdated } from '../../../app/model/slice.ts';
+import useAppDispatch from '../../../shared/hooks/useAppDispatch.ts';
+import useAppSelector from '../../../shared/hooks/useAppSelector.ts';
 import useScrollTop from '../../../shared/hooks/useScrollTop.ts';
-import useUrl from '../../../shared/hooks/useUrl.ts';
-import { urlParams } from '../../../shared/types/enums.ts';
+import selectMoviesPerPage from '../../../shared/lib/selectors/selectMoviesPerPage.ts';
 import { ItemsPerPage } from '../../../shared/types/types.ts';
 import Tabs from '../../../shared/ui/Tabs.tsx';
 
@@ -14,22 +15,18 @@ interface IMovieListHeader extends PropsWithChildren {
 }
 
 function MovieListHeader({ children, scroll }: IMovieListHeader) {
-  const { setUrl, readUrl } = useUrl();
-
-  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
+  const dispatch = useAppDispatch();
+  const moviesPerPage = useAppSelector(selectMoviesPerPage);
 
   useScrollTop(moviesPerPage, scroll);
 
   const handleMoviesPerPage = useCallback(
-    (value: number) => {
-      if (value === moviesPerPage) return;
+    (newMoviesPerPage: number) => {
+      if (newMoviesPerPage === moviesPerPage) return;
 
-      setUrl({
-        'movies-per-page': String(value),
-        page: String(DEFAULT_PAGE),
-      });
+      dispatch(moviesPerPageUpdated(newMoviesPerPage));
     },
-    [moviesPerPage, setUrl],
+    [dispatch, moviesPerPage],
   );
 
   return (

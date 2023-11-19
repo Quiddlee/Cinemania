@@ -5,14 +5,12 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useState,
 } from 'react';
 
 import Button from './Button.tsx';
-import useAnime from '../hooks/useAnime.tsx';
-import { itemsPerPage } from '../types/enums.ts';
+import useAnime from '../hooks/useAnime.ts';
+import useTabs from '../hooks/useTabs.ts';
 
 interface IOptionProps<TVal> {
   children: string;
@@ -37,7 +35,10 @@ function Tabs<TVal extends string | number>({
   handler,
   activeValue,
 }: ISelectProps<TVal>) {
-  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+  const { position, containerRef, tabSliderWidth } = useTabs(
+    Number(activeValue),
+    (children as ReactNode[])?.length || 1,
+  );
 
   const handleSetValue = useCallback(
     (e: MouseEvent) => {
@@ -53,48 +54,33 @@ function Tabs<TVal extends string | number>({
     [handleSetValue, activeValue],
   );
 
-  const containerPadding = 4;
-  const containerWidth = containerRef?.offsetWidth ?? 0;
-  const numOfTabs = (children as ReactNode[])?.length || 1;
-  const tabSliderWidth = containerWidth / numOfTabs - containerPadding;
-
-  const start = containerPadding;
-  const middle = containerWidth / 2 - tabSliderWidth / 2;
-  const end = containerWidth - tabSliderWidth - containerPadding;
-
-  let position = start;
-
-  if (activeValue === itemsPerPage.FIVE) position = middle;
-  if (activeValue === itemsPerPage.TEN) position = end;
-
-  const animateContainerRef = useAnime<HTMLDivElement>({
+  useAnime({
+    targets: containerRef,
     scale: [0, 1],
     opacity: [0, 1],
     easing: 'easeInOutElastic(1, .34)',
+    translateZ: 0,
     duration: 1600,
   });
 
-  const tabSliderRef = useAnime<HTMLSpanElement>(
+  const { elementRef: tabSliderRef } = useAnime<HTMLSpanElement>(
     {
       translateX: position,
+      translateZ: 0,
       scaleX: [1.4, 1],
       easing: 'spring(.2, 80, 4, 0)',
     },
     [position],
   );
 
-  useEffect(() => {
-    setContainerRef(animateContainerRef.current);
-  }, [animateContainerRef]);
-
   return (
     <div
       data-animate="tabs"
-      ref={animateContainerRef}
+      ref={containerRef}
       style={{
-        viewTransitionName: `tab-${activeValue}`,
+        viewTransitionName: 'tabs',
       }}
-      className="relative w-fit rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
+      className="relative w-fit overflow-hidden rounded-full border-l border-t border-white/20 bg-white/10 p-1 text-zinc-100 shadow-2xl backdrop-blur-md backdrop-saturate-200">
       <SelectContext.Provider value={contextValue}>
         <span
           ref={tabSliderRef}

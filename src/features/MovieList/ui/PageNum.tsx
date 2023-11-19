@@ -1,27 +1,29 @@
 import { useEffect, useRef } from 'react';
 
-import useAnime from '../../../shared/hooks/useAnime.tsx';
+import useAnime from '../../../shared/hooks/useAnime.ts';
+import useAppSelector from '../../../shared/hooks/useAppSelector.ts';
+import useGetMovieList from '../../../shared/hooks/useGetMovieList.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
+import selectMoviesPerPage from '../../../shared/lib/selectors/selectMoviesPerPage.ts';
 import { urlParams } from '../../../shared/types/enums.ts';
-import useSearch from '../../Search/hooks/useSearch.ts';
 
 function PageNum() {
   const { readUrl } = useUrl();
-  const { totalResults } = useSearch();
-  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
-  const prevCurrPage = useRef(0);
+  const { totalResults } = useGetMovieList();
+  const moviesPerPage = useAppSelector(selectMoviesPerPage);
   const prevMaxPage = useRef(0);
 
   const currPage = Number(readUrl(urlParams.PAGE));
   const maxPage = Math.ceil(totalResults / moviesPerPage);
 
-  const currPageRef = useAnime({
-    textContent: [prevCurrPage.current, currPage],
+  const { elementRef: currPageRef } = useAnime<HTMLSpanElement>({
+    textContent: [0, currPage],
     round: 1,
     easing: 'easeInOutExpo',
+    delay: 500,
   });
 
-  const maxPageRef = useAnime(
+  const { elementRef: maxPageRef } = useAnime<HTMLSpanElement>(
     {
       textContent: [prevMaxPage.current, maxPage],
       round: 1,
@@ -30,7 +32,7 @@ function PageNum() {
     [maxPage],
   );
 
-  const containerRef = useAnime<HTMLParagraphElement>({
+  const { elementRef: containerRef } = useAnime<HTMLParagraphElement>({
     scale: [0, 1],
     opacity: [0, 1],
     easing: 'easeInOutElastic(1, .34)',
@@ -39,9 +41,8 @@ function PageNum() {
   });
 
   useEffect(() => {
-    prevCurrPage.current = currPage;
     prevMaxPage.current = maxPage;
-  }, [currPage, maxPage]);
+  }, [maxPage]);
 
   return (
     <span

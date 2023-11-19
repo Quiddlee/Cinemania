@@ -1,6 +1,5 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
-import useMovie from './hooks/useMovie.ts';
 import Actors from './ui/Actors.tsx';
 import BackButton from './ui/BackButton.tsx';
 import Description from './ui/Description.tsx';
@@ -10,21 +9,35 @@ import Poster from './ui/Poster.tsx';
 import Rating from './ui/Rating.tsx';
 import Runtime from './ui/Runtime.tsx';
 import Title from './ui/Title.tsx';
+import ReactLogo from '../../assets/reactJS-logo.png';
+import { NOT_EXIST } from '../../shared/const/const.ts';
+import useDocumentTitle from '../../shared/hooks/useDocumentTitle.ts';
+import useGetMovie from '../../shared/hooks/useGetMovie.ts';
+import convertSecsToHrsAndMins from '../../shared/lib/helpers/convertSecsToHrsAndMins.ts';
 import FallbackUi from '../../shared/ui/FallbackUi.tsx';
 
 export function Component() {
+  const movie = useGetMovie();
+  useDocumentTitle(`Cinemania | ${movie?.Title}`);
+
+  if (!movie) return null;
+
   const {
-    description,
+    Poster: poster,
+    Title: title,
+    Runtime: runtime,
+    Genre: genre,
+    Plot: plot,
+    Year: year,
     imdbRating,
     imdbVotes,
-    poster,
-    time,
-    actors,
-    director,
-    genre,
-    title,
-    year,
-  } = useMovie();
+    Director: director,
+    Actors: actors,
+  } = movie;
+
+  const time = convertSecsToHrsAndMins(runtime);
+  const description = `${plot.slice(0, 150)}...`;
+  const safePoster = poster === NOT_EXIST ? ReactLogo : poster;
 
   return (
     <div
@@ -34,7 +47,7 @@ export function Component() {
       data-scroll-target="section"
       className="h-[540px] flex-1 animate-fade-in overflow-hidden rounded-5xl border-l border-t border-white/20 bg-white/10 p-2 text-neutral-200 shadow-2xl backdrop-brightness-150 backdrop-saturate-200">
       <div className="relative flex h-full saturate-200 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-full before:rounded-4xl before:bg-gradient-to-r before:from-zinc-950 before:to-neutral-950/70">
-        <Poster poster={poster} title={title} />
+        <Poster poster={safePoster} title={title} />
         <article className="z-10 grid max-w-md content-start gap-4 px-8 py-8 text-zinc-400">
           <BackButton />
           <Title>{title}</Title>

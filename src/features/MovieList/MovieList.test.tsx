@@ -6,16 +6,17 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 import MovieList from './MovieList.tsx';
 import Movie from '../../entities/movie/ui/Movie.tsx';
-import createMockSearchContext from '../../test/helpers/createMockSearchContext.ts';
-import renderWithRouter from '../../test/helpers/RenderWithRouter.tsx';
-import * as useSearch from '../Search/hooks/useSearch.ts';
+import * as useGetMovieList from '../../shared/hooks/useGetMovieList.ts';
+import renderWithRouterProvider from '../../test/helpers/renderWithRouterProvider.tsx';
+import { mockMovies } from '../../test/mocks/data.ts';
 
-const mockedUseSearch = vi.spyOn(useSearch, 'default');
+const mockedUseGetMovieList = vi.spyOn(useGetMovieList, 'default');
 let scroll: RefObject<LocomotiveScroll>;
 
 describe('MovieList', () => {
   beforeAll(() => {
     scroll = { current: new LocomotiveScroll() };
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
@@ -23,9 +24,12 @@ describe('MovieList', () => {
   });
 
   it('should display an empty list message', () => {
-    mockedUseSearch.mockReturnValue(createMockSearchContext(null));
+    mockedUseGetMovieList.mockReturnValue({
+      movieList: undefined,
+      totalResults: 0,
+    });
 
-    renderWithRouter(
+    renderWithRouterProvider(
       <MovieList
         scroll={scroll}
         render={(movie, i) => (
@@ -46,9 +50,12 @@ describe('MovieList', () => {
   });
 
   it('should renders the specified number of cards', () => {
-    mockedUseSearch.mockReturnValue(createMockSearchContext());
+    mockedUseGetMovieList.mockReturnValue({
+      movieList: mockMovies,
+      totalResults: mockMovies.length,
+    });
 
-    renderWithRouter(
+    renderWithRouterProvider(
       <MovieList
         scroll={scroll}
         render={(movie, i) => (
