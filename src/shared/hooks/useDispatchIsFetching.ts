@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import useAppDispatch from './useAppDispatch.ts';
-import { dataFetched } from '../../app/model/slice.ts';
+import { dataFetchedMainPage } from '../../app/model/slice.ts';
 
 /**
  * Dispatches the `dataFetched` action with the given `isFetching` value.
@@ -12,7 +12,7 @@ import { dataFetched } from '../../app/model/slice.ts';
 function useDispatchIsFetching(isFetching: boolean) {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(dataFetched(isFetching));
+    dispatch(dataFetchedMainPage(isFetching));
   }, [dispatch, isFetching]);
 }
 

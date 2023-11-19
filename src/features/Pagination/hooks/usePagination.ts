@@ -7,14 +7,17 @@ import useAppSelector from '../../../shared/hooks/useAppSelector.ts';
 import useGetMovieList from '../../../shared/hooks/useGetMovieList.ts';
 import useScrollTop from '../../../shared/hooks/useScrollTop.ts';
 import useUrl from '../../../shared/hooks/useUrl.ts';
-import selectIsFetching from '../../../shared/lib/selectors/selectIsFetching.ts';
+import selectIsFetchingDetails from '../../../shared/lib/selectors/selectIsFetchingDetails.ts';
+import selectIsFetchingMain from '../../../shared/lib/selectors/selectIsFetchingMain.ts';
 import { urlParams } from '../../../shared/types/enums.ts';
 
 function usePagination(scroll: RefObject<LocomotiveScroll>) {
   const { setUrl, readUrl } = useUrl();
-  const isFetching = useAppSelector(selectIsFetching);
+  const isFetchingMain = useAppSelector(selectIsFetchingMain);
+  const isFetchingDetails = useAppSelector(selectIsFetchingDetails);
   const { totalResults } = useGetMovieList();
 
+  const isFetching = isFetchingDetails || isFetchingMain;
   const currPage = Number(readUrl(urlParams.PAGE));
   const isPrevDisabled = currPage === DEFAULT_PAGE || isFetching;
   const isNextDisabled = isFetching;

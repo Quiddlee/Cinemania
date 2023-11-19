@@ -3,7 +3,8 @@ import { RefObject, useEffect } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 
 import useAppSelector from '../../../shared/hooks/useAppSelector.ts';
-import selectIsFetching from '../../../shared/lib/selectors/selectIsFetching.ts';
+import selectIsFetchingDetails from '../../../shared/lib/selectors/selectIsFetchingDetails.ts';
+import selectIsFetchingMain from '../../../shared/lib/selectors/selectIsFetchingMain.ts';
 
 /**
  * A custom hook that checks if the loader or the search is currently loading.
@@ -12,7 +13,10 @@ import selectIsFetching from '../../../shared/lib/selectors/selectIsFetching.ts'
  * @return {boolean} isLoading - A boolean indicating if the loader is loading.
  */
 function useLoader(scrollRef: RefObject<LocomotiveScroll>) {
-  const isFetching = useAppSelector(selectIsFetching);
+  const isFetchingMain = useAppSelector(selectIsFetchingMain);
+  const isFetchingDetails = useAppSelector(selectIsFetchingDetails);
+
+  const isFetching = isFetchingDetails || isFetchingMain;
 
   useEffect(() => {
     const scroll = scrollRef.current;

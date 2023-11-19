@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
 
-import useDispatchIsFetching from './useDispatchIsFetching.ts';
+import useAppDispatch from './useAppDispatch.ts';
+import { dataFetchedDetailsPage } from '../../app/model/slice.ts';
 import { useGetMovieQuery } from '../../entities/movie/api/movieApi.ts';
 
 /**
@@ -14,8 +17,11 @@ function useGetMovie() {
 
   const id = pathname.slice(1);
   const { data: movie, isFetching } = useGetMovieQuery(id);
+  const dispatch = useAppDispatch();
 
-  useDispatchIsFetching(isFetching);
+  useEffect(() => {
+    dispatch(dataFetchedDetailsPage(isFetching));
+  }, [dispatch, isFetching]);
 
   if (movie && 'Error' in movie) throw new Error(movie.Error);
 
