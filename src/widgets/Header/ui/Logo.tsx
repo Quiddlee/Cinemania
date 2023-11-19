@@ -47,7 +47,7 @@ function Logo() {
           ],
           scaleY: [
             { value: 5, duration: 300, easing: 'easeOutCubic' },
-            { value: 0.8, duration: 300, easing: 'easeInCubic' },
+            { value: 1, duration: 300, easing: 'easeInCubic' },
             { value: 3, duration: 100, easing: 'easeOutCirc' },
             { value: 0.6, duration: 100, easing: 'easeOutCirc' },
             { value: 1, duration: 1000, easing: 'easeOutElastic' },
@@ -63,7 +63,7 @@ function Logo() {
           easing: 'easeInCirc',
           delay: anime.stagger(200),
         },
-        600,
+        555,
       )
       .add(
         {
