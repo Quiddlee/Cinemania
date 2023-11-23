@@ -9,6 +9,7 @@ import MovieListHeader from '@features/MovieList/ui/MovieListHeader';
 import PageNum from '@features/MovieList/ui/PageNum';
 import Pagination from '@features/Pagination/Pagination';
 import Search from '@features/Search/Search';
+import { APP_TITLE } from '@shared/const/const';
 import useScroll from '@shared/hooks/useScroll';
 import useTooltip from '@shared/hooks/useTooltip';
 import Tooltip from '@shared/ui/Tooltip';
@@ -32,7 +33,7 @@ function AppLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Head>
-        <title>Cinemania | Dive Into Movie Wonderland</title>
+        <title>{APP_TITLE}</title>
         <link rel="icon" href="./pop-corn.svg" />
       </Head>
       <main className={poppins.className}>
