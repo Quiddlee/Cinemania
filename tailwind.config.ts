@@ -1,6 +1,15 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './entities/**/*.{js,ts,jsx,tsx,mdx}',
+    './features/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages-layer/**/*.{js,ts,jsx,tsx,mdx}',
+    './shared/**/*.{js,ts,jsx,tsx,mdx}',
+    './widgets/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   theme: {
     extend: {
       transitionTimingFunction: {
@@ -16,10 +25,10 @@ export default {
       keyframes: {
         'fade-in': {
           '0%': {
-            opacity: 0,
+            opacity: '0',
           },
           '100%': {
-            opacity: 1,
+            opacity: '1',
           },
         },
         'movie-fade-in': {
@@ -33,17 +42,17 @@ export default {
         'pagination-fade-in': {
           '0%': {
             scale: '0.3',
-            opacity: 0,
+            opacity: '0',
           },
           '100%': {
             scale: '1',
-            opacity: 1,
+            opacity: '1',
           },
         },
         float: {
           '0%': {
             translate3d: '0',
-            rotate: 0,
+            rotate: '0',
           },
           '20%': {
             transform: 'translate3d(-50px, 15px, 0)',
@@ -56,13 +65,13 @@ export default {
           },
           '60%': {
             rotate: '10deg',
-            scale: 1.2,
+            scale: '1.2',
             transform: 'translate3d(30px, 20px, 0)',
           },
           '100%': {
             translate3d: '0',
-            rotate: 0,
-            scale: 1,
+            rotate: '0',
+            scale: '1',
           },
         },
       },
@@ -84,3 +93,4 @@ export default {
   },
   plugins: [],
 };
+export default config;
