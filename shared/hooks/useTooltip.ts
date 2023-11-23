@@ -1,8 +1,8 @@
-import { RefObject, useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
+import useScroll from '@entities/scroll/hooks/useScroll';
 import useAnime from '@shared/hooks/useAnime';
 import getElementMouseCoord from '@shared/lib/helpers/getElementMouseCoord';
-import LocomotiveScroll from 'locomotive-scroll';
 
 const ELEMENT_POSITION_OFFSET = 120;
 
@@ -10,14 +10,14 @@ const ELEMENT_POSITION_OFFSET = 120;
  * Floating tooltip bubble following the mouse.
  * The tooltip is displayed when the element is hovered and follows the mouse movement.
  *
- * @param {RefObject<LocomotiveScroll>} scroll - The reference to the LocomotiveScroll instance. Used to hide the tooltip on scroll
  * @return {Object} obj - An object containing the tooltip reference, hideTooltip function, and showTooltip function.
  * @return {HTMLDivElement} obj.tooltipRef - The ref with the tooltip element.
  * @return {() => void} obj.hideTooltip - Function that is used to hide the tooltip. For example on mouseLeave event.
  * @return {() => void} obj.showTooltip - Function that is used to show the tooltip. For example on mouseEnter event.
  */
-function useTooltip(scroll: RefObject<LocomotiveScroll>) {
+function useTooltip() {
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const { scroll } = useScroll();
 
   const { animation: showTooltipAnimation } = useAnime({
     targets: tooltipRef,
@@ -57,7 +57,7 @@ function useTooltip(scroll: RefObject<LocomotiveScroll>) {
   }, [hideTooltipAnimation]);
 
   useEffect(() => {
-    scroll.current?.on?.('scroll', () => {
+    scroll?.on?.('scroll', () => {
       const isVisible =
         tooltipRef.current &&
         getComputedStyle(tooltipRef.current).opacity === '1';

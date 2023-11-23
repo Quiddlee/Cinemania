@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { DependencyList, RefObject, useEffect, useRef } from 'react';
+import { DependencyList, useEffect, useRef } from 'react';
 
-import LocomotiveScroll from 'locomotive-scroll';
+import useScroll from '@entities/scroll/hooks/useScroll';
 
 import { SCROLL_TOP_DURATION } from '../const/const';
 
@@ -9,21 +9,17 @@ import { SCROLL_TOP_DURATION } from '../const/const';
  * Update scroll position to top when `currValue` changes.
  *
  * @param {unknown} currValue - The current value.
- * @param {RefObject<LocomotiveScroll> | undefined} scroll - The scroll reference.
  * @param {...DependencyList} deps - Additional dependencies.
  * @return {void}
  */
-function useScrollTop(
-  currValue: unknown,
-  scroll: RefObject<LocomotiveScroll> | undefined,
-  ...deps: DependencyList
-) {
+function useScrollTop(currValue: unknown, ...deps: DependencyList) {
+  const { scroll } = useScroll();
   const prevValueRef = useRef(currValue);
 
   useEffect(() => {
     if (prevValueRef.current !== currValue) {
       prevValueRef.current = currValue;
-      scroll?.current?.scrollTo?.('top', { duration: SCROLL_TOP_DURATION });
+      scroll?.scrollTo?.('top', { duration: SCROLL_TOP_DURATION });
     }
   }, [currValue, scroll, ...deps]);
 }

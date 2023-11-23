@@ -1,4 +1,4 @@
-import { PropsWithChildren, RefObject, useCallback } from 'react';
+import { PropsWithChildren, useCallback } from 'react';
 
 import { ItemsPerPage } from '@customTypes/types';
 import useAppDispatch from '@shared/hooks/useAppDispatch';
@@ -6,19 +6,14 @@ import useAppSelector from '@shared/hooks/useAppSelector';
 import useScrollTop from '@shared/hooks/useScrollTop';
 import selectMoviesPerPage from '@shared/lib/selectors/selectMoviesPerPage';
 import Tabs from '@shared/ui/Tabs';
-import LocomotiveScroll from 'locomotive-scroll';
 
 import { moviesPerPageUpdated } from '../../../app/model/slice';
 
-interface IMovieListHeader extends PropsWithChildren {
-  scroll: RefObject<LocomotiveScroll>;
-}
-
-function MovieListHeader({ children, scroll }: IMovieListHeader) {
+function MovieListHeader({ children }: PropsWithChildren) {
   const dispatch = useAppDispatch();
   const moviesPerPage = useAppSelector(selectMoviesPerPage);
 
-  useScrollTop(moviesPerPage, scroll);
+  useScrollTop(moviesPerPage);
 
   const handleMoviesPerPage = useCallback(
     (newMoviesPerPage: number) => {

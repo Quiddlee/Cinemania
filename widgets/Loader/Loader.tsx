@@ -1,17 +1,10 @@
 'use client';
 
-import { RefObject } from 'react';
-
 import useLoader from '@widgets/Loader/hooks/useLoader';
-import LocomotiveScroll from 'locomotive-scroll';
 import { createPortal } from 'react-dom';
 
-interface ILoaderProps {
-  scroll: RefObject<LocomotiveScroll>;
-}
-
-function Loader({ scroll }: ILoaderProps) {
-  const isFetching = useLoader(scroll);
+function Loader() {
+  const isFetching = useLoader();
 
   if (!isFetching) return null;
 

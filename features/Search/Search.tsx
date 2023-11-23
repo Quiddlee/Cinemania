@@ -1,9 +1,10 @@
-import { RefObject, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import Image from 'next/image';
 
 import searchIcon from '@assets/search.svg';
 import { urlParams } from '@customTypes/enums';
+import useScroll from '@entities/scroll/hooks/useScroll';
 import { ENTER_KEY, ESCAPE_KEY } from '@features/Search/const/const';
 import { queryUpdated } from '@features/Search/model/slice';
 import {
@@ -16,13 +17,9 @@ import useKey from '@shared/hooks/useKey';
 import useLocalStorageState from '@shared/hooks/useLocalStorageState';
 import useUrl from '@shared/hooks/useUrl';
 import Button from '@shared/ui/Button';
-import LocomotiveScroll from 'locomotive-scroll';
 
-interface IMovieListProps {
-  scroll: RefObject<LocomotiveScroll>;
-}
-
-function Search({ scroll }: IMovieListProps) {
+function Search() {
+  const { scroll } = useScroll();
   const [query, setQuery] = useLocalStorageState(
     '',
     LOCAL_STORAGE_SEARCH_QUERY,
@@ -33,7 +30,7 @@ function Search({ scroll }: IMovieListProps) {
 
   const handleSearch = useCallback(() => {
     setUrl(urlParams.PAGE, DEFAULT_PAGE);
-    scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+    scroll?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
     dispatch(queryUpdated(query));
   }, [dispatch, query, scroll, setUrl]);
 

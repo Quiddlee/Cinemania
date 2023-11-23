@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body data-scroll-container="true" className="overflow-hidden">
         <Main />
         <NextScript />
       </body>

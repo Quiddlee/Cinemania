@@ -1,9 +1,4 @@
-import { RefObject } from 'react';
-
-import LocomotiveScroll from 'locomotive-scroll';
-import { afterAll, afterEach, beforeAll, describe, vi } from 'vitest';
-
-let scroll: RefObject<LocomotiveScroll>;
+import { afterEach, describe, vi } from 'vitest';
 
 // const mockedSetItem = vi.spyOn(localStorage, 'setItem');
 // const mockedGetItem = vi.spyOn(localStorage, 'getItem');
@@ -11,14 +6,6 @@ let scroll: RefObject<LocomotiveScroll>;
 describe('Search', () => {
   afterEach(() => {
     vi.clearAllMocks();
-  });
-
-  beforeAll(() => {
-    scroll = { current: new LocomotiveScroll() };
-  });
-
-  afterAll(() => {
-    scroll.current?.destroy();
   });
 
   // it('should save the entered value to the local storage when clicking on the search button', async () => {

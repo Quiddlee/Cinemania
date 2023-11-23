@@ -1,18 +1,16 @@
-import { PropsWithChildren, ReactNode, RefObject } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 import { Movie } from '@customTypes/types';
 import useListClick from '@features/MovieList/hooks/useListClick';
 import MovieNotFound from '@features/MovieList/ui/MovieNotFound';
 import useGetMovieList from '@shared/hooks/useGetMovieList';
-import LocomotiveScroll from 'locomotive-scroll';
 
 interface IMovieListProps extends PropsWithChildren {
-  scroll: RefObject<LocomotiveScroll>;
   render: (movie: Movie, i: number) => ReactNode;
 }
 
-function MovieList({ scroll, render, children }: IMovieListProps) {
-  const { listRef, handleClick } = useListClick(scroll);
+function MovieList({ render, children }: IMovieListProps) {
+  const { listRef, handleClick } = useListClick();
   const { movieList } = useGetMovieList();
 
   if (!movieList) return <MovieNotFound />;

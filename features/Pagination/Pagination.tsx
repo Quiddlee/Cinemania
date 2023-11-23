@@ -1,23 +1,16 @@
-import { RefObject } from 'react';
-
 import arrowLeft from '@assets/arrow-left.svg';
 import arrowRight from '@assets/arrow-right.svg';
 import usePagination from '@features/Pagination/hooks/usePagination';
 import Button from '@features/Pagination/ui/Button';
-import LocomotiveScroll from 'locomotive-scroll';
 
-interface IPaginationProps {
-  scroll: RefObject<LocomotiveScroll>;
-}
-
-function Pagination({ scroll }: IPaginationProps) {
+function Pagination() {
   const {
     handleNextPage,
     handlePrevPage,
     isPrevDisabled,
     isNextDisabled,
     noPages,
-  } = usePagination(scroll);
+  } = usePagination();
 
   if (noPages) return null;
 

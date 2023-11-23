@@ -1,19 +1,19 @@
-import { MouseEvent, RefObject, useRef } from 'react';
+import { MouseEvent, useRef } from 'react';
 
 import { urlParams } from '@customTypes/enums';
+import useScroll from '@entities/scroll/hooks/useScroll';
 import { DEFAULT_PAGE, SCROLL_TOP_DURATION } from '@shared/const/const';
 import useUrl from '@shared/hooks/useUrl';
-import LocomotiveScroll from 'locomotive-scroll';
 
 /**
  * Closes the details section on list click.
  *
- * @param {RefObject<LocomotiveScroll>} scroll - A reference to the scroll container. Used to scroll to the top of the page
  * @return obj - An object containing the list reference and the click handler.
  * @return {RefObject<HTMLUListElement>} obj.listRef - A reference to the list element.
  * @return {(e: MouseEvent) => void} obj.handleClick - A function to handle the click event.
  * */
-function useListClick(scroll: RefObject<LocomotiveScroll>) {
+function useListClick() {
+  const { scroll } = useScroll();
   const listRef = useRef<HTMLUListElement>(null);
   const { readUrl } = useUrl();
 
@@ -23,7 +23,7 @@ function useListClick(scroll: RefObject<LocomotiveScroll>) {
 
     if (target !== listRef.current || currPage === DEFAULT_PAGE) return;
 
-    scroll.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+    scroll?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
   }
 
   return { listRef, handleClick };
