@@ -7,4 +7,5 @@ export const itemsPerPage = {
 export const urlParams = {
   PAGE: 'page',
   MOVIES_PER_PAGE: 'movies-per-page',
+  SEARCH: 'search',
 } as const;

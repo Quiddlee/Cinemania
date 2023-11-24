@@ -7,7 +7,7 @@ import { QUERY_PARAMS_INIT } from '@shared/const/const';
 
 type SetUrl = {
   (query: UrlParams, value: string | number): void;
-  (multipleQueriesAndValues: Record<UrlParams, string | number>): void; // used for multiple queries at once (to avoid multiple renders and to update history only once for proper history navigation)
+  (multipleQueriesAndValues: Partial<Record<UrlParams, string | number>>): void; // used for multiple queries at once (to avoid multiple renders and to update history only once for proper history navigation)
 };
 
 type ReadUrl = (query: UrlParams) => string;
@@ -47,7 +47,7 @@ function useUrl() {
 
   const setUrl: SetUrl = useCallback(
     (
-      query: UrlParams | Record<UrlParams, string | number>,
+      query: UrlParams | Partial<Record<UrlParams, string | number>>,
       value?: string | number,
     ) => {
       if (typeof query === 'object') {

@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { movieApi } from '@entities/movie/api/movieApi';
-import { searchReducer } from '@features/Search/model/slice';
 import { createWrapper } from 'next-redux-wrapper';
 
 import { appReducer } from '../model/slice';
@@ -13,7 +12,6 @@ export type PreloadState = Partial<RootState>;
 
 const rootReducer = combineReducers({
   [movieApi.reducerPath]: movieApi.reducer,
-  searchReducer,
   appReducer,
 });
 

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -6,33 +6,24 @@ import searchIcon from '@assets/search.svg';
 import { urlParams } from '@customTypes/enums';
 import useScroll from '@entities/scroll/hooks/useScroll';
 import { ENTER_KEY, ESCAPE_KEY } from '@features/Search/const/const';
-import { queryUpdated } from '@features/Search/model/slice';
-import {
-  DEFAULT_PAGE,
-  LOCAL_STORAGE_SEARCH_QUERY,
-  SCROLL_TOP_DURATION,
-} from '@shared/const/const';
-import useAppDispatch from '@shared/hooks/useAppDispatch';
+import { DEFAULT_PAGE, SCROLL_TOP_DURATION } from '@shared/const/const';
 import useKey from '@shared/hooks/useKey';
-import useLocalStorageState from '@shared/hooks/useLocalStorageState';
 import useUrl from '@shared/hooks/useUrl';
 import Button from '@shared/ui/Button';
 
 function Search() {
   const { scroll } = useScroll();
-  const [query, setQuery] = useLocalStorageState(
-    '',
-    LOCAL_STORAGE_SEARCH_QUERY,
-  );
+  const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const { setUrl } = useUrl();
-  const dispatch = useAppDispatch();
 
   const handleSearch = useCallback(() => {
-    setUrl(urlParams.PAGE, DEFAULT_PAGE);
+    setUrl({
+      [urlParams.PAGE]: DEFAULT_PAGE,
+      [urlParams.SEARCH]: query,
+    });
     scroll?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
-    dispatch(queryUpdated(query));
-  }, [dispatch, query, scroll, setUrl]);
+  }, [query, scroll, setUrl]);
 
   function handleEnter() {
     const isInputFocus = document.activeElement === inputRef.current;

@@ -7,7 +7,6 @@ import useAppDispatch from '@shared/hooks/useAppDispatch';
 import useAppSelector from '@shared/hooks/useAppSelector';
 import useUrl from '@shared/hooks/useUrl';
 import selectMoviesPerPage from '@shared/lib/selectors/selectMoviesPerPage';
-import selectSearchQuery from '@shared/lib/selectors/selectSearchQuery';
 
 import { dataFetchedDetailsPage } from '../../app/model/slice';
 
@@ -19,10 +18,10 @@ import { dataFetchedDetailsPage } from '../../app/model/slice';
 function useGetMovieList() {
   const { readUrl } = useUrl();
 
-  const query = useAppSelector(selectSearchQuery);
   const moviesPerPage = useAppSelector(selectMoviesPerPage);
   const dispatch = useAppDispatch();
   const page = readUrl(urlParams.PAGE);
+  const query = readUrl(urlParams.SEARCH);
 
   const { data, isLoading, isFetching } = useGetMovieListQuery({
     page,
