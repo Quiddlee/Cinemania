@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 import { UrlParams } from '@customTypes/types';
 import { QUERY_PARAMS_INIT } from '@shared/const/const';
+import useQueryParams from '@shared/hooks/useQueryParams';
 
 type SetUrl = {
   (query: UrlParams, value: string | number): void;
@@ -21,22 +22,7 @@ type ReadUrl = (query: UrlParams) => string;
  */
 function useUrl() {
   const router = useRouter();
-
-  const setQuery = useCallback(
-    (key: string, value: number | string) =>
-      router.push(
-        {
-          ...router,
-          query: {
-            ...router.query,
-            [key]: String(value),
-          },
-        },
-        undefined,
-        { shallow: true },
-      ),
-    [router],
-  );
+  const { setQuery, deleteQuery } = useQueryParams();
 
   const readUrl: ReadUrl = useCallback(
     (queryKey: UrlParams) =>
@@ -52,6 +38,10 @@ function useUrl() {
     ) => {
       if (typeof query === 'object') {
         Object.entries(query).forEach(([queryKey, queryValue]) => {
+          if (queryValue === '') {
+            deleteQuery(queryKey);
+            return;
+          }
           void setQuery(queryKey, queryValue);
         });
       }
@@ -60,7 +50,7 @@ function useUrl() {
         void setQuery(query, value);
       }
     },
-    [setQuery],
+    [deleteQuery, setQuery],
   );
 
   return { readUrl, setUrl };
