@@ -1,11 +1,7 @@
-import { useEffect } from 'react';
-
 import { useRouter } from 'next/router';
 
 import { useGetMovieQuery } from '@entities/movie/api/movieApi';
-import useAppDispatch from '@shared/hooks/useAppDispatch';
-
-import { dataFetchedDetailsPage } from '../../app/model/slice';
+import useDispatchIsFetching from '@shared/hooks/useDispatchIsFetching';
 
 /**
  * Retrieves movie data using the useGetMovieQuery hook and dispatches the isFetching state to the useDispatchIsFetching function.
@@ -17,11 +13,8 @@ function useGetMovie() {
   const { query } = useRouter();
   const id = (query?.id as string) ?? '1';
   const { data: movie, isLoading, isFetching } = useGetMovieQuery(id);
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(dataFetchedDetailsPage(isFetching || isLoading));
-  }, [dispatch, isFetching, isLoading]);
+  useDispatchIsFetching(isLoading || isFetching);
 
   if (movie && 'Error' in movie) throw new Error(movie.Error);
 

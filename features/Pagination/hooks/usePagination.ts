@@ -6,16 +6,13 @@ import useAppSelector from '@shared/hooks/useAppSelector';
 import useGetMovieList from '@shared/hooks/useGetMovieList';
 import useScrollTop from '@shared/hooks/useScrollTop';
 import useUrl from '@shared/hooks/useUrl';
-import selectIsFetchingDetails from '@shared/lib/selectors/selectIsFetchingDetails';
-import selectIsFetchingMain from '@shared/lib/selectors/selectIsFetchingMain';
+import selectIsFetching from '@shared/lib/selectors/selectIsFetching';
 
 function usePagination() {
   const { setUrl, readUrl } = useUrl();
-  const isFetchingMain = useAppSelector(selectIsFetchingMain);
-  const isFetchingDetails = useAppSelector(selectIsFetchingDetails);
+  const isFetching = useAppSelector(selectIsFetching);
   const { totalResults } = useGetMovieList();
 
-  const isFetching = isFetchingDetails || isFetchingMain;
   const currPage = Number(readUrl(urlParams.PAGE));
   const isPrevDisabled = currPage === DEFAULT_PAGE || isFetching;
   const isNextDisabled = isFetching;

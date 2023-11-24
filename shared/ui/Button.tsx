@@ -1,9 +1,9 @@
 import { ButtonHTMLAttributes, memo } from 'react';
 
+import selectIsFetching from '@shared/lib/selectors/selectIsFetching';
+
 import useAppSelector from '../hooks/useAppSelector';
 import cn from '../lib/helpers/cn';
-import selectIsFetchingDetails from '../lib/selectors/selectIsFetchingDetails';
-import selectIsFetchingMain from '../lib/selectors/selectIsFetchingMain';
 
 const buttonTypes = {
   filled:
@@ -25,10 +25,8 @@ const Button = memo(function Button({
   disabled,
   ...props
 }: IButtonProps) {
-  const isFetchingMain = useAppSelector(selectIsFetchingMain);
-  const isFetchingDetails = useAppSelector(selectIsFetchingDetails);
+  const isFetching = useAppSelector(selectIsFetching);
 
-  const isFetching = isFetchingDetails || isFetchingMain;
   const isDisabled = disabled || isFetching;
 
   return (

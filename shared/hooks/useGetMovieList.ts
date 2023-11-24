@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
-
 import { urlParams } from '@customTypes/enums';
 import { MovieList } from '@customTypes/types';
 import { useGetMovieListQuery } from '@entities/movie/api/movieApi';
-import useAppDispatch from '@shared/hooks/useAppDispatch';
+import useDispatchIsFetching from '@shared/hooks/useDispatchIsFetching';
 import useUrl from '@shared/hooks/useUrl';
-
-import { dataFetchedDetailsPage } from '../../app/model/slice';
 
 /**
  * Retrieves a list of movies using the `useGetMovieListQuery` hook.
@@ -16,7 +12,6 @@ import { dataFetchedDetailsPage } from '../../app/model/slice';
 function useGetMovieList() {
   const { readUrl } = useUrl();
 
-  const dispatch = useAppDispatch();
   const page = readUrl(urlParams.PAGE);
   const query = readUrl(urlParams.SEARCH);
   const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
@@ -32,9 +27,7 @@ function useGetMovieList() {
     | undefined;
   const totalResults = Number.parseInt(data?.totalResults ?? '0', 10);
 
-  useEffect(() => {
-    dispatch(dataFetchedDetailsPage(isFetching || isLoading));
-  }, [dispatch, isFetching, isLoading]);
+  useDispatchIsFetching(isLoading || isFetching);
 
   return { movieList, totalResults };
 }
