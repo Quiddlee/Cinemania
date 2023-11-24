@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { movieApi } from '@entities/movie/api/movieApi';
 import { searchReducer } from '@features/Search/model/slice';
+import { createWrapper } from 'next-redux-wrapper';
 
 import { appReducer } from '../model/slice';
 
@@ -23,3 +24,5 @@ export const setupStore = (preloadedState?: PreloadState) =>
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(movieApi.middleware),
   });
+
+export const wrapper = createWrapper<AppStore>(() => setupStore());

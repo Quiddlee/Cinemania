@@ -49,8 +49,9 @@ const Movie = memo(function Movie({
           onBlur={handleMouseOut}
           className="h-full space-y-4 rounded-4xl p-2">
           <Image
-            height="320"
-            width="320"
+            width="0"
+            height="0"
+            sizes="100vw"
             data-testid="movie-poster"
             className="h-80 w-full rounded-4xl object-cover"
             src={poster}

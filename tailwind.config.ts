@@ -86,10 +86,6 @@ const config: Config = {
         float: 'float 16s ease-in-out infinite',
       },
     },
-    fontFamily: {
-      sans: 'Poppins, monospace, sans-serif',
-      quicksand: 'Quicksand, sans-serif',
-    },
   },
   plugins: [],
 };

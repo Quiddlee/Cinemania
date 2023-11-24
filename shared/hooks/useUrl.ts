@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/router';
 
 import { UrlParams } from '@customTypes/types';
+import { QUERY_PARAMS_INIT } from '@shared/const/const';
 
 type SetUrl = {
   (query: UrlParams, value: string | number): void;
@@ -38,7 +39,9 @@ function useUrl() {
   );
 
   const readUrl: ReadUrl = useCallback(
-    (query: UrlParams) => router[query as keyof typeof router] as string,
+    (queryKey: UrlParams) =>
+      (router.query[queryKey as keyof typeof router] as string) ??
+      QUERY_PARAMS_INIT[queryKey],
     [router],
   );
 

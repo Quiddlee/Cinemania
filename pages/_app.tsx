@@ -4,15 +4,19 @@ import SmoothScrollProvider from '@entities/scroll/context/smoothScroll';
 import ErrorBoundary from '@shared/ui/ErrorBoundary';
 import FallbackUi from '@shared/ui/FallbackUi';
 import AppLayout from '@widgets/AppLayout/AppLayout';
+import { Provider } from 'react-redux';
 
-import ReduxProvider from '../app/model/provider';
+import { wrapper } from '../app/store/store';
 
 import '@styles/globals.css';
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, ...rest }: AppProps) {
+  const { store, props } = wrapper.useWrappedStore(rest);
+  const { pageProps } = props;
+
   return (
     <ErrorBoundary fallback={<FallbackUi />}>
-      <ReduxProvider>
+      <Provider store={store}>
         <SmoothScrollProvider
           options={{
             smooth: true,
@@ -27,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </AppLayout>
         </SmoothScrollProvider>
-      </ReduxProvider>
+      </Provider>
     </ErrorBoundary>
   );
 }
+
+export default App;
