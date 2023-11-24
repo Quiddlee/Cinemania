@@ -2,17 +2,15 @@ import { useEffect, useRef } from 'react';
 
 import { urlParams } from '@customTypes/enums';
 import useAnime from '@shared/hooks/useAnime';
-import useAppSelector from '@shared/hooks/useAppSelector';
 import useGetMovieList from '@shared/hooks/useGetMovieList';
 import useUrl from '@shared/hooks/useUrl';
-import selectMoviesPerPage from '@shared/lib/selectors/selectMoviesPerPage';
 
 function PageNum() {
   const { readUrl } = useUrl();
   const { totalResults } = useGetMovieList();
-  const moviesPerPage = useAppSelector(selectMoviesPerPage);
   const prevMaxPage = useRef(0);
 
+  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
   const currPage = Number(readUrl(urlParams.PAGE));
   const maxPage = Math.ceil(totalResults / moviesPerPage);
 

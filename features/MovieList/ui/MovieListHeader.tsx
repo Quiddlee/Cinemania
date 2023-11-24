@@ -1,27 +1,23 @@
 import { PropsWithChildren, useCallback } from 'react';
 
+import { urlParams } from '@customTypes/enums';
 import { ItemsPerPage } from '@customTypes/types';
-import useAppDispatch from '@shared/hooks/useAppDispatch';
-import useAppSelector from '@shared/hooks/useAppSelector';
 import useScrollTop from '@shared/hooks/useScrollTop';
-import selectMoviesPerPage from '@shared/lib/selectors/selectMoviesPerPage';
+import useUrl from '@shared/hooks/useUrl';
 import Tabs from '@shared/ui/Tabs';
 
-import { moviesPerPageUpdated } from '../../../app/model/slice';
-
 function MovieListHeader({ children }: PropsWithChildren) {
-  const dispatch = useAppDispatch();
-  const moviesPerPage = useAppSelector(selectMoviesPerPage);
+  const { readUrl, setUrl } = useUrl();
+  const moviesPerPage = Number(readUrl(urlParams.MOVIES_PER_PAGE));
 
   useScrollTop(moviesPerPage);
 
   const handleMoviesPerPage = useCallback(
     (newMoviesPerPage: number) => {
-      if (newMoviesPerPage === moviesPerPage) return;
-
-      dispatch(moviesPerPageUpdated(newMoviesPerPage));
+      if (newMoviesPerPage !== moviesPerPage)
+        setUrl(urlParams.MOVIES_PER_PAGE, newMoviesPerPage);
     },
-    [dispatch, moviesPerPage],
+    [moviesPerPage, setUrl],
   );
 
   return (

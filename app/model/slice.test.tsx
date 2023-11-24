@@ -5,7 +5,6 @@ import {
   dataFetchedDetailsPage,
   dataFetchedMainPage,
   initialState,
-  moviesPerPageUpdated,
 } from './slice';
 
 describe('appSlice', () => {
@@ -24,15 +23,6 @@ describe('appSlice', () => {
     expect(state).toEqual({
       ...initialState,
       isFetchingMainPage: true,
-    });
-  });
-
-  it("should change app's slice moviesPerPage state", () => {
-    const state = appReducer(initialState, moviesPerPageUpdated(99));
-
-    expect(state).toEqual({
-      ...initialState,
-      moviesPerPage: 99,
     });
   });
 });

@@ -1,17 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { MOVIES_PER_PAGE } from '@shared/const/const';
-
 interface IInitialState {
   isFetchingMainPage: boolean;
   isFetchingDetailsPage: boolean;
-  moviesPerPage: number;
 }
 
 export const initialState: IInitialState = {
   isFetchingMainPage: false,
   isFetchingDetailsPage: false,
-  moviesPerPage: MOVIES_PER_PAGE,
 };
 
 export const appSlice = createSlice({
@@ -21,21 +17,12 @@ export const appSlice = createSlice({
     dataFetchedMainPage: (state, action: PayloadAction<boolean>) => {
       state.isFetchingMainPage = action.payload;
     },
-
     dataFetchedDetailsPage: (state, action: PayloadAction<boolean>) => {
       state.isFetchingDetailsPage = action.payload;
-    },
-
-    moviesPerPageUpdated: (state, action: PayloadAction<number>) => {
-      state.moviesPerPage = action.payload;
     },
   },
 });
 
-export const {
-  dataFetchedMainPage,
-  dataFetchedDetailsPage,
-  moviesPerPageUpdated,
-} = appSlice.actions;
+export const { dataFetchedMainPage, dataFetchedDetailsPage } = appSlice.actions;
 
 export const appReducer = appSlice.reducer;
