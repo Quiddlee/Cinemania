@@ -35,13 +35,13 @@ function AppLayout({ children }: PropsWithChildren) {
         <title>{APP_TITLE}</title>
         <link rel="icon" href="./pop-corn.svg" />
       </Head>
+      <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
       <div
         id="section"
         data-scroll-section="true"
         ref={containerRef}
         className={`${poppins.className} relative m-auto min-h-screen`}>
         <section className="relative z-20 m-auto grid min-h-screen gap-2 pb-8 sm:gap-10">
-          <Tooltip innerRef={tooltipRef}>Click for details</Tooltip>
           <Loader />
           <GradientBackground />
           <Header>
