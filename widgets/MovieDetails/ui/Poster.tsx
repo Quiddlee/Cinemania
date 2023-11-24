@@ -10,6 +10,9 @@ interface IMoviePosterProps {
 const Poster = memo(function Poster({ poster, title }: IMoviePosterProps) {
   return (
     <Image
+      width="0"
+      height="0"
+      sizes="100vw"
       data-testid="details-poster"
       className="absolute h-full w-full rounded-4xl object-cover"
       src={poster}
