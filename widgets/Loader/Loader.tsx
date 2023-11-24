@@ -4,9 +4,9 @@ import useLoader from '@widgets/Loader/hooks/useLoader';
 import { createPortal } from 'react-dom';
 
 function Loader() {
-  const isFetching = useLoader();
+  const isLoading = useLoader();
 
-  if (!isFetching) return null;
+  if (!isLoading) return null;
 
   return createPortal(
     <div
