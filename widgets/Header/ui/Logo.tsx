@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import Link from 'next/link';
-
+import LinkWithQuery from '@shared/ui/LinkWithQuery';
 import anime from 'animejs';
 
 function Logo() {
@@ -210,8 +209,8 @@ function Logo() {
   }, []);
 
   return (
-    <Link className="mr-auto" href="/">
-      <h1 className="flex items-end gap-2 font-quicksand text-3xl font-bold tracking-tighter text-lime-400 lg:text-4xl">
+    <LinkWithQuery className="mr-auto" href="/">
+      <h1 className="font-quicksand flex items-end gap-2 text-3xl font-bold tracking-tighter text-lime-400 lg:text-4xl">
         <span ref={popCornRef}>
           <svg width="27" height="39" viewBox="0 0 27 39">
             <path
@@ -347,7 +346,7 @@ function Logo() {
           </span>
         </div>
       </h1>
-    </Link>
+    </LinkWithQuery>
   );
 }
 

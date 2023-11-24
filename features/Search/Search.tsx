@@ -67,7 +67,7 @@ function Search() {
         data-testid="search-input"
         ref={inputRef}
         className="peer w-full rounded-full border-l border-t border-white/20 bg-white/10 px-6 py-3 font-light text-zinc-100 transition-all duration-200 hover:bg-white/20 focus:-translate-y-0.5 focus:border-transparent focus:shadow-xl focus:shadow-black/20 focus:outline-0 focus:ring focus:ring-lime-300"
-        placeholder="Type to Search..."
+        placeholder="Type href Search..."
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

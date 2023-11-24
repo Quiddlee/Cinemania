@@ -1,12 +1,12 @@
 import { memo, MouseEvent } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
 import ReactLogo from '@assets/reactJS-logo.png';
 import { Movie as TMovie } from '@customTypes/types';
 import { NOT_EXIST } from '@shared/const/const';
 import useRadialHover from '@shared/hooks/useRadialHover';
+import LinkWithQuery from '@shared/ui/LinkWithQuery';
 
 interface IMovieProps {
   data: TMovie;
@@ -27,10 +27,9 @@ const Movie = memo(function Movie({
 
   const poster = Poster === NOT_EXIST ? ReactLogo : Poster;
   const animationDelay = `0.${String(delay)}s`;
-  // const isDetailsClose = pathname.slice(1) === '';
 
   return (
-    <Link data-testid="movie-item" href={`/${imdbID}`}>
+    <LinkWithQuery data-testid="movie-item" href={`/${imdbID}`}>
       <li
         data-testid="movie"
         style={{
@@ -69,7 +68,7 @@ const Movie = memo(function Movie({
           </article>
         </div>
       </li>
-    </Link>
+    </LinkWithQuery>
   );
 });
 export default Movie;

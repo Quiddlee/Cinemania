@@ -1,26 +1,30 @@
 import { ReactNode } from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface ILinkWithQueryProps {
   children: ReactNode;
-  to: string;
+  href: string;
   className?: string;
-  // viewTransition?: boolean;
 }
 
 function LinkWithQuery({
   children,
   className = '',
-  to,
-  // viewTransition = true,
+  href,
   ...props
 }: ILinkWithQueryProps) {
+  const router = useRouter();
+  const { id, ...query } = router.query;
+
   return (
     <Link
       className={`${className} w-fit`}
-      // to={to}
-      href={to}
+      href={{
+        pathname: href,
+        query,
+      }}
       {...props}>
       {children}
     </Link>

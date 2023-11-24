@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 
-import Link from 'next/link';
-
 import Modal from '@shared/ui/Modal';
+
+import LinkWithQuery from './LinkWithQuery';
 
 function FallbackUi({ children }: PropsWithChildren) {
   return (
@@ -19,7 +19,7 @@ function FallbackUi({ children }: PropsWithChildren) {
         <p>If you faced any issues, please contact our support team</p>
         <div className="flex gap-4 text-blue-400 underline">
           <p>cinemania-help@gmail.com</p>
-          <Link href="/">Go back</Link>
+          <LinkWithQuery href="/">Go back</LinkWithQuery>
         </div>
       </Modal>
     </div>

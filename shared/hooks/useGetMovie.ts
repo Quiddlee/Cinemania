@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 import { useGetMovieQuery } from '@entities/movie/api/movieApi';
 import useAppDispatch from '@shared/hooks/useAppDispatch';
@@ -14,9 +14,9 @@ import { dataFetchedDetailsPage } from '../../app/model/slice';
  * @returns {ApiMovieResponse} obj.movie - The movie data.
  */
 function useGetMovie() {
-  const pathname = usePathname();
-  const id = pathname?.slice(1);
-  const { data: movie, isLoading, isFetching } = useGetMovieQuery(id ?? '1');
+  const { query } = useRouter();
+  const id = (query?.id as string) ?? '1';
+  const { data: movie, isLoading, isFetching } = useGetMovieQuery(id);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

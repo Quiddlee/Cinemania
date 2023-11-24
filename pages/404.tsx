@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import LinkWithQuery from '@shared/ui/LinkWithQuery';
 import Modal from '@shared/ui/Modal';
 import GradientBackground from '@widgets/AppLayout/ui/GradientBackground';
 import Header from '@widgets/Header/Header';
@@ -21,9 +20,9 @@ function Custom404() {
 
           <p>We&apos;re sorry, the page you are looking for does not exist</p>
 
-          <Link href="/" className="text-blue-400 underline">
+          <LinkWithQuery href="/" className="text-blue-400 underline">
             Go back
-          </Link>
+          </LinkWithQuery>
         </Modal>
       </main>
     </>
