@@ -7,17 +7,13 @@ function useQueryParams() {
 
   const setQuery = useCallback(
     (key: string, value: number | string) =>
-      router.push(
-        {
-          ...router,
-          query: {
-            ...router.query,
-            [key]: String(value),
-          },
+      router.push({
+        ...router,
+        query: {
+          ...router.query,
+          [key]: String(value),
         },
-        undefined,
-        { shallow: true },
-      ),
+      }),
     [router],
   );
 
