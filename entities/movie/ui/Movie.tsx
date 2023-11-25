@@ -1,12 +1,14 @@
 import { memo, MouseEvent } from 'react';
 
 import Image from 'next/image';
+import colors from 'tailwindcss/colors';
 
 import ReactLogo from '@assets/reactJS-logo.png';
 import { Movie as TMovie } from '@customTypes/types';
 import { NOT_EXIST } from '@shared/const/const';
 import useRadialHover from '@shared/hooks/useRadialHover';
 import LinkWithQuery from '@shared/ui/LinkWithQuery';
+import StarRating from '@shared/ui/StarRating';
 
 interface IMovieProps {
   data: TMovie;
@@ -65,6 +67,13 @@ const Movie = memo(function Movie({
             <div className="mt-2 grid text-gray-400">
               <span data-testid="movie-year">{Year}</span>
             </div>
+            <StarRating
+              size={24}
+              maxRating={5}
+              defaultRating={4}
+              className="mt-4"
+              color={colors.lime['400']}
+            />
           </article>
         </div>
       </li>
