@@ -13,7 +13,12 @@ function Modal({ className = '', children }: IModalProps) {
   } = useRadialHover<HTMLDivElement>();
 
   return (
-    <article className="m-auto h-fit w-fit animate-springish self-center overflow-hidden rounded-4xl border-l border-t border-white/20 bg-white/10 text-center text-gray-400 shadow-md backdrop-blur-3xl backdrop-saturate-150">
+    <article
+      data-scroll-offset="15%"
+      data-scroll="true"
+      data-scroll-sticky="true"
+      data-scroll-target="section"
+      className="m-auto h-fit w-fit animate-springish self-center overflow-hidden rounded-4xl border-l border-t border-white/20 bg-white/10 text-center text-gray-400 shadow-md backdrop-blur-3xl backdrop-saturate-150">
       <div
         ref={modalRef}
         onMouseMove={handleMouseMove}

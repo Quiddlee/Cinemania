@@ -16,7 +16,9 @@ function useGetMovie() {
 
   useDispatchIsFetching(isLoading || isFetching);
 
-  if (movie && 'Error' in movie) throw new Error(movie.Error);
+  if (movie && 'Error' in movie) {
+    return null;
+  }
 
   return movie;
 }

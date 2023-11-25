@@ -13,11 +13,13 @@ import Rating from '@widgets/MovieDetails/ui/Rating';
 import Runtime from '@widgets/MovieDetails/ui/Runtime';
 import Title from '@widgets/MovieDetails/ui/Title';
 
+import Custom404 from '../../pages/404';
+
 function MovieDetails() {
   const movie = useGetMovie();
   useDocumentTitle(`Cinemania | ${movie?.Title}`);
 
-  if (!movie) return null;
+  if (!movie) return <Custom404 />;
 
   const {
     Poster: poster,
