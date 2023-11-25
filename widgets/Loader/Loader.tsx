@@ -1,5 +1,3 @@
-'use client';
-
 import useLoader from '@widgets/Loader/hooks/useLoader';
 import { createPortal } from 'react-dom';
 
