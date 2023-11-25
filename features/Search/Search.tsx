@@ -6,16 +6,20 @@ import searchIcon from '@assets/search.svg';
 import { urlParams } from '@customTypes/enums';
 import useScroll from '@entities/scroll/hooks/useScroll';
 import { ENTER_KEY, ESCAPE_KEY } from '@features/Search/const/const';
-import { DEFAULT_PAGE, SCROLL_TOP_DURATION } from '@shared/const/const';
+import { DEFAULT_PAGE, QUERY_FALLBACK, SCROLL_TOP_DURATION } from '@shared/const/const';
 import useKey from '@shared/hooks/useKey';
 import useUrl from '@shared/hooks/useUrl';
 import Button from '@shared/ui/Button';
 
 function Search() {
   const { scroll } = useScroll();
-  const [query, setQuery] = useState('');
+  const { setUrl, readUrl } = useUrl();
+  const [query, setQuery] = useState(() => {
+    const searchQuery = readUrl(urlParams.SEARCH);
+    if (searchQuery === QUERY_FALLBACK) return ''
+    return searchQuery;
+  });
   const inputRef = useRef<HTMLInputElement>(null);
-  const { setUrl } = useUrl();
 
   const handleSearch = useCallback(() => {
     setUrl({
