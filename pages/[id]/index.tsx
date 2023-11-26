@@ -3,7 +3,7 @@ import { getRunningQueriesThunk } from '@shared/api/rootApi';
 import MovieDetails from '@widgets/MovieDetails/MovieDetails';
 import { GetServerSidePropsContext } from 'next';
 
-import { wrapper } from '../app/store/store';
+import { wrapper } from '../../app/store/store';
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
