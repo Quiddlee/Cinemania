@@ -31,7 +31,6 @@ function Search() {
       [urlParams.SEARCH]: query,
     });
     scroll?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
-    localStorage.setItem('searchQuery', query);
   }, [query, scroll, setUrl]);
 
   function handleEnter() {
