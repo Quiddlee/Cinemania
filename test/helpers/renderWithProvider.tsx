@@ -3,14 +3,10 @@ import { PropsWithChildren, ReactElement } from 'react';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { render } from '@testing-library/react';
 
+import IOptions from '@test/types/interfaces';
 import { Provider } from 'react-redux';
 
-import { AppStore, PreloadState, setupStore } from '../../app/store/store';
-
-interface IOptions {
-  preloadedState?: PreloadState;
-  store?: AppStore;
-}
+import { setupStore } from '../../app/store/store';
 
 function renderWithProvider(
   ui: ReactElement,

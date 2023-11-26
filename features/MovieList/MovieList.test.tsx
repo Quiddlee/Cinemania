@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
 import Movie from '@entities/movie/ui/Movie';
 import MovieList from '@features/MovieList/MovieList';
 import * as useGetMovieList from '@shared/hooks/useGetMovieList';
+import renderWithRouter from '@test/helpers/RenderWithRouter';
 import { mockMovies } from '@test/mocks/data';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
@@ -17,7 +18,7 @@ describe('MovieList', () => {
       totalResults: 0,
     });
 
-    render(
+    renderWithRouter(
       <MovieList
         render={(movie, i) => (
           <Movie
@@ -42,7 +43,7 @@ describe('MovieList', () => {
       totalResults: mockMovies.length,
     });
 
-    render(
+    renderWithRouter(
       <MovieList
         render={(movie, i) => (
           <Movie

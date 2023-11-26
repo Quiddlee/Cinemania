@@ -1,46 +1,39 @@
-// import {ReactElement} from "react";
-//
-// import {setupListeners} from '@reduxjs/toolkit/query';
-// import {render} from '@testing-library/react';
-//
-// import {AppStore, PreloadState, setupStore} from '../../app/store/store';
-//
-// interface IOptions {
-//   preloadedState?: PreloadState;
-//   store?: AppStore;
-//   initialEntries?: string[];
-//   initialIndex?: number;
-// }
-//
-// function renderProvider(
-//   ui?: ReactElement | null,
-//   {
-//     preloadedState,
-//     store = setupStore(preloadedState),
-//     initialEntries,
-//     initialIndex,
-//   }: IOptions = {},
-// ) {
-//   setupListeners(store.dispatch);
-//
-//   // const routes = ui ? [{ path: '/', element: ui }] : ROUTES;
-//   // const router = createMemoryRouter(routes, {
-//   //   initialEntries,
-//   //   initialIndex,
-//   // });
-//
-//   console.log(initialEntries);
-//   console.log(initialIndex);
-//
-//   return {
-//     store,
-//     ...render(
-//       // <Provider store={store}>
-//       //   {/* <RouterProvider router={router} /> */}
-//       // </Provider>,
-//         ui
-//     ),
-//   };
-// }
-//
-// export default renderProvider;
+import { ReactNode } from 'react';
+
+import { setupListeners } from '@reduxjs/toolkit/query';
+import { render } from '@testing-library/react';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
+import { NextRouter } from 'next/router';
+
+import createMockRouter from '@test/helpers/createMockRouter';
+import IOptions from '@test/types/interfaces';
+import { Provider } from 'react-redux';
+
+import { setupStore } from '../../app/store/store';
+
+function renderWithRouter(
+  ui?: ReactNode | null,
+  router: Partial<NextRouter> = {},
+  {
+    preloadedState = {},
+    store = setupStore(preloadedState),
+    ...renderOptions
+  }: IOptions = {},
+) {
+  const mockRouter = createMockRouter(router);
+
+  setupListeners(store.dispatch);
+
+  return {
+    store,
+    router: mockRouter,
+    ...render(
+      <RouterContext.Provider value={mockRouter}>
+        <Provider store={store}>{ui}</Provider>
+      </RouterContext.Provider>,
+      { ...renderOptions },
+    ),
+  };
+}
+
+export default renderWithRouter;
