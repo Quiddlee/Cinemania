@@ -10,9 +10,10 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
     'prettier',
+    'next/core-web-vitals'
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'prettier.config.js', '@typescript-eslint', 'node_modules', 'tailwind.config.js'],
-  plugins: ['react', 'react-refresh', 'simple-import-sort', 'import', 'prettier'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'prettier.config.js', 'node_modules', 'tailwind.config.js', 'next.config.js', 'environment.d.ts'],
+  plugins: ['react', 'react-refresh', 'simple-import-sort', 'import', 'prettier', '@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -34,14 +35,7 @@ module.exports = {
     'no-void': 0,
     'no-param-reassign': 0,
     'import/no-extraneous-dependencies': 0,
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        'ts': 'always',
-        'tsx': 'always'
-      }
-    ],
+    'import/extensions': 0,
     'import/namespace': 0,
     'sort-imports': ['error', {ignoreCase: true, ignoreDeclarationSort: true}],
     'import/order': [
@@ -60,7 +54,7 @@ module.exports = {
             position: 'before',
           },
           {
-            pattern: '@src/**',
+            pattern: '*',
             group: 'internal',
           },
         ],
@@ -77,6 +71,7 @@ module.exports = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
+        project: './tsconfig.json',
       },
       node: {
         extensions: ['.js','.jsx','.ts','.tsx']
