@@ -12,6 +12,7 @@ import Pagination from '@features/Pagination/Pagination';
 import Search from '@features/Search/Search';
 import { APP_TITLE } from '@shared/const/const';
 import useTooltip from '@shared/hooks/useTooltip';
+import ThrowError from '@shared/ui/ThrowError';
 import Tooltip from '@shared/ui/Tooltip';
 import GradientBackground from '@widgets/AppLayout/ui/GradientBackground';
 import Header from '@widgets/Header/Header';
@@ -47,6 +48,7 @@ function AppLayout({ children }: PropsWithChildren) {
           <Header>
             <Logo />
             <Search />
+            <ThrowError />
             <TotalResults />
           </Header>
           <Main>
