@@ -10,11 +10,13 @@ function renderWithRouter(
   ui?: ReactNode | null,
   router: Partial<NextRouter> = {},
 ) {
+  const mockRouter = createMockRouter(router);
+
   render(
-    <RouterContext.Provider value={createMockRouter(router)}>
-      {ui}
-    </RouterContext.Provider>,
+    <RouterContext.Provider value={mockRouter}>{ui}</RouterContext.Provider>,
   );
+
+  return mockRouter;
 }
 
 export default renderWithRouter;
