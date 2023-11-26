@@ -6,7 +6,11 @@ import searchIcon from '@assets/search.svg';
 import { urlParams } from '@customTypes/enums';
 import useScroll from '@entities/scroll/hooks/useScroll';
 import { ENTER_KEY, ESCAPE_KEY } from '@features/Search/const/const';
-import { DEFAULT_PAGE, QUERY_FALLBACK, SCROLL_TOP_DURATION } from '@shared/const/const';
+import {
+  DEFAULT_PAGE,
+  QUERY_FALLBACK,
+  SCROLL_TOP_DURATION,
+} from '@shared/const/const';
 import useKey from '@shared/hooks/useKey';
 import useUrl from '@shared/hooks/useUrl';
 import Button from '@shared/ui/Button';
@@ -16,7 +20,7 @@ function Search() {
   const { setUrl, readUrl } = useUrl();
   const [query, setQuery] = useState(() => {
     const searchQuery = readUrl(urlParams.SEARCH);
-    if (searchQuery === QUERY_FALLBACK) return ''
+    if (searchQuery === QUERY_FALLBACK) return '';
     return searchQuery;
   });
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,6 +31,7 @@ function Search() {
       [urlParams.SEARCH]: query,
     });
     scroll?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+    localStorage.setItem('searchQuery', query);
   }, [query, scroll, setUrl]);
 
   function handleEnter() {
@@ -71,7 +76,7 @@ function Search() {
         onClick={handleSearch}
         className="absolute bottom-0 right-0 top-0 m-auto flex items-center gap-2 peer-focus:-translate-y-0.5">
         <>
-          <Image src={searchIcon} alt="" />
+          <Image width="0" height="0" sizes="100vw" src={searchIcon} alt="" />
           <span>Search</span>
         </>
       </Button>
