@@ -1,10 +1,13 @@
-import { MouseEvent } from 'react';
+import { MouseEvent as ReactMouseEvent } from 'react';
 
 import colors from 'tailwindcss/colors';
 
 import getElementMouseCoord from './getElementMouseCoord';
 
-type AnimationFn = (elem: HTMLElement, evt: MouseEvent) => void;
+type AnimationFn = (
+  elem: HTMLElement,
+  evt: MouseEvent | ReactMouseEvent,
+) => void;
 
 type CleanUpFn = (elem: HTMLElement) => void;
 
@@ -41,7 +44,10 @@ function animate(
   }
 }
 
-function animateRadialHover(elem: HTMLElement, e: MouseEvent) {
+function animateRadialHover(
+  elem: HTMLElement,
+  e: MouseEvent | ReactMouseEvent,
+) {
   const { posX, posY } = getElementMouseCoord(elem, e);
   const startTimeStamp = performance.now();
   pointerX = posX;
