@@ -7,8 +7,7 @@ describe('appSlice', () => {
     const state = appReducer(initialState, dataFetched(true));
 
     expect(state).toEqual({
-      ...initialState,
-      isFetchingDetailsPage: true,
+      isFetching: true,
     });
   });
 });

@@ -1,7 +1,12 @@
+import { loadEnvConfig } from '@next/env';
+
 import { delay, http, HttpResponse } from 'msw';
 
 import { mockMovieDetails, mockMovieDetailsNoPoster, mockMovies } from './data';
 import { NO_POSTER_QUERY_TEST_CASE } from '../const/const';
+
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 
 const handlers = [
   http.get(`${process.env.NEXT_PUBLIC_API_URL}`, async ({ request }) => {

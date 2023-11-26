@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Pagination from '@features/Pagination/Pagination';
+import renderWithRouterProvider from '@test/helpers/renderWithRouterProvider';
 import { mockMovies } from '@test/mocks/data';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -21,7 +22,7 @@ describe('Pagination', () => {
       totalResults,
     });
 
-    render(<Pagination />);
+    renderWithRouterProvider(<Pagination />);
 
     const [button] = screen.getAllByTestId('pagination');
 
