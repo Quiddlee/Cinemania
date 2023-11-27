@@ -5,27 +5,28 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "baseUrl": "./src",
     "paths": {
       "@app/*": [
-        "./src/app/*"
+        "app/*"
       ],
       "@features/*": [
-        "./src/features/*"
+        "features/*"
       ],
       "@entities/*": [
-        "./src/entities/*"
+        "entities/*"
       ],
       "@shared/*": [
-        "./src/shared/*"
+        "shared/*"
       ],
       "@widgets/*": [
-        "./src/widgets/*"
+        "widgets/*"
       ],
       "@customTypes/*": [
-        "./src/shared/types/*"
+        "shared/types/*"
       ],
       "@assets/*": [
-        "./src/assets/*"
+        "assets/*"
       ],
     },
 

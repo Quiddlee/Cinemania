@@ -11,8 +11,8 @@ module.exports = {
     'plugin:import/recommended',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'prettier.config.js', '@typescript-eslint', 'node_modules', 'tailwind.config.js'],
-  plugins: ['react', 'react-refresh', 'simple-import-sort', 'import', 'prettier'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'prettier.config.js', 'node_modules', 'tailwind.config.js'],
+  plugins: ['react', 'react-refresh', 'simple-import-sort', 'import', 'prettier', '@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -27,7 +27,7 @@ module.exports = {
     'no-void': 0,
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    'import/extensions': 0,
+    'import/extensions': ["error", "never"],
     'import/namespace': 0,
     'sort-imports': ['error', {ignoreCase: true, ignoreDeclarationSort: true}],
     'import/order': [
