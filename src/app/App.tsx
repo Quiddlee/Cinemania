@@ -1,5 +1,6 @@
-function App() {
-  return <div className="bg-red-500 text-white">Hello React!</div>;
-}
+import router from '@app/model/router';
+import { RouterProvider } from 'react-router-dom';
+
+const App = () => <RouterProvider router={router} />;
 
 export default App;
