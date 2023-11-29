@@ -13,6 +13,7 @@ export default defineConfig({
       { find: '@entities', replacement: resolve(__dirname, './src/entities') },
       { find: '@shared', replacement: resolve(__dirname, './src/shared') },
       { find: '@widgets', replacement: resolve(__dirname, './src/widgets') },
+      { find: '@pages', replacement: resolve(__dirname, './src/pages') },
       {
         find: '@customTypes',
         replacement: resolve(__dirname, './src/shared/types'),
@@ -22,4 +23,5 @@ export default defineConfig({
       { find: '@test', replacement: resolve(__dirname, './src/test') },
     ],
   },
+  base: './',
 });

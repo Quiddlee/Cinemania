@@ -24,6 +24,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react/function-component-definition': 0,
     'no-void': 0,
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
