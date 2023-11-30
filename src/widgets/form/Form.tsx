@@ -5,10 +5,12 @@ import cn from '@shared/lib/helpers/cn';
 const Form: FC<FormHTMLAttributes<HTMLFormElement>> = ({
   children,
   className,
+  ...props
 }) => (
   <form
+    {...props}
     className={cn(
-      'grid w-96 gap-6 rounded-md border border-zinc-800 p-6',
+      'grid w-96 gap-2 rounded-md border border-zinc-800 p-6',
       className,
     )}>
     {children}

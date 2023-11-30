@@ -4,7 +4,7 @@ import cn from '@shared/lib/helpers/cn';
 
 const buttonVariants = {
   filled:
-    'flex h-10 w-20 items-center justify-center rounded-md bg-zinc-100 px-4 py-2 text-zinc-950 transition-all hover:bg-zinc-300',
+    'flex text-sm h-10 w-20 items-center justify-center rounded-md bg-zinc-100 px-4 py-2 text-zinc-950 transition-all hover:bg-zinc-300',
 } as const;
 
 type ButtonVariants = keyof typeof buttonVariants;
