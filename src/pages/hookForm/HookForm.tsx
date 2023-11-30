@@ -1,3 +1,4 @@
+import Button from '@shared/ui/Button';
 import Input from '@shared/ui/Input';
 import Form from '@widgets/form/Form';
 import FormRow from '@widgets/form/ui/FormRow';
@@ -12,6 +13,7 @@ const HookForm = () => (
     <FormRow label="Name">
       <Input id="Name" type="text" placeholder="Enter yout name..." />
     </FormRow>
+
     <FormRow label="Age">
       <Input
         id="Age"
@@ -21,12 +23,15 @@ const HookForm = () => (
         className=""
       />
     </FormRow>
+
     <FormRow label="Email">
       <Input id="Email" type="text" placeholder="Enter yout email..." />
     </FormRow>
+
     <FormRow label="Password">
       <Input id="Password" type="text" placeholder="Enter yout password..." />
     </FormRow>
+
     <FormRow label="Confirm password">
       <Input
         id="Confirm password"
@@ -34,6 +39,8 @@ const HookForm = () => (
         placeholder="Enter your email..."
       />
     </FormRow>
+
+    <Button submit>Submit</Button>
   </Form>
 );
 

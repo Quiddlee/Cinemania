@@ -1,11 +1,10 @@
-import { FC, LabelHTMLAttributes, PropsWithChildren } from 'react';
+import { FC, LabelHTMLAttributes } from 'react';
 
 import cn from '@shared/lib/helpers/cn';
 
-type FormRowProps = LabelHTMLAttributes<HTMLLabelElement> &
-  PropsWithChildren & {
-    label: string;
-  };
+type FormRowProps = LabelHTMLAttributes<HTMLLabelElement> & {
+  label: string;
+};
 
 const FormRow: FC<FormRowProps> = ({ label, className, children }) => (
   <label className={cn('grid gap-2', className)} htmlFor={label}>
