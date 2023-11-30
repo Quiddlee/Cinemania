@@ -24,10 +24,11 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'no-void': 0,
     'jsx-a11y/label-has-associated-control': 0,
     'react/jsx-props-no-spreading': 0,
     'react/function-component-definition': 0,
-    'no-void': 0,
+    'react/require-default-props': 0,
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'import/extensions': ["error", "never"],
