@@ -9,6 +9,7 @@ const Form: FC<FormHTMLAttributes<HTMLFormElement>> = ({
 }) => (
   <form
     {...props}
+    noValidate
     className={cn(
       'grid w-96 gap-2 rounded-md border border-zinc-800 p-6',
       className,

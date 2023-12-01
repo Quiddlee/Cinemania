@@ -1,3 +1,7 @@
+import hookFormSchema, {
+  HookFormFields,
+} from '@pages/hookForm/model/hookFormSchema';
+import useYupValidationResolver from '@shared/lib/hooks/useYupValidationResolver';
 import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
@@ -5,24 +9,15 @@ import Form from '@widgets/form/Form';
 import FormRow from '@widgets/form/ui/FormRow';
 import { useForm } from 'react-hook-form';
 
-type FormFields = {
-  name: string;
-  age: number;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  gender: 'male' | 'female' | 'undecided';
-  country: string;
-  picture: FileList;
-  termsAndConditions: boolean;
-};
-
 const HookForm = () => {
+  const resolver = useYupValidationResolver<HookFormFields>(hookFormSchema);
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
-  } = useForm<FormFields>();
+  } = useForm<HookFormFields>({
+    resolver,
+  });
 
   function onSubmit(/* data: FormFields */) {
     //
@@ -66,7 +61,7 @@ const HookForm = () => {
       <FormRow label="Password" error={errors.password?.message}>
         <Input
           id="password"
-          type="text"
+          type="password"
           placeholder="Enter yout password..."
           {...register('password', { required: 'This field is required' })}
         />
@@ -78,7 +73,7 @@ const HookForm = () => {
         error={errors.confirmPassword?.message}>
         <Input
           id="confirmPassword"
-          type="text"
+          type="password"
           placeholder="Enter your email..."
           {...register('confirmPassword', {
             required: 'This field is required',
@@ -86,11 +81,11 @@ const HookForm = () => {
         />
       </FormRow>
 
-      <FormRow label="Gender" error={errors.gender?.message}>
-        <select name="gender" id="gender">
+      <FormRow label="Gender">
+        <select id="gender" {...register('gender')}>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="undecided">Undecided</option>
+          <option value="other">other</option>
         </select>
       </FormRow>
 
@@ -136,7 +131,7 @@ const HookForm = () => {
         />
       </FormRow>
 
-      <Button className="mt-4" submit>
+      <Button disabled={!isValid} className="mt-4" submit>
         Submit
       </Button>
     </Form>
