@@ -8,12 +8,18 @@ type FormRowProps = LabelHTMLAttributes<HTMLLabelElement> & {
   error?: string;
 };
 
-const FormRow: FC<FormRowProps> = ({ label, className, error, children }) => (
+const FormRow: FC<FormRowProps> = ({
+  label,
+  htmlFor,
+  className,
+  error,
+  children,
+}) => (
   <label
     className={cn('grid gap-2 text-sm', className, {
       'text-red-900': error,
     })}
-    htmlFor={label.toLowerCase()}>
+    htmlFor={htmlFor ?? label.toLowerCase()}>
     {label}
     {children}
     <Error>{error}</Error>
