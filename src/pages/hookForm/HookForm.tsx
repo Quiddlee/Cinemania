@@ -20,8 +20,8 @@ const HookForm = () => {
     resolver,
   });
 
-  function onSubmit(/* data: FormFields */) {
-    //
+  function onSubmit(/* data: HookFormFields */) {
+    // console.log(data);
   }
 
   return (
