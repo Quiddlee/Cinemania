@@ -6,6 +6,7 @@ import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import Form from '@widgets/form/Form';
+import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 import { useForm } from 'react-hook-form';
 
@@ -25,10 +26,7 @@ const HookForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <article className="space-y mb-4">
-        <h1 className="text-2xl">Register</h1>
-        <p className="text-zinc-500">Welcome to our platform! 😎</p>
-      </article>
+      <FormHeader title="Register" subTitle="Welcome to our platform! 😎" />
 
       <FormRow label="Name" error={errors.name?.message}>
         <Input
