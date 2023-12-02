@@ -12,7 +12,15 @@ const Input = forwardRef<
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(!isPasswordType);
 
-  const inputType = isPasswordVisible ? 'text' : 'password';
+  let inputType = type;
+
+  if (isPasswordVisible && isPasswordType) {
+    inputType = 'text';
+  }
+
+  if (!isPasswordVisible && isPasswordType) {
+    inputType = 'password';
+  }
 
   function handleToggle() {
     setIsPasswordVisible((prevState) => !prevState);
