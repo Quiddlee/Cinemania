@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-const className = 'text-sm text-blue-500 hover:text-blue-600 hover:underline';
+const className = 'text-sm text-zinc-100 hover:text-zinc-200 hover:underline';
 
 type LinkButtonProps = PropsWithChildren & {
   to: string;
