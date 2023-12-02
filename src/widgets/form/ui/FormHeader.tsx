@@ -2,13 +2,13 @@ import { FC } from 'react';
 
 type FormHeaderProps = {
   title: string;
-  subTitle: string;
+  subtitle?: string;
 };
 
-const FormHeader: FC<FormHeaderProps> = ({ title, subTitle }) => (
+const FormHeader: FC<FormHeaderProps> = ({ title, subtitle }) => (
   <article className="space-y mb-4">
     <h1 className="text-2xl">{title}</h1>
-    <p className="text-zinc-500">{subTitle}</p>
+    {subtitle && <p className="text-zinc-500">{subtitle}</p>}
   </article>
 );
 

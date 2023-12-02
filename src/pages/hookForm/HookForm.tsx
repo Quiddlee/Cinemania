@@ -32,7 +32,7 @@ const HookForm = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormHeader title="Register" subTitle="Welcome to our platform! 😎" />
+      <FormHeader title="Register" subtitle="Welcome to our platform! 😎" />
 
       <FormRow label="Name" error={errors.name?.message}>
         <Input
