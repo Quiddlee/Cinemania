@@ -9,6 +9,7 @@ import Form from '@widgets/form/Form';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const HookForm = () => {
   const resolver = useYupValidationResolver<HookFormFields>(hookFormSchema);
@@ -20,8 +21,12 @@ const HookForm = () => {
     resolver,
   });
 
-  function onSubmit(/* data: HookFormFields */) {
-    // console.log(data);
+  const navigate = useNavigate();
+
+  function onSubmit(data: HookFormFields) {
+    // eslint-disable-next-line no-console
+    console.log(data);
+    navigate('/');
   }
 
   return (
