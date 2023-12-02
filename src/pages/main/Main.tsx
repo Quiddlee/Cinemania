@@ -20,26 +20,26 @@ const Main = () => {
       <Form>
         {hookFormData && (
           <>
-            <FormRow label="name">
-              <span>{hookFormData.name}</span>
+            <FormRow label="Name">
+              <span className="text-sm">{hookFormData.name}</span>
             </FormRow>
-            <FormRow label="age">
-              <span>{hookFormData.age}</span>
+            <FormRow label="Age">
+              <span className="text-sm">{hookFormData.age}</span>
             </FormRow>
-            <FormRow label="email">
-              <span>{hookFormData.email}</span>
+            <FormRow label="Email">
+              <span className="text-sm">{hookFormData.email}</span>
             </FormRow>
-            <FormRow label="password">
-              <span>{hookFormData.password}</span>
+            <FormRow label="Password">
+              <span className="text-sm">{hookFormData.password}</span>
             </FormRow>
-            <FormRow label="country">
-              <span>{hookFormData.country}</span>
+            <FormRow label="Country">
+              <span className="text-sm">{hookFormData.country}</span>
             </FormRow>
-            <FormRow label="gender">
-              <span>{hookFormData.gender}</span>
+            <FormRow label="Gender">
+              <span className="text-sm">{hookFormData.gender}</span>
             </FormRow>
-            <FormRow label="terms and conditions">
-              <span>{hookFormData.termsAndConditions}</span>
+            <FormRow label="Terms and conditions">
+              <span className="text-sm">{hookFormData.termsAndConditions}</span>
             </FormRow>
           </>
         )}
