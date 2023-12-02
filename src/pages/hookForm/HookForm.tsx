@@ -21,6 +21,7 @@ const HookForm = () => {
     handleSubmit,
   } = useForm<HookFormFields>({
     resolver,
+    mode: 'onChange',
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -86,7 +87,7 @@ const HookForm = () => {
         <select id="gender" {...register('gender')}>
           <option value="male">Male</option>
           <option value="female">Female</option>
-          <option value="other">other</option>
+          <option value="other">Other</option>
         </select>
       </FormRow>
 
@@ -99,10 +100,10 @@ const HookForm = () => {
         />
 
         <datalist id="country-list">
-          <option value="US">United States of America</option>
-          <option value="UA">Ukraine</option>
-          <option value="PL">Poland</option>
-          <option value="DE">Germany</option>
+          <option value="United States of America">US</option>
+          <option value="Ukraine">UA</option>
+          <option value="Poland">PL</option>
+          <option value="Germany">DE</option>
         </datalist>
       </FormRow>
 

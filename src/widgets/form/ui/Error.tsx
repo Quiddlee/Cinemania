@@ -4,7 +4,7 @@ import cn from '@shared/lib/helpers/cn';
 
 const Error: FC<PropsWithChildren> = ({ children }) => (
   <span
-    className={cn('h-6 text-sm text-red-900', {
+    className={cn('min-h-[1.5rem] text-sm text-red-900', {
       'opacity-100': children,
     })}>
     {children}
