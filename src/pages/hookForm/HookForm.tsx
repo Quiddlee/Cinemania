@@ -33,7 +33,7 @@ const HookForm = () => {
           id="name"
           type="text"
           placeholder="Enter yout name..."
-          {...register('name', { required: 'This field is required' })}
+          {...register('name')}
         />
       </FormRow>
 
@@ -41,9 +41,8 @@ const HookForm = () => {
         <Input
           id="age"
           type="number"
-          min="0"
           placeholder="Enter yout age..."
-          {...register('age', { required: 'This field is required' })}
+          {...register('age')}
         />
       </FormRow>
 
@@ -52,7 +51,7 @@ const HookForm = () => {
           id="email"
           type="text"
           placeholder="Enter yout email..."
-          {...register('email', { required: 'This field is required' })}
+          {...register('email')}
         />
       </FormRow>
 
@@ -61,7 +60,7 @@ const HookForm = () => {
           id="password"
           type="password"
           placeholder="Enter yout password..."
-          {...register('password', { required: 'This field is required' })}
+          {...register('password')}
         />
       </FormRow>
 
@@ -72,10 +71,8 @@ const HookForm = () => {
         <Input
           id="confirmPassword"
           type="password"
-          placeholder="Enter your email..."
-          {...register('confirmPassword', {
-            required: 'This field is required',
-          })}
+          placeholder="Enter your confirm password..."
+          {...register('confirmPassword')}
         />
       </FormRow>
 
@@ -92,9 +89,7 @@ const HookForm = () => {
           id="country"
           list="country-list"
           placeholder="Enter your contry..."
-          {...register('country', {
-            required: 'This field is required',
-          })}
+          {...register('country')}
         />
 
         <datalist id="country-list">
@@ -106,13 +101,7 @@ const HookForm = () => {
       </FormRow>
 
       <FormRow label="Picture" error={errors.picture?.message}>
-        <Input
-          id="picture"
-          type="file"
-          {...register('picture', {
-            required: 'This field is required',
-          })}
-        />
+        <Input id="picture" type="file" {...register('picture')} />
       </FormRow>
 
       <FormRow
@@ -123,9 +112,7 @@ const HookForm = () => {
         <Checkbox
           id="termsAndConditions"
           type="checkbox"
-          {...register('termsAndConditions', {
-            required: 'This field is required',
-          })}
+          {...register('termsAndConditions')}
         />
       </FormRow>
 
