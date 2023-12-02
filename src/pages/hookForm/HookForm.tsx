@@ -1,6 +1,8 @@
 import hookFormSchema, {
   HookFormFields,
 } from '@pages/hookForm/model/hookFormSchema';
+import { formSubmitted } from '@pages/hookForm/model/slice';
+import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useYupValidationResolver from '@shared/lib/hooks/useYupValidationResolver';
 import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
@@ -20,12 +22,11 @@ const HookForm = () => {
   } = useForm<HookFormFields>({
     resolver,
   });
-
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   function onSubmit(data: HookFormFields) {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    dispatch(formSubmitted(data));
     navigate('/');
   }
 
