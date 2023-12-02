@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { HookFormFields } from '@pages/hookForm/model/hookFormSchema';
+import { HookFormFields } from '@widgets/form/model/formSchema';
 
 type HookFormData = Omit<HookFormFields, 'picture'> & {
   picture: string;

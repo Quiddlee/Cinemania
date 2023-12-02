@@ -1,13 +1,11 @@
 import { FormEvent, useCallback, useRef } from 'react';
 
-import hookFormSchema, {
-  HookFormFields,
-} from '@pages/hookForm/model/hookFormSchema';
 import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
 import Form from '@widgets/form/Form';
+import formSchema, { HookFormFields } from '@widgets/form/model/formSchema';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 
@@ -24,7 +22,7 @@ const UncontrolledForm = () => {
       termsAndConditions: true,
     } as HookFormFields;
 
-    await hookFormSchema.validate(formValues);
+    await formSchema.validate(formValues);
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import isFile from '@shared/lib/helpers/isFile';
 import isFileList from '@shared/lib/helpers/isFileList';
 import { bool, InferType, mixed, number, object, ref, string } from 'yup';
 
-const hookFormSchema = object({
+const formSchema = object({
   name: string().required('Name is required field'),
   age: number()
     .typeError('Age must be a number')
@@ -76,6 +76,6 @@ const hookFormSchema = object({
     .required('T&C is required field'),
 });
 
-export type HookFormFields = InferType<typeof hookFormSchema>;
+export type HookFormFields = InferType<typeof formSchema>;
 
-export default hookFormSchema;
+export default formSchema;
