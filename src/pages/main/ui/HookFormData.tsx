@@ -15,32 +15,30 @@ const HookFormData = () => {
     );
 
   return (
-    <Form>
-      <>
-        <FormHeader title="Hook form data" />
+    <Form className="gap-0">
+      <FormHeader title="Hook form data" />
 
-        <FormRow label="Name">
-          <span className="text-sm">{formData.name}</span>
-        </FormRow>
-        <FormRow label="Age">
-          <span className="text-sm">{formData.age}</span>
-        </FormRow>
-        <FormRow label="Email">
-          <span className="text-sm">{formData.email}</span>
-        </FormRow>
-        <FormRow label="Password">
-          <span className="text-sm">{formData.password}</span>
-        </FormRow>
-        <FormRow label="Country">
-          <span className="text-sm">{formData.country}</span>
-        </FormRow>
-        <FormRow label="Gender">
-          <span className="text-sm">{formData.gender}</span>
-        </FormRow>
-        <FormRow label="Terms and conditions">
-          <span className="text-sm">{formData.termsAndConditions}</span>
-        </FormRow>
-      </>
+      <FormRow label="Name" className="mt-4">
+        <span className="text-sm text-zinc-500">{formData.name}</span>
+      </FormRow>
+      <FormRow label="Age">
+        <span className="text-sm text-zinc-500">{formData.age}</span>
+      </FormRow>
+      <FormRow label="Email">
+        <span className="text-sm text-zinc-500">{formData.email}</span>
+      </FormRow>
+      <FormRow label="Password">
+        <span className="text-sm text-zinc-500">{formData.password}</span>
+      </FormRow>
+      <FormRow label="Country">
+        <span className="text-sm text-zinc-500">{formData.country}</span>
+      </FormRow>
+      <FormRow label="Gender">
+        <span className="text-sm text-zinc-500">{formData.gender}</span>
+      </FormRow>
+      <FormRow label="Terms and conditions">
+        <span className="text-sm text-zinc-500">accepted</span>
+      </FormRow>
     </Form>
   );
 };
