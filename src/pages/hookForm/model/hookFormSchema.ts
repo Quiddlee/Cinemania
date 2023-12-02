@@ -2,6 +2,8 @@ import {
   ALLOWED_FILE_SIZE,
   ALLOWED_FILE_TYPES,
 } from '@pages/hookForm/const/const';
+import isFile from '@shared/lib/helpers/isFile';
+import isFileList from '@shared/lib/helpers/isFileList';
 import { bool, InferType, mixed, number, object, ref, string } from 'yup';
 
 const hookFormSchema = object({
@@ -26,13 +28,22 @@ const hookFormSchema = object({
   gender: string(),
   country: string().required('Country is required field'),
   picture: mixed()
-    .test('required', 'The file is required', (value) => {
-      const fileList = value as FileList;
-      return Boolean(fileList.length);
-    })
+    .test(
+      'required',
+      'The file is required',
+      (value) => isFileList(value) || isFile(value),
+    )
     .test('fileSize', 'The file size must be less or equal 500kb', (value) => {
-      const fileList = value as FileList;
-      const file = fileList.item(0);
+      let file: File | null = null;
+
+      if (isFileList(value)) {
+        const fileList = value as FileList;
+        file = fileList.item(0);
+      }
+
+      if (isFile(value)) {
+        file = value;
+      }
 
       if (!file) return true;
       return file.size <= ALLOWED_FILE_SIZE;
@@ -41,11 +52,23 @@ const hookFormSchema = object({
       'fileExtension',
       'The file extension must be jpeg or png',
       (value) => {
-        const fileList = value as FileList;
-        const file = fileList.item(0);
+        let file: File | null = null;
+
+        if (isFileList(value)) {
+          const fileList = value as FileList;
+          file = fileList.item(0);
+        }
+
+        if (isFile(value)) {
+          file = value;
+        }
 
         if (!file) return true;
-        return ALLOWED_FILE_TYPES.some((type) => file.type === type);
+
+        const fileType = file.type;
+        return ALLOWED_FILE_TYPES.some(
+          (allowedType) => fileType === allowedType,
+        );
       },
     ),
   termsAndConditions: bool()

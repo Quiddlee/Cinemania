@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
 import cn from '@shared/lib/helpers/cn';
 
@@ -14,23 +14,31 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   styleVariant?: ButtonVariants;
 };
 
-const Button: FC<ButtonProps> = ({
-  submit = false,
-  className,
-  children,
-  styleVariant = 'filled',
-  disabled,
-  ...props
-}) => (
-  <button
-    {...props}
-    type={submit ? 'submit' : 'button'}
-    className={cn(buttonVariants[styleVariant], className, {
-      'opacity-30': disabled,
-      'pointer-events-none': disabled,
-    })}>
-    {children}
-  </button>
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      submit = false,
+      className,
+      children,
+      styleVariant = 'filled',
+      disabled,
+      ...props
+    },
+    ref,
+  ) => (
+    <button
+      {...props}
+      ref={ref}
+      type={submit ? 'submit' : 'button'}
+      className={cn(buttonVariants[styleVariant], className, {
+        'opacity-30': disabled,
+        'pointer-events-none': disabled,
+      })}>
+      {children}
+    </button>
+  ),
 );
+
+Button.displayName = 'Button';
 
 export default Button;
