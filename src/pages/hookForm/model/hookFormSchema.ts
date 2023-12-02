@@ -1,4 +1,8 @@
-import { bool, InferType, number, object, ref, string } from 'yup';
+import {
+  ALLOWED_FILE_SIZE,
+  ALLOWED_FILE_TYPES,
+} from '@pages/hookForm/const/const';
+import { bool, InferType, mixed, number, object, ref, string } from 'yup';
 
 const hookFormSchema = object({
   name: string().required('Name is required field'),
@@ -23,7 +27,29 @@ const hookFormSchema = object({
     .oneOf(['male', 'female', 'undecided'], 'Gender must match')
     .required('Gender is required'),
   country: string().required('Country is required field'),
-  picture: string().required('Picture is required field'),
+  picture: mixed()
+    .test('required', 'The file is required', (value) => {
+      const fileList = value as FileList;
+      return Boolean(fileList.length);
+    })
+    .test('fileSize', 'The file size must be less or equal 500kb', (value) => {
+      const fileList = value as FileList;
+      const file = fileList.item(0);
+
+      if (!file) return true;
+      return file.size <= ALLOWED_FILE_SIZE;
+    })
+    .test(
+      'fileExtension',
+      'The file extension must be jpeg or png',
+      (value) => {
+        const fileList = value as FileList;
+        const file = fileList.item(0);
+
+        if (!file) return true;
+        return ALLOWED_FILE_TYPES.some((type) => file.type === type);
+      },
+    ),
   termsAndConditions: bool()
     .oneOf([true], 'Terms and conditions should be accepted')
     .required('T&C is required field'),
