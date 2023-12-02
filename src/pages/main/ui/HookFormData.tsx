@@ -36,6 +36,11 @@ const HookFormData = () => {
       <FormRow label="Gender">
         <span className="text-sm text-zinc-500">{formData.gender}</span>
       </FormRow>
+      <FormRow label="Picture">
+        <span className="truncate text-sm text-zinc-500">
+          {formData.picture}
+        </span>
+      </FormRow>
       <FormRow label="Terms and conditions">
         <span className="text-sm text-zinc-500">accepted</span>
       </FormRow>

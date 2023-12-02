@@ -2,6 +2,7 @@ import hookFormSchema, {
   HookFormFields,
 } from '@pages/hookForm/model/hookFormSchema';
 import { formSubmitted } from '@pages/hookForm/model/slice';
+import fileToBase64 from '@shared/lib/helpers/fileToBase64';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useYupValidationResolver from '@shared/lib/hooks/useYupValidationResolver';
 import Button from '@shared/ui/Button';
@@ -26,8 +27,17 @@ const HookForm = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  function onSubmit(data: HookFormFields) {
-    dispatch(formSubmitted(data));
+  async function onSubmit(data: HookFormFields) {
+    const picture = data.picture as FileList;
+    const file = picture.item(0) as File;
+
+    const base64File = await fileToBase64(file);
+    const modifiedData = {
+      ...data,
+      picture: base64File,
+    } as const;
+
+    dispatch(formSubmitted(modifiedData));
     navigate('/');
   }
 

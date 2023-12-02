@@ -2,8 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { HookFormFields } from '@pages/hookForm/model/hookFormSchema';
 
+type HookFormData = Omit<HookFormFields, 'picture'> & {
+  picture: string;
+};
+
 type IInitialState = {
-  formData: HookFormFields | null;
+  formData: HookFormData | null;
 };
 
 export const initialState: IInitialState = {
@@ -14,7 +18,7 @@ export const hookFormSlice = createSlice({
   name: 'hookForm',
   initialState,
   reducers: {
-    formSubmitted: (state, action: PayloadAction<HookFormFields>) => {
+    formSubmitted: (state, action: PayloadAction<HookFormData>) => {
       state.formData = action.payload;
     },
   },
