@@ -41,7 +41,7 @@ const HookForm = () => {
           <Input
             id="name"
             type="text"
-            placeholder="Enter yout name..."
+            placeholder="Enter your name..."
             {...register('name')}
           />
         </FormRow>
@@ -50,7 +50,7 @@ const HookForm = () => {
           <Input
             id="age"
             type="number"
-            placeholder="Enter yout age..."
+            placeholder="Enter your age..."
             {...register('age')}
           />
         </FormRow>
@@ -59,7 +59,7 @@ const HookForm = () => {
           <Input
             id="email"
             type="text"
-            placeholder="Enter yout email..."
+            placeholder="Enter your email..."
             {...register('email')}
           />
         </FormRow>
@@ -68,7 +68,7 @@ const HookForm = () => {
           <Input
             id="password"
             type="password"
-            placeholder="Enter yout password..."
+            placeholder="Enter your password..."
             {...register('password')}
           />
 

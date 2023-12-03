@@ -67,7 +67,7 @@ const UncontrolledForm = () => {
             id="name"
             name="name"
             type="text"
-            placeholder="Enter yout name..."
+            placeholder="Enter your name..."
           />
         </FormRow>
 
@@ -76,7 +76,7 @@ const UncontrolledForm = () => {
             id="age"
             name="age"
             type="number"
-            placeholder="Enter yout age..."
+            placeholder="Enter your age..."
           />
         </FormRow>
 
@@ -85,7 +85,7 @@ const UncontrolledForm = () => {
             id="email"
             name="email"
             type="text"
-            placeholder="Enter yout email..."
+            placeholder="Enter your email..."
           />
         </FormRow>
 
@@ -95,7 +95,7 @@ const UncontrolledForm = () => {
             id="password"
             name="password"
             type="password"
-            placeholder="Enter yout password..."
+            placeholder="Enter your password..."
           />
 
           <PasswordStrengthMeter
