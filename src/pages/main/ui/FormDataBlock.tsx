@@ -1,49 +1,43 @@
 import { FC, useEffect, useState } from 'react';
 
+import { formLengthUpdated } from '@pages/main/model/slice';
 import cn from '@shared/lib/helpers/cn';
+import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
-import selectHookFormData from '@shared/lib/selectors/selectHookFormData';
-import selectUncontrolledFormData from '@shared/lib/selectors/selectUncontrolledFormData';
+import selectFormDataLen from '@shared/lib/selectors/selectFormDataLen';
 import Form from '@widgets/form/Form';
-import { FormTypes } from '@widgets/form/types/types';
+import { FormData } from '@widgets/form/types/types';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 
-type FormDataBlockProps = {
-  formType: FormTypes;
-};
+const TIMEOUT_MS = 2000;
 
-const FormDataBlock: FC<FormDataBlockProps> = ({ formType }) => {
-  const isHookForm = formType === 'hook';
+const FormDataBlock: FC<{
+  formData: FormData;
+  isNew: boolean;
+}> = ({ formData, isNew }) => {
+  const [isFirstLoad, setIsFirstLoad] = useState(isNew);
 
-  const { formData } = useAppSelector(
-    isHookForm ? selectHookFormData : selectUncontrolledFormData,
-  );
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-
-  const title = `${isHookForm ? 'Hook' : 'Uncontrolled'} form data`;
+  const prevLen = useAppSelector(selectFormDataLen);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (formData) {
-      setTimeout(() => {
-        setIsFirstLoad(false);
-      }, 3000);
-    }
-  }, [formData]);
+    if (!isNew) return undefined as void;
 
-  if (!formData)
-    return (
-      <Form>
-        <FormHeader title="No data 🍃" />
-      </Form>
-    );
+    const timeoutId = setTimeout(() => {
+      setIsFirstLoad(false);
+      dispatch(formLengthUpdated(prevLen + 1));
+    }, TIMEOUT_MS);
+
+    return () => clearTimeout(timeoutId);
+  }, [dispatch, formData, isNew, prevLen]);
 
   return (
     <Form
       className={cn('gap-0', {
         'border-zinc-100': isFirstLoad,
       })}>
-      <FormHeader title={title} />
+      <FormHeader title="Form data" />
 
       <FormRow label="Name" className="mt-4">
         <span className="text-sm text-zinc-500">{formData.name}</span>

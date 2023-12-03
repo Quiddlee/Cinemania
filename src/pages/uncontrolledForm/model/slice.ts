@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FormData } from '@widgets/form/types/types';
 
 type IInitialState = {
-  formData: FormData | null;
+  formData: FormData[];
 };
 
 export const initialState: IInitialState = {
-  formData: null,
+  formData: [],
 };
 
 export const uncontrolledFormSlice = createSlice({
@@ -15,7 +15,7 @@ export const uncontrolledFormSlice = createSlice({
   initialState,
   reducers: {
     formSubmitted: (state, action: PayloadAction<FormData>) => {
-      state.formData = action.payload;
+      state.formData.push(action.payload);
     },
   },
 });
