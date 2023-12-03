@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
+import cn from '@shared/lib/helpers/cn';
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import selectHookFormData from '@shared/lib/selectors/selectHookFormData';
 import selectUncontrolledFormData from '@shared/lib/selectors/selectUncontrolledFormData';
@@ -18,8 +19,17 @@ const FormDataBlock: FC<FormDataBlockProps> = ({ formType }) => {
   const { formData } = useAppSelector(
     isHookForm ? selectHookFormData : selectUncontrolledFormData,
   );
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
   const title = `${isHookForm ? 'Hook' : 'Uncontrolled'} form data`;
+
+  useEffect(() => {
+    if (formData) {
+      setTimeout(() => {
+        setIsFirstLoad(false);
+      }, 3000);
+    }
+  }, [formData]);
 
   if (!formData)
     return (
@@ -29,7 +39,10 @@ const FormDataBlock: FC<FormDataBlockProps> = ({ formType }) => {
     );
 
   return (
-    <Form className="gap-0">
+    <Form
+      className={cn('gap-0', {
+        'border-zinc-100': isFirstLoad,
+      })}>
       <FormHeader title={title} />
 
       <FormRow label="Name" className="mt-4">
