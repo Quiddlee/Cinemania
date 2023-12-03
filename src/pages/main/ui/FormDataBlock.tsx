@@ -1,11 +1,25 @@
+import { FC } from 'react';
+
 import useAppSelector from '@shared/lib/hooks/useAppSelector';
 import selectHookFormData from '@shared/lib/selectors/selectHookFormData';
+import selectUncontrolledFormData from '@shared/lib/selectors/selectUncontrolledFormData';
 import Form from '@widgets/form/Form';
+import { FormTypes } from '@widgets/form/types/types';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 
-const HookFormData = () => {
-  const { formData } = useAppSelector(selectHookFormData);
+type FormDataBlockProps = {
+  formType: FormTypes;
+};
+
+const FormDataBlock: FC<FormDataBlockProps> = ({ formType }) => {
+  const isHookForm = formType === 'hook';
+
+  const { formData } = useAppSelector(
+    isHookForm ? selectHookFormData : selectUncontrolledFormData,
+  );
+
+  const title = `${isHookForm ? 'Hook' : 'Uncontrolled'} form data`;
 
   if (!formData)
     return (
@@ -16,7 +30,7 @@ const HookFormData = () => {
 
   return (
     <Form className="gap-0">
-      <FormHeader title="Hook form data" />
+      <FormHeader title={title} />
 
       <FormRow label="Name" className="mt-4">
         <span className="text-sm text-zinc-500">{formData.name}</span>
@@ -48,4 +62,4 @@ const HookFormData = () => {
   );
 };
 
-export default HookFormData;
+export default FormDataBlock;

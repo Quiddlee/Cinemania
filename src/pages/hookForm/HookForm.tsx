@@ -12,7 +12,7 @@ import { useForm } from 'react-hook-form';
 
 const HookForm = () => {
   const resolver = useYupValidationResolver(formSchema);
-  const submitForm = useSubmit();
+  const submitForm = useSubmit('hook');
   const {
     register,
     formState: { errors, isValid },

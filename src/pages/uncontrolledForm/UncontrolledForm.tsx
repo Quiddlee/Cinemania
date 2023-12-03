@@ -19,7 +19,7 @@ const UncontrolledForm = () => {
   const [errors, setErrors] = useState<ValidationErrors<FormFields> | null>(
     null,
   );
-  const submitForm = useSubmit();
+  const submitForm = useSubmit('uncontrolled');
 
   const handleSubmit = useCallback(
     async (evt: FormEvent) => {
@@ -55,7 +55,7 @@ const UncontrolledForm = () => {
     <>
       <LinkButton to="/">Back</LinkButton>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <FormHeader title="Register" subtitle="Welcome to our platform! 😎" />
+        <FormHeader title="Register" subtitle="Welcome to our platform! 🚀" />
 
         <FormRow label="Name" error={errors?.name?.message}>
           <Input
