@@ -34,7 +34,7 @@ const Input = forwardRef<
         ref={ref}
         disabled={disabled}
         className={cn(
-          'h-10 w-full rounded-md border border-zinc-800 bg-neutral-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 transition-all duration-200 focus:outline-none focus:ring focus:ring-zinc-50 focus:ring-offset-2 focus:ring-offset-zinc-950',
+          'h-10 w-full rounded-md border border-zinc-800 bg-neutral-950 px-3 py-2 pr-10 text-sm text-zinc-100 placeholder-zinc-500 transition-all duration-200 focus:outline-none focus:ring focus:ring-zinc-50 focus:ring-offset-2 focus:ring-offset-zinc-950',
           className,
           {
             'opacity-40': disabled,

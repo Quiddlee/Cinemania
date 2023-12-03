@@ -3,6 +3,7 @@ import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
+import PasswordStrengthMeter from '@shared/ui/PasswordStrengthMeter';
 import Form from '@widgets/form/Form';
 import useSubmit from '@widgets/form/lib/hooks/useSubmit';
 import formSchema, { FormFields } from '@widgets/form/model/formSchema';
@@ -17,10 +18,13 @@ const HookForm = () => {
     register,
     formState: { errors, isValid },
     handleSubmit,
+    getValues,
   } = useForm<FormFields>({
     resolver,
     mode: 'onChange',
   });
+
+  const passwordValue = getValues('password');
 
   async function onSubmit(data: FormFields) {
     void submitForm(data);
@@ -66,6 +70,8 @@ const HookForm = () => {
             placeholder="Enter yout password..."
             {...register('password')}
           />
+
+          <PasswordStrengthMeter passwordValue={passwordValue} />
         </FormRow>
 
         <FormRow

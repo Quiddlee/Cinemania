@@ -7,6 +7,7 @@ import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
+import PasswordStrengthMeter from '@shared/ui/PasswordStrengthMeter';
 import Form from '@widgets/form/Form';
 import useSubmit from '@widgets/form/lib/hooks/useSubmit';
 import formSchema, { FormFields } from '@widgets/form/model/formSchema';
@@ -20,6 +21,9 @@ const UncontrolledForm = () => {
     null,
   );
   const submitForm = useSubmit('uncontrolled');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const inputValue = inputRef.current?.value ?? '';
 
   const handleSubmit = useCallback(
     async (evt: FormEvent) => {
@@ -86,11 +90,14 @@ const UncontrolledForm = () => {
 
         <FormRow label="Password" error={errors?.password?.message}>
           <Input
+            ref={inputRef}
             id="password"
             name="password"
             type="password"
             placeholder="Enter yout password..."
           />
+
+          <PasswordStrengthMeter passwordValue={inputValue} />
         </FormRow>
 
         <FormRow

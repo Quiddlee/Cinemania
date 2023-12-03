@@ -4,6 +4,12 @@ import {
 } from '@pages/hookForm/const/const';
 import isFile from '@shared/lib/helpers/isFile';
 import isFileList from '@shared/lib/helpers/isFileList';
+import {
+  atLeastOneDigit,
+  atLeastOneLowerCase,
+  atLeastOneSpecialCharacter,
+  atLeastOneUpperCase,
+} from '@widgets/form/lib/const/const';
 import { bool, InferType, mixed, number, object, ref, string } from 'yup';
 
 const formSchema = object({
@@ -17,10 +23,13 @@ const formSchema = object({
     .required('Email is required field'),
   password: string()
     .min(8, 'Password must have at least 8 characters')
-    .matches(/[0-9]/, 'Must contain at least 1 digit')
-    .matches(/[a-z]/, 'Must contain at least 1 lowercase letter')
-    .matches(/[A-Z]/, 'Must contain at least 1 uppercase letter')
-    .matches(/[^\w\s]/g, 'Must contain at least 1 special character')
+    .matches(atLeastOneDigit, 'Must contain at least 1 digit')
+    .matches(atLeastOneLowerCase, 'Must contain at least 1 lowercase letter')
+    .matches(atLeastOneUpperCase, 'Must contain at least 1 uppercase letter')
+    .matches(
+      atLeastOneSpecialCharacter,
+      'Must contain at least 1 special character',
+    )
     .required('Password is required field'),
   confirmPassword: string()
     .oneOf([ref('password')], 'Passwords does not match')

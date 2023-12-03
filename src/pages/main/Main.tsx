@@ -13,6 +13,7 @@ const Main = () => (
     </div>
 
     <div className="flex gap-8">
+      {/* TODO: create a new form block on every form submit */}
       <FormDataBlock formType="uncontrolled" />
       <FormDataBlock formType="hook" />
     </div>
