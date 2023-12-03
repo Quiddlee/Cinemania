@@ -13,7 +13,9 @@ import {
 import { bool, InferType, mixed, number, object, ref, string } from 'yup';
 
 const formSchema = object({
-  name: string().required('Name is required field'),
+  name: string()
+    .matches(/^[A-Z]/, 'First letter must be uppercase')
+    .required('Name is required field'),
   age: number()
     .typeError('Age must be a number')
     .min(12, 'You must be at least 12 years old')
