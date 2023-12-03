@@ -1,7 +1,5 @@
 import { FormEvent, useCallback, useRef, useState } from 'react';
 
-import { formSubmitted } from '@pages/uncontrolledForm/model/slice';
-import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useYupValidationResolver, {
   ValidationErrors,
 } from '@shared/lib/hooks/useYupValidationResolver';
@@ -10,11 +8,10 @@ import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
 import Form from '@widgets/form/Form';
-import prepareFormData from '@widgets/form/lib/helpers/prepareFormData';
+import useSubmit from '@widgets/form/lib/hooks/useSubmit';
 import formSchema, { FormFields } from '@widgets/form/model/formSchema';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
-import { useNavigate } from 'react-router-dom';
 
 const UncontrolledForm = () => {
   const formRef = useRef(null);
@@ -22,8 +19,7 @@ const UncontrolledForm = () => {
   const [errors, setErrors] = useState<ValidationErrors<FormFields> | null>(
     null,
   );
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const submitForm = useSubmit();
 
   const handleSubmit = useCallback(
     async (evt: FormEvent) => {
@@ -49,13 +45,10 @@ const UncontrolledForm = () => {
         setErrors(validationErrors);
       } else {
         setErrors(null);
-
-        const modifiedData = await prepareFormData(values as FormFields);
-        dispatch(formSubmitted(modifiedData));
-        navigate('/');
+        void submitForm(values as FormFields);
       }
     },
-    [dispatch, navigate, resolver],
+    [resolver, submitForm],
   );
 
   return (

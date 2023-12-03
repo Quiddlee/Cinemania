@@ -1,20 +1,18 @@
-import { formSubmitted } from '@pages/hookForm/model/slice';
-import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useYupValidationResolver from '@shared/lib/hooks/useYupValidationResolver';
 import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
 import Form from '@widgets/form/Form';
-import prepareFormData from '@widgets/form/lib/helpers/prepareFormData';
+import useSubmit from '@widgets/form/lib/hooks/useSubmit';
 import formSchema, { FormFields } from '@widgets/form/model/formSchema';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 const HookForm = () => {
   const resolver = useYupValidationResolver(formSchema);
+  const submitForm = useSubmit();
   const {
     register,
     formState: { errors, isValid },
@@ -23,13 +21,9 @@ const HookForm = () => {
     resolver,
     mode: 'onChange',
   });
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   async function onSubmit(data: FormFields) {
-    const modifiedData = await prepareFormData(data);
-    dispatch(formSubmitted(modifiedData));
-    navigate('/');
+    void submitForm(data);
   }
 
   return (
