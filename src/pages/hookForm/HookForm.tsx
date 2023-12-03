@@ -7,6 +7,7 @@ import PasswordStrengthMeter from '@shared/ui/PasswordStrengthMeter';
 import Form from '@widgets/form/Form';
 import useSubmit from '@widgets/form/lib/hooks/useSubmit';
 import formSchema, { FormFields } from '@widgets/form/model/formSchema';
+import CountryDataList from '@widgets/form/ui/CountryDataList';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 import { useForm } from 'react-hook-form';
@@ -104,13 +105,7 @@ const HookForm = () => {
             placeholder="Enter your contry..."
             {...register('country')}
           />
-
-          <datalist id="country-list">
-            <option value="United States of America">US</option>
-            <option value="Ukraine">UA</option>
-            <option value="Poland">PL</option>
-            <option value="Germany">DE</option>
-          </datalist>
+          <CountryDataList id="country-list" />
         </FormRow>
 
         <FormRow label="Picture" error={errors.picture?.message}>
