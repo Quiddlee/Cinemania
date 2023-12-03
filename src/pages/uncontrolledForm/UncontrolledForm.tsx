@@ -23,7 +23,7 @@ const UncontrolledForm = () => {
   const submitForm = useSubmit('uncontrolled');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const inputValue = inputRef.current?.value ?? '';
+  const passwordValue = inputRef.current?.value ?? '';
 
   const handleSubmit = useCallback(
     async (evt: FormEvent) => {
@@ -88,7 +88,7 @@ const UncontrolledForm = () => {
           />
         </FormRow>
 
-        <FormRow label="Password" error={errors?.password?.message}>
+        <FormRow label="Password">
           <Input
             ref={inputRef}
             id="password"
@@ -97,7 +97,10 @@ const UncontrolledForm = () => {
             placeholder="Enter yout password..."
           />
 
-          <PasswordStrengthMeter passwordValue={inputValue} />
+          <PasswordStrengthMeter
+            passwordValue={passwordValue}
+            errorMessage={errors?.password?.message}
+          />
         </FormRow>
 
         <FormRow

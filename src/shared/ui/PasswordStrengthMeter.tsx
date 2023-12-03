@@ -6,12 +6,14 @@ import { passwordStrengthLevels } from '@widgets/form/lib/const/const';
 
 type PasswordStrengthMeterProps = {
   passwordValue: string;
+  errorMessage?: string;
 };
 
 const FIRST_LEVEL_TEXT = passwordStrengthLevels[0];
 
 const PasswordStrengthMeter: FC<PasswordStrengthMeterProps> = ({
   passwordValue,
+  errorMessage,
 }) => {
   const passwordStrengthLevel = usePasswordStrength(passwordValue);
 
@@ -36,7 +38,7 @@ const PasswordStrengthMeter: FC<PasswordStrengthMeterProps> = ({
 
             '-translate-y-1 opacity-0': noLevel,
           })}>
-          {strengthLevelText}
+          {`${strengthLevelText} ${errorMessage ?? ''}`}
         </span>
 
         <span

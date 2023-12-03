@@ -63,7 +63,7 @@ const HookForm = () => {
           />
         </FormRow>
 
-        <FormRow label="Password" error={errors.password?.message}>
+        <FormRow label="Password">
           <Input
             id="password"
             type="password"
@@ -71,7 +71,10 @@ const HookForm = () => {
             {...register('password')}
           />
 
-          <PasswordStrengthMeter passwordValue={passwordValue} />
+          <PasswordStrengthMeter
+            passwordValue={passwordValue}
+            errorMessage={errors.password?.message}
+          />
         </FormRow>
 
         <FormRow

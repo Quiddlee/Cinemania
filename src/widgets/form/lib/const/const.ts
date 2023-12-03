@@ -9,8 +9,8 @@ export const passwordStrengthArr = [
   atLeastOneSpecialCharacter,
 ];
 export const passwordStrengthLevels = [
-  'poor 💩',
-  'fair 🤔',
-  'good 😃',
-  'excellent 🚀',
+  'Poor 💩',
+  'Fair 🤔',
+  'Good 😃',
+  'Excellent 🚀',
 ] as const;
