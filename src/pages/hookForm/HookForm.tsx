@@ -1,5 +1,4 @@
 import { formSubmitted } from '@pages/hookForm/model/slice';
-import fileToBase64 from '@shared/lib/helpers/fileToBase64';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useYupValidationResolver from '@shared/lib/hooks/useYupValidationResolver';
 import Button from '@shared/ui/Button';
@@ -7,6 +6,7 @@ import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
 import Form from '@widgets/form/Form';
+import prepareFormData from '@widgets/form/lib/helpers/prepareFormData';
 import formSchema, { FormFields } from '@widgets/form/model/formSchema';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
@@ -27,15 +27,7 @@ const HookForm = () => {
   const dispatch = useAppDispatch();
 
   async function onSubmit(data: FormFields) {
-    const picture = data.picture as FileList;
-    const file = picture.item(0) as File;
-
-    const base64File = await fileToBase64(file);
-    const modifiedData = {
-      ...data,
-      picture: base64File,
-    } as const;
-
+    const modifiedData = await prepareFormData(data);
     dispatch(formSubmitted(modifiedData));
     navigate('/');
   }

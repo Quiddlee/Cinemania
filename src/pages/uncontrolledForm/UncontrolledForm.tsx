@@ -1,7 +1,6 @@
 import { FormEvent, useCallback, useRef, useState } from 'react';
 
 import { formSubmitted } from '@pages/uncontrolledForm/model/slice';
-import fileToBase64 from '@shared/lib/helpers/fileToBase64';
 import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
 import useYupValidationResolver, {
   ValidationErrors,
@@ -11,8 +10,8 @@ import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
 import Form from '@widgets/form/Form';
+import prepareFormData from '@widgets/form/lib/helpers/prepareFormData';
 import formSchema, { FormFields } from '@widgets/form/model/formSchema';
-import type { FormData } from '@widgets/form/types/types';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 import { useNavigate } from 'react-router-dom';
@@ -44,18 +43,14 @@ const UncontrolledForm = () => {
       const { errors: validationErrors, values } =
         await resolver<FormFields>(formValues);
 
-      if (Object.keys(validationErrors).length) {
+      const isErrorsFound = Object.keys(validationErrors).length;
+
+      if (isErrorsFound) {
         setErrors(validationErrors);
       } else {
         setErrors(null);
 
-        const picture = values.picture as File;
-        const base64File = await fileToBase64(picture);
-        const modifiedData = {
-          ...values,
-          picture: base64File,
-        } as FormData;
-
+        const modifiedData = await prepareFormData(values as FormFields);
         dispatch(formSubmitted(modifiedData));
         navigate('/');
       }

@@ -1,16 +1,15 @@
 import { useCallback } from 'react';
 
 import { EmptyObject } from '@customTypes/types';
+import { FormFields } from '@widgets/form/model/formSchema';
 import { object, ValidationError } from 'yup';
 
 export type ValidationErrors<TFormData> = Partial<{
   [key in keyof TFormData]: { type: string; message: string };
 }>;
 
-type UseYupValidationResolverReturn<TFormData> = Promise<{
-  values:
-    | Awaited<ReturnType<ReturnType<typeof object>['validate']>>
-    | EmptyObject;
+type ValidationResolverReturn<TFormData> = Promise<{
+  values: FormFields | EmptyObject;
   errors: ValidationErrors<TFormData>;
 }>;
 
@@ -18,11 +17,11 @@ const useYupValidationResolver = (
   validationSchema: ReturnType<typeof object>,
 ) =>
   useCallback(
-    async <TData>(data: TData): UseYupValidationResolverReturn<TData> => {
+    async <TData>(data: TData): ValidationResolverReturn<TData> => {
       try {
-        const values = await validationSchema.validate(data, {
+        const values = (await validationSchema.validate(data, {
           abortEarly: false,
-        });
+        })) as FormFields;
 
         return {
           values,
