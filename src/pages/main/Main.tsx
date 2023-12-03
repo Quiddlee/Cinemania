@@ -17,7 +17,7 @@ const Main = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         <h1 className="text-2xl font-bold">User Data 🐳</h1>|
         <LinkButton to={`../${ROUTES.UNCONTROLLED_FORM}`}>
           Uncontrolled form
@@ -25,7 +25,7 @@ const Main = () => {
         <LinkButton to={`../${ROUTES.HOOK_FORM}`}>Hook form</LinkButton>
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {[...hookFormData, ...uncontrolledFormData].map((formData, i) => (
           <FormDataBlock formData={formData} key={i} isNew={prevLen < i} />
         ))}
