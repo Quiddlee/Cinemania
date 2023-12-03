@@ -9,7 +9,7 @@ const Form = forwardRef<HTMLFormElement, FormHTMLAttributes<HTMLFormElement>>(
       ref={ref}
       noValidate
       className={cn(
-        'grid w-96 gap-2 rounded-md border border-zinc-800 p-6',
+        'grid w-96 gap-2 rounded-md border border-zinc-800 p-6 transition-all duration-200 ease-out',
         className,
       )}>
       {children}

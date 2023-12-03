@@ -37,7 +37,7 @@ const FormDataBlock: FC<FormDataBlockProps> = ({ formData, isNew }) => {
   return (
     <Form
       className={cn('gap-0', {
-        'border-zinc-100': isFirstLoad,
+        'ring ring-zinc-400 ring-offset-2 ring-offset-zinc-950': isFirstLoad,
       })}>
       <FormHeader title="Form data" />
 
