@@ -7,26 +7,26 @@ import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
 import Form from '@widgets/form/Form';
-import formSchema, { HookFormFields } from '@widgets/form/model/formSchema';
+import formSchema, { FormFields } from '@widgets/form/model/formSchema';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 const HookForm = () => {
-  const resolver = useYupValidationResolver<HookFormFields>(formSchema);
+  const resolver = useYupValidationResolver(formSchema);
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<HookFormFields>({
+  } = useForm<FormFields>({
     resolver,
     mode: 'onChange',
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  async function onSubmit(data: HookFormFields) {
+  async function onSubmit(data: FormFields) {
     const picture = data.picture as FileList;
     const file = picture.item(0) as File;
 

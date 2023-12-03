@@ -76,6 +76,6 @@ const formSchema = object({
     .required('T&C is required field'),
 });
 
-export type HookFormFields = InferType<typeof formSchema>;
+export type FormFields = InferType<typeof formSchema>;
 
 export default formSchema;

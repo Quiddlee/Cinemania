@@ -10,8 +10,8 @@ export const initialState: IInitialState = {
   formData: null,
 };
 
-export const hookFormSlice = createSlice({
-  name: 'hookForm',
+export const uncontrolledFormSlice = createSlice({
+  name: 'uncontrolledForm',
   initialState,
   reducers: {
     formSubmitted: (state, action: PayloadAction<FormData>) => {
@@ -20,6 +20,6 @@ export const hookFormSlice = createSlice({
   },
 });
 
-export const { formSubmitted } = hookFormSlice.actions;
+export const { formSubmitted } = uncontrolledFormSlice.actions;
 
-export const hookFormReducer = hookFormSlice.reducer;
+export const uncontrolledFormReducer = uncontrolledFormSlice.reducer;

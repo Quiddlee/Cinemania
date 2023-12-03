@@ -1,29 +1,67 @@
-import { FormEvent, useCallback, useRef } from 'react';
+import { FormEvent, useCallback, useRef, useState } from 'react';
 
+import { formSubmitted } from '@pages/uncontrolledForm/model/slice';
+import fileToBase64 from '@shared/lib/helpers/fileToBase64';
+import useAppDispatch from '@shared/lib/hooks/useAppDispatch';
+import useYupValidationResolver, {
+  ValidationErrors,
+} from '@shared/lib/hooks/useYupValidationResolver';
 import Button from '@shared/ui/Button';
 import Checkbox from '@shared/ui/Checkbox';
 import Input from '@shared/ui/Input';
 import LinkButton from '@shared/ui/LinkButton';
 import Form from '@widgets/form/Form';
-import formSchema, { HookFormFields } from '@widgets/form/model/formSchema';
+import formSchema, { FormFields } from '@widgets/form/model/formSchema';
+import type { FormData } from '@widgets/form/types/types';
 import FormHeader from '@widgets/form/ui/FormHeader';
 import FormRow from '@widgets/form/ui/FormRow';
+import { useNavigate } from 'react-router-dom';
 
 const UncontrolledForm = () => {
   const formRef = useRef(null);
+  const resolver = useYupValidationResolver(formSchema);
+  const [errors, setErrors] = useState<ValidationErrors<FormFields> | null>(
+    null,
+  );
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = useCallback(async (evt: FormEvent) => {
-    evt.preventDefault();
+  const handleSubmit = useCallback(
+    async (evt: FormEvent) => {
+      evt.preventDefault();
 
-    if (!formRef.current) return;
-    const formData = new FormData(formRef.current);
-    const formValues = {
-      ...Object.fromEntries(formData.entries()),
-      termsAndConditions: true,
-    } as HookFormFields;
+      if (!formRef.current) return;
 
-    await formSchema.validate(formValues);
-  }, []);
+      const formData = new FormData(formRef.current);
+      const formDataObj = Object.fromEntries(
+        formData.entries(),
+      ) as Partial<FormFields>;
+      const formValues = {
+        ...formDataObj,
+        termsAndConditions: Boolean(formDataObj?.termsAndConditions),
+      } as FormFields;
+
+      const { errors: validationErrors, values } =
+        await resolver<FormFields>(formValues);
+
+      if (Object.keys(validationErrors).length) {
+        setErrors(validationErrors);
+      } else {
+        setErrors(null);
+
+        const picture = values.picture as File;
+        const base64File = await fileToBase64(picture);
+        const modifiedData = {
+          ...values,
+          picture: base64File,
+        } as FormData;
+
+        dispatch(formSubmitted(modifiedData));
+        navigate('/');
+      }
+    },
+    [dispatch, navigate, resolver],
+  );
 
   return (
     <>
@@ -31,7 +69,7 @@ const UncontrolledForm = () => {
       <Form ref={formRef} onSubmit={handleSubmit}>
         <FormHeader title="Register" subtitle="Welcome to our platform! 😎" />
 
-        <FormRow label="Name">
+        <FormRow label="Name" error={errors?.name?.message}>
           <Input
             id="name"
             name="name"
@@ -40,7 +78,7 @@ const UncontrolledForm = () => {
           />
         </FormRow>
 
-        <FormRow label="Age">
+        <FormRow label="Age" error={errors?.age?.message}>
           <Input
             id="age"
             name="age"
@@ -49,7 +87,7 @@ const UncontrolledForm = () => {
           />
         </FormRow>
 
-        <FormRow label="Email">
+        <FormRow label="Email" error={errors?.email?.message}>
           <Input
             id="email"
             name="email"
@@ -58,7 +96,7 @@ const UncontrolledForm = () => {
           />
         </FormRow>
 
-        <FormRow label="Password">
+        <FormRow label="Password" error={errors?.password?.message}>
           <Input
             id="password"
             name="password"
@@ -67,7 +105,10 @@ const UncontrolledForm = () => {
           />
         </FormRow>
 
-        <FormRow htmlFor="confirmPassword" label="Confirm password">
+        <FormRow
+          htmlFor="confirmPassword"
+          label="Confirm password"
+          error={errors?.confirmPassword?.message}>
           <Input
             id="confirmPassword"
             name="confirmPassword"
@@ -76,7 +117,7 @@ const UncontrolledForm = () => {
           />
         </FormRow>
 
-        <FormRow label="Gender">
+        <FormRow label="Gender" error={errors?.gender?.message}>
           <select id="gender" name="gender">
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -84,7 +125,7 @@ const UncontrolledForm = () => {
           </select>
         </FormRow>
 
-        <FormRow label="Country">
+        <FormRow label="Country" error={errors?.country?.message}>
           <Input
             id="country"
             name="country"
@@ -100,14 +141,15 @@ const UncontrolledForm = () => {
           </datalist>
         </FormRow>
 
-        <FormRow label="Picture">
+        <FormRow label="Picture" error={errors?.picture?.message}>
           <Input id="picture" name="picture" type="file" />
         </FormRow>
 
         <FormRow
           htmlFor="termsAndConditions"
           label="I accept the terms and conditions"
-          className="flex flex-row-reverse items-center justify-end">
+          className="flex flex-row-reverse items-center justify-end"
+          error={errors?.termsAndConditions?.message}>
           <Checkbox
             id="termsAndConditions"
             name="termsAndConditions"

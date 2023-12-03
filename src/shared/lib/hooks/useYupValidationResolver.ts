@@ -1,12 +1,24 @@
 import { useCallback } from 'react';
 
+import { EmptyObject } from '@customTypes/types';
 import { object, ValidationError } from 'yup';
 
-const useYupValidationResolver = <TData>(
+export type ValidationErrors<TFormData> = Partial<{
+  [key in keyof TFormData]: { type: string; message: string };
+}>;
+
+type UseYupValidationResolverReturn<TFormData> = Promise<{
+  values:
+    | Awaited<ReturnType<ReturnType<typeof object>['validate']>>
+    | EmptyObject;
+  errors: ValidationErrors<TFormData>;
+}>;
+
+const useYupValidationResolver = (
   validationSchema: ReturnType<typeof object>,
 ) =>
   useCallback(
-    async (data: TData) => {
+    async <TData>(data: TData): UseYupValidationResolverReturn<TData> => {
       try {
         const values = await validationSchema.validate(data, {
           abortEarly: false,
