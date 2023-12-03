@@ -12,10 +12,12 @@ import FormRow from '@widgets/form/ui/FormRow';
 
 const TIMEOUT_MS = 2000;
 
-const FormDataBlock: FC<{
+type FormDataBlockProps = {
   formData: FormData;
   isNew: boolean;
-}> = ({ formData, isNew }) => {
+};
+
+const FormDataBlock: FC<FormDataBlockProps> = ({ formData, isNew }) => {
   const [isFirstLoad, setIsFirstLoad] = useState(isNew);
 
   const prevLen = useAppSelector(selectFormDataLen);
