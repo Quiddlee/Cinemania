@@ -44,6 +44,7 @@ describe('Movie', () => {
     mockedUseGetMovieList.mockReturnValue({
       movieList: mockMovies,
       totalResults: mockMovies.length,
+      isInitialLoading: false,
     });
 
     renderWithRouterProvider();

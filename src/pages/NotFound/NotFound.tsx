@@ -1,6 +1,6 @@
 import LinkWithQuery from '../../shared/ui/LinkWithQuery.tsx';
 import Modal from '../../shared/ui/Modal.tsx';
-import GradientBackground from '../AppLayout/ui/GradientBackground.tsx';
+import GradientBackground from "../AppLayout/ui/GradientBackground.tsx";
 
 function NotFound() {
   return (

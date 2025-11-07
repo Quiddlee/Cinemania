@@ -38,7 +38,7 @@ function useGetMovieList() {
     dispatch(dataFetchedDetailsPage(isFetching || isLoading));
   }, [dispatch, isFetching, isLoading]);
 
-  return { movieList, totalResults };
+  return { movieList, totalResults, isInitialLoading: isLoading };
 }
 
 export default useGetMovieList;

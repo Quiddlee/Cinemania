@@ -7,6 +7,7 @@ import MovieListHeader from '../../features/MovieList/ui/MovieListHeader.tsx';
 import PageNum from '../../features/MovieList/ui/PageNum.tsx';
 import Pagination from '../../features/Pagination/Pagination.tsx';
 import Search from '../../features/Search/Search.tsx';
+import useGetMovieList from '../../shared/hooks/useGetMovieList.ts';
 import useScroll from '../../shared/hooks/useScroll.ts';
 import useTooltip from '../../shared/hooks/useTooltip.ts';
 import Tooltip from '../../shared/ui/Tooltip.tsx';
@@ -19,6 +20,7 @@ import Main from '../../widgets/Main/Main.tsx';
 function AppLayout() {
   const { containerRef, scrollRef } = useScroll<HTMLDivElement>();
   const { tooltipRef, hideTooltip, showTooltip } = useTooltip(scrollRef);
+  const { isInitialLoading } = useGetMovieList();
 
   return (
     <div
@@ -31,7 +33,7 @@ function AppLayout() {
         <Loader scroll={scrollRef} />
         <GradientBackground />
         <Header>
-          <Logo />
+          {!isInitialLoading && <Logo />}
           <Search scroll={scrollRef} />
           <TotalResults />
         </Header>

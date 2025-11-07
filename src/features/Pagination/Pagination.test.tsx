@@ -33,6 +33,7 @@ describe('Pagination', () => {
     mockedUseGetMovieList.mockReturnValue({
       movieList: mockMovies,
       totalResults,
+      isInitialLoading: false,
     });
 
     renderWithRouterProvider(<Pagination scroll={scroll} />);
