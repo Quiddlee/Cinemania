@@ -1,4 +1,4 @@
-import { memo, MouseEvent } from 'react';
+import { memo, MouseEvent, SyntheticEvent } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
@@ -31,6 +31,11 @@ const Movie = memo(function Movie({
   const animationDelay = `0.${String(delay)}s`;
   const isDetailsClose = pathname.slice(1) === '';
 
+  const handleError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = ReactLogo;
+  }
+
   return (
     <LinkWithQuery
       data-testid="movie-item"
@@ -45,10 +50,8 @@ const Movie = memo(function Movie({
         className="w-64 animate-springish cursor-pointer overflow-hidden rounded-5xl bg-neutral-950 text-gray-100 transition-all duration-200">
         <div
           ref={containerRef}
-          onMouseMove={(e) => {
-            handleMouseMove(e);
-            onMouseMove(e);
-          }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={onMouseMove}
           onMouseLeave={() => {
             handleMouseOut();
             onMouseOut();
@@ -56,6 +59,7 @@ const Movie = memo(function Movie({
           onBlur={handleMouseOut}
           className="h-full space-y-4 rounded-4xl p-2">
           <img
+            onError={handleError}
             data-testid="movie-poster"
             className="h-80 w-full rounded-4xl object-cover"
             src={poster}

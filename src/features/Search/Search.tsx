@@ -3,13 +3,14 @@ import { RefObject, useCallback, useRef } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 
 import { ENTER_KEY, ESCAPE_KEY } from './const/const.ts';
-import useSearch from './hooks/useSearch.ts';
+import { queryUpdated } from './model/slice.ts';
 import searchIcon from '../../assets/search.svg';
 import {
   DEFAULT_PAGE,
   LOCAL_STORAGE_SEARCH_QUERY,
   SCROLL_TOP_DURATION,
 } from '../../shared/const/const.ts';
+import useAppDispatch from '../../shared/hooks/useAppDispatch.ts';
 import useKey from '../../shared/hooks/useKey.ts';
 import useLocalStorageState from '../../shared/hooks/useLocalStorageState.ts';
 import useUrl from '../../shared/hooks/useUrl.ts';
@@ -26,21 +27,14 @@ function Search({ scroll }: IMovieListProps) {
     LOCAL_STORAGE_SEARCH_QUERY,
   );
   const inputRef = useRef<HTMLInputElement>(null);
-  const { fetchMovies, query: currQuery, updateQuery } = useSearch();
   const { setUrl } = useUrl();
+  const dispatch = useAppDispatch();
 
-  const handleSearch = useCallback(
-    async (newQuery: string) => {
-      if (newQuery === currQuery) return;
-
-      setUrl(urlParams.PAGE, DEFAULT_PAGE);
-      scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
-
-      fetchMovies(newQuery.trim());
-      updateQuery(query);
-    },
-    [currQuery, fetchMovies, query, scroll, setUrl, updateQuery],
-  );
+  const handleSearch = useCallback(() => {
+    setUrl(urlParams.PAGE, DEFAULT_PAGE);
+    scroll?.current?.scrollTo('top', { duration: SCROLL_TOP_DURATION });
+    dispatch(queryUpdated(query));
+  }, [dispatch, query, scroll, setUrl]);
 
   function handleEnter() {
     const isInputFocus = document.activeElement === inputRef.current;
@@ -53,7 +47,7 @@ function Search({ scroll }: IMovieListProps) {
     }
 
     if (isInputFocus) {
-      void handleSearch(query);
+      handleSearch();
       inputRef.current?.blur();
     }
   }
@@ -81,7 +75,7 @@ function Search({ scroll }: IMovieListProps) {
         onChange={(e) => setQuery(e.target.value)}
       />
       <Button
-        onClick={() => handleSearch(query)}
+        onClick={handleSearch}
         className="absolute bottom-0 right-0 top-0 m-auto flex items-center gap-2 peer-focus:-translate-y-0.5">
         <>
           <img className="z-10" src={searchIcon} alt="" />

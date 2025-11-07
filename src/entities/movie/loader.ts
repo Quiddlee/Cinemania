@@ -1,6 +1,6 @@
 import { Params } from 'react-router-dom';
 
-import { getMovie } from './api/apiMovie.ts';
+import { getMovie } from './api/apiMovie-v1.ts';
 
 interface ILoaderParams {
   params: Params;

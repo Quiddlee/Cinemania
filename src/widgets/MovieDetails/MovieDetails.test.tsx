@@ -1,26 +1,42 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
+import * as MovieDetails from './MovieDetails.tsx';
+import { setupStore } from '../../app/store/store.ts';
 import reactLogo from '../../assets/reactJS-logo.png';
+import { movieApi } from '../../entities/movie/api/movieApi.ts';
+import * as useGetMovie from '../../shared/hooks/useGetMovie.ts';
 import convertSecsToHrsAndMins from '../../shared/lib/helpers/convertSecsToHrsAndMins.ts';
-import { NO_POSTER_QUERY_TEST_CASE } from '../../test/const/const.ts';
 import renderWithRouter from '../../test/helpers/RenderWithRouter.tsx';
-import { mockMovieDetails } from '../../test/mocks/data.ts';
+import renderWithRouterProvider from '../../test/helpers/renderWithRouterProvider.tsx';
+import {
+  mockMovieDetails,
+  mockMovieDetailsNoPoster,
+} from '../../test/mocks/data.ts';
 
 const runtimeHours = convertSecsToHrsAndMins(mockMovieDetails.Runtime);
 const descriptionSliced = `${mockMovieDetails.Plot.slice(0, 150)}...`;
+const mockedUseGetMovie = vi.spyOn(useGetMovie, 'default');
+const store = setupStore();
 
 describe('Movie details', () => {
+  afterEach(() => {
+    vi.clearAllMocks();
+    store.dispatch(movieApi.util.resetApiState());
+  });
+
   it('should render the details section', async () => {
-    renderWithRouter(null, ['/test']);
+    mockedUseGetMovie.mockReturnValue(mockMovieDetails);
+
+    renderWithRouter(<MovieDetails.Component />);
 
     const detailsSection = await screen.findByTestId('details-section');
     expect(detailsSection).toBeInTheDocument();
   });
 
   it('should display the loader while fetching data', async () => {
-    renderWithRouter(null, ['/delay']);
+    renderWithRouterProvider();
 
     const loader = await screen.findByTestId('loader');
 
@@ -28,28 +44,37 @@ describe('Movie details', () => {
   });
 
   it('should properly calculate and edit the runtime', async () => {
-    renderWithRouter(null, ['/test']);
+    mockedUseGetMovie.mockReturnValue(mockMovieDetails);
+
+    renderWithRouter(<MovieDetails.Component />);
 
     const runtime = await screen.findByTestId('details-runtime');
     expect(runtime).toHaveTextContent(runtimeHours);
   });
 
   it('should properly slice the description', async () => {
-    renderWithRouter(null, ['/test']);
+    mockedUseGetMovie.mockReturnValue(mockMovieDetails);
+
+    renderWithRouter(<MovieDetails.Component />);
 
     const description = await screen.findByTestId('details-description');
     expect(description).toHaveTextContent(descriptionSliced);
   });
 
   it('should handle no poster case', async () => {
-    renderWithRouter(null, [`/${NO_POSTER_QUERY_TEST_CASE}`]);
+    mockedUseGetMovie.mockReturnValue(mockMovieDetailsNoPoster);
+
+    renderWithRouter(<MovieDetails.Component />);
 
     const poster = await screen.findByTestId('details-poster');
+
     expect(poster).toHaveAttribute('src', reactLogo);
   });
 
   it('should correctly display the details data', async () => {
-    renderWithRouter(null, ['/test']);
+    mockedUseGetMovie.mockReturnValue(mockMovieDetails);
+
+    renderWithRouter(<MovieDetails.Component />);
 
     const [poster, title, runtime, genre, rating, descr, director, cast] =
       await Promise.all([
@@ -83,7 +108,8 @@ describe('Movie details', () => {
   });
 
   it('should hide the component on close button click', async () => {
-    renderWithRouter(null, ['/test']);
+    mockedUseGetMovie.mockReturnValue(mockMovieDetails);
+    renderWithRouterProvider(null, { initialEntries: ['/test'] });
 
     const [closeButton, detailsSection] = await Promise.all([
       screen.findByTestId('details-close'),

@@ -1,8 +1,4 @@
-import {
-  API_URL,
-  DEFAULT_PAGE,
-  QUERY_FALLBACK,
-} from '../../../shared/const/const.ts';
+import { DEFAULT_PAGE, QUERY_FALLBACK } from '../../../shared/const/const.ts';
 import {
   ApiErrorResponse,
   ApiMovieListResponse,
@@ -14,7 +10,9 @@ export async function getMovieList(
   page: number = DEFAULT_PAGE,
 ): Promise<ApiMovieListResponse> {
   const response = await fetch(
-    `${API_URL}&s=${query || QUERY_FALLBACK}&page=${page}`,
+    `${import.meta.env.VITE_API_URL}?apikey=${import.meta.env.VITE_API_KEY}&s=${
+      query || QUERY_FALLBACK
+    }&page=${page}`,
   );
 
   if (!response.ok) throw new Error('Something went wrong fetching movies!');
@@ -29,7 +27,11 @@ export async function getMovieList(
 }
 
 export async function getMovie(id: string) {
-  const response = await fetch(`${API_URL}&i=${id}`);
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}?apikey=${
+      import.meta.env.VITE_API_KEY
+    }&i=${id}`,
+  );
 
   if (!response.ok) throw new Error('Something went wrong fetching movies!');
 

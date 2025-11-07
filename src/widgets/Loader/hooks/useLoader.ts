@@ -1,10 +1,10 @@
 import { RefObject, useEffect } from 'react';
 
 import LocomotiveScroll from 'locomotive-scroll';
-import { useNavigation } from 'react-router-dom';
 
-import useSearch from '../../../features/Search/hooks/useSearch.ts';
-import { LOADING_STATE } from '../../../shared/const/const.ts';
+import useAppSelector from '../../../shared/hooks/useAppSelector.ts';
+import selectIsFetchingDetails from '../../../shared/lib/selectors/selectIsFetchingDetails.ts';
+import selectIsFetchingMain from '../../../shared/lib/selectors/selectIsFetchingMain.ts';
 
 /**
  * A custom hook that checks if the loader or the search is currently loading.
@@ -13,8 +13,10 @@ import { LOADING_STATE } from '../../../shared/const/const.ts';
  * @return {boolean} isLoading - A boolean indicating if the loader is loading.
  */
 function useLoader(scrollRef: RefObject<LocomotiveScroll>) {
-  const navigation = useNavigation();
-  const { isLoading: searchIsLoading } = useSearch();
+  const isFetchingMain = useAppSelector(selectIsFetchingMain);
+  const isFetchingDetails = useAppSelector(selectIsFetchingDetails);
+
+  const isFetching = isFetchingDetails || isFetchingMain;
 
   useEffect(() => {
     const scroll = scrollRef.current;
@@ -22,10 +24,7 @@ function useLoader(scrollRef: RefObject<LocomotiveScroll>) {
     return () => void scroll?.start();
   }, [scrollRef]);
 
-  const loaderIsLoading = navigation.state === LOADING_STATE;
-  const isLoading = searchIsLoading || loaderIsLoading;
-
-  return isLoading;
+  return isFetching;
 }
 
 export default useLoader;

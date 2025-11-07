@@ -1,6 +1,6 @@
 import Modal from '../../../shared/ui/Modal.tsx';
 
-function NotFound() {
+function MovieNotFound() {
   return (
     <Modal>
       <span className="text-2xl font-semibold text-gray-200">
@@ -12,4 +12,4 @@ function NotFound() {
   );
 }
 
-export default NotFound;
+export default MovieNotFound;
